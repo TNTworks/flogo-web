@@ -1,0 +1,32 @@
+<div class="body" (fgOnEscape)="cancel()">
+  <div class="lead">
+    <i class="flogo-icon-info lead__icon"></i>
+    <span>{{ 'APP.MISSING_TRIGGER.TITLE' | translate }}</span>
+  </div>
+  <p class="message" [innerHTML]="i18nMessage | translate"></p>
+</div>
+
+<button class="modal-close" (click)="cancel()">
+  <span aria-hidden="true" class="sr-only">{{ 'MODAL:CLOSE' | translate }}</span>
+</button>
+
+<div class="footer">
+  <div class="uxpl-checkbox dont-show-again">
+    <input
+      id="dontShowAgain"
+      [checked]="dontShowAgain"
+      (change)="dontShowAgain = $event.target.checked"
+      class="uxpl-checkbox__input"
+      type="checkbox"
+    />
+    <label for="dontShowAgain" class="uxpl-checkbox__label">{{
+      'APP.MISSING_TRIGGER.DONT_SHOW_AGAIN' | translate
+    }}</label>
+  </div>
+  <button class="flogo-button--secondary" (click)="cancel()">
+    {{ 'APP.MISSING_TRIGGER.CANCEL' | translate }}
+  </button>
+  <button class="flogo-button--primary" (click)="confirm()">
+    {{ i18nConfirmBtn | translate }}
+  </button>
+</div>

@@ -1,0 +1,86 @@
+<div class="canvas-flow" *ngIf="flowState">
+  <flogo-designer-header
+    [name]="flowState.name"
+    [appName]="flowState?.app?.name"
+    [description]="flowState.description"
+    (goBack)="navigateToApp()"
+    (changeName)="changeFlowDetailName($event, 'name')"
+    (changeDescription)="changeFlowDetail($event, 'description')"
+  >
+    <svg class="flow-logo" viewBox="-3 -11 48 48" header-role="resource-logo">
+      <use xlink:href="/assets/svg/plugin-flows.svg#flowIcon"></use>
+    </svg>
+    <flogo-run-flow
+      header-role="right-block"
+      class="flow-debugging"
+      [disableRun]="runnableInfo?.disabled"
+      disableReason="{{ runnableInfo?.disableReason | translate }}"
+      [flowInputs]="flowState?.metadata?.input"
+      (submit)="onRunFlow($event)"
+    ></flogo-run-flow>
+    <flogo-logs header-role="right-block"></flogo-logs>
+    <div
+      header-role="right-block"
+      class="menu-dropdown"
+      (fgClickOutside)="closeFlowMenu()"
+    >
+      <i
+        class="flogo-icon-kebabmenu kebabmenu-icon menu-dropdown-more-button"
+        [class.active]="isflowMenuOpen"
+        (click)="toggleFlowMenu()"
+        role="button"
+        id="flowMenuButton"
+        aria-haspopup="true"
+        [attr.aria-expanded]="isflowMenuOpen"
+      ></i>
+      <div
+        class="menu-dropdown__content menu-dropdown__content--more"
+        aria-labelledby="flowMenuButton"
+        [class.active]="isflowMenuOpen"
+      >
+        <ul class="dropdown-list">
+          <li class="dropdown-list__item" (click)="deleteFlow()">
+            <i class="flogo-icon flogo-icon-delete"></i>{{ 'CANVAS:DELETE' | translate }}
+          </li>
+        </ul>
+      </div>
+    </div>
+    <flogo-flow-tabs header-role="bottom-block" class="tabs"></flogo-flow-tabs>
+  </flogo-designer-header>
+
+  <ng-template #flowContent>
+    <flogo-flow-triggers [iconProvider]="iconProvider"></flogo-flow-triggers>
+    <flogo-flow-params-schema-button
+      role="button"
+      [flowMetadata]="flowState?.metadata"
+      (click)="openInputSchemaModal()"
+    ></flogo-flow-params-schema-button>
+    <div class="diagram-container">
+      <flogo-flow-diagram
+        class="diagram"
+        [iconProvider]="iconProvider"
+        (deleteTask)="onDeleteTask($event)"
+      ></flogo-flow-diagram>
+    </div>
+  </ng-template>
+
+  <flogo-context-panel-area
+    class="context-panel-container"
+    [isOpen]="isOpen"
+    panelTitle="Testing and Debugging"
+    [contextElementSelector]="SELECTOR_FOR_CURRENT_ELEMENT"
+    [triggerStyles]="triggerPosition"
+    (open)="changePanelState(true)"
+    (close)="changePanelState(false)"
+  >
+    <div context-panel-role="primary-area" class="primary-area">
+      <ng-container *ngTemplateOutlet="flowContent"></ng-container>
+    </div>
+    <div context-panel-role="panel-content">
+      <flogo-flow-debug-panel class="debug-panel-container"> </flogo-flow-debug-panel>
+    </div>
+  </flogo-context-panel-area>
+
+  <flogo-flow-task-configurator></flogo-flow-task-configurator>
+  <flogo-flow-branch-configurator></flogo-flow-branch-configurator>
+</div>

@@ -1,0 +1,16 @@
+<div [formGroup]="fieldGroup" class="df-container form-group">
+  <label
+    flogo-flow-dynamic-form-label
+    for="{{ fieldControl.name }}"
+    [fieldMetadata]="fieldControl"
+    [control]="fieldGroup.get('name')"
+    [noOptionalLabel]="hideOptionalLabel"
+  ></label>
+  <input
+    type="number"
+    class="df-input form-control tc-inputs"
+    [ngClass]="{ '--invalid': fieldGroup.get('value').invalid }"
+    id="{{ fieldControl.name }}"
+    formControlName="value"
+  />
+</div>

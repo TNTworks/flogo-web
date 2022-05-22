@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "flogo-resource",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "description": "Resource type",
+      "x-prompt": "What is the type for the resource? For example: flow",
+      "minLength": 1,
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      }
+    },
+    "ref": {
+      "type": "string",
+      "description": "Contribution ref",
+      "x-prompt": "[Optional] What is the ref to the action contribution for this plugin? \nExample: github.com/project-flogo/flow \n (Hit enter to skip)"
+    }
+  },
+  "required": ["type"]
+}

@@ -1,0 +1,38 @@
+<div [formGroup]="paramGroup" class="form-input">
+  <input
+    class="form-input__name"
+    type="text"
+    formControlName="name"
+    placeholder="parameter name"
+    [ngClass]="{ '--invalid': !paramGroup.get('name').valid }"
+  />
+
+  <div class="dropdown form-input__type type-selector" (fgClickOutside)="closeDropdown()">
+    <button
+      class="btn btn-default dropdown-toggle type-selector__label"
+      type="button"
+      aria-haspopup="true"
+      aria-expanded="true"
+      (click)="toggleDropdown()"
+    >
+      <span>{{ paramGroup.get('type').value | lowercase }}</span>
+      <input type="hidden" formControlName="type" />
+      <i class="flogo-icon-dropdown type-selector__caret"></i>
+    </button>
+    <ul
+      class="dropdown-menu type-selector__dropdown-menu"
+      [style.display]="isOpen ? 'block' : 'none'"
+    >
+      <li
+        *ngFor="let option of dropdownOptions"
+        class="list-label"
+        (click)="selectType(option)"
+      >
+        <a>{{ option }}</a>
+      </li>
+    </ul>
+  </div>
+  <div class="form-input__delete">
+    <i class="flogo-icon-delete delete-icon" (click)="onRemoveParam()"></i>
+  </div>
+</div>

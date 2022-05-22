@@ -1,0 +1,146 @@
+{
+  "input": {},
+  "expect": {
+    "extractActions": [
+      {
+        "description": "ddadfads",
+        "id": "test_flow",
+        "metadata": {
+          "input": [
+            {
+              "name": "one",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "two",
+              "type": "string"
+            }
+          ]
+        },
+        "ref": "github.com/project-flogo/flow",
+        "tasks": [
+          {
+            "id": "log_2",
+            "name": "Log Message",
+            "description": "Simple Log Activity",
+            "type": 1,
+            "activityType": "tibco-log",
+            "activityRef": "some_path_to_repo/activity/log",
+            "attributes": [
+              {
+                "name": "message",
+                "value": "Hello world",
+                "required": false,
+                "type": "string"
+              },
+              {
+                "name": "flowInfo",
+                "value": "true",
+                "required": false,
+                "type": "boolean"
+              },
+              {
+                "name": "addToFlow",
+                "value": "true",
+                "required": false,
+                "type": "boolean"
+              }
+            ],
+            "inputMappings": [
+              {
+                "mapTo": "message",
+                "type": 2,
+                "value": "Hello world"
+              },
+              {
+                "mapTo": "flowInfo",
+                "type": 2,
+                "value": "true"
+              },
+              {
+                "mapTo": "addToFlow",
+                "type": 2,
+                "value": "true"
+              }
+            ]
+          }
+        ],
+        "links": []
+      }
+    ],
+    "extractTriggers": [
+      {
+        "name": "Receive HTTP Message",
+        "ref": "some_path_to_repo/trigger/rest",
+        "description": "Simple REST Trigger",
+        "settings": {
+          "port": null
+        },
+        "id": "receive_http_message",
+        "handlers": [
+          {
+            "settings": {
+              "method": null,
+              "path": null,
+              "autoIdReply": null,
+              "useReplyHandler": null
+            },
+            "actionId": "test_flow",
+            "actionMappings": {
+              "input": [],
+              "output": []
+            }
+          }
+        ]
+      }
+    ],
+    "reconciledTriggers": [
+      {
+        "trigger": {
+          "name": "Receive HTTP Message",
+          "ref": "some_path_to_repo/trigger/rest",
+          "description": "Simple REST Trigger",
+          "settings": {
+            "port": null
+          },
+          "id": "receive_http_message",
+          "handlers": [
+            {
+              "settings": {
+                "method": null,
+                "path": null,
+                "autoIdReply": null,
+                "useReplyHandler": null
+              },
+              "actionId": "test_flow",
+              "actionMappings": {
+                "input": [],
+                "output": []
+              }
+            }
+          ]
+        },
+        "reconciledHandlers": [
+          {
+            "handler": {
+              "settings": {
+                "method": null,
+                "path": null,
+                "autoIdReply": null,
+                "useReplyHandler": null
+              },
+              "actionId": "test_flow",
+              "actionMappings": {
+                "input": [],
+                "output": []
+              }
+            },
+            "actionId": "test_flow-processed"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,66 @@
+<div class="js-debug-panel-content debug-panel__content content">
+  <div *ngIf="activity$ | async as activity; else emptyText" class="activity">
+    <div class="activity__info-group">
+      <flogo-activity-icon
+        [iconUrl]="iconUrl"
+        [customAltText]="'Activity icon'"
+        class="activity__icon"
+      >
+      </flogo-activity-icon>
+      <div class="activity__name">
+        <span>{{ activity.name }}</span>
+        <a
+          class="schema-homepage"
+          *ngIf="activity.schemaHomepage"
+          [href]="activity.schemaHomepage"
+          target="_blank"
+        >
+          <i class="flogo-icon-info"></i>
+        </a>
+      </div>
+      <div class="activity__id">ID: {{ activity.id }}</div>
+      <div class="activity__description">{{ activity.description }}</div>
+      <button
+        *ngIf="isRestartableTask$ | async"
+        class="flogo-button--secondary btn-run"
+        [disabled]="isRunDisabled$ | async"
+        (click)="run()"
+      >
+        {{ 'DEBUGGER:BUTTON-RUN-FROM-TILE' | translate }}
+      </button>
+    </div>
+    <ng-container
+      *ngIf="executionErrors?.length > 0; then errorDisplay; else activityFields"
+    ></ng-container>
+  </div>
+  <ng-template #emptyText>
+    <div class="empty-text">
+      <div class="empty-text__lead">{{ 'DEBUGGER:EMPTY-STATE-TITLE' | translate }}</div>
+      <div class="empty-text__detail">
+        {{ 'DEBUGGER:EMPTY-STATE-DESCRIPTION' | translate }}
+      </div>
+    </div>
+  </ng-template>
+</div>
+
+<ng-template #errorDisplay>
+  <flogo-flow-debug-panel-error
+    class="activity__field-group"
+    [errors]="executionErrors"
+  ></flogo-flow-debug-panel-error>
+</ng-template>
+<ng-template #activityFields>
+  <ng-container *ngIf="!(isEndOfFlow$ | async); else endOfFlow">
+    <flogo-flow-debug-panel-fields
+      class="activity__fields"
+      [fields]="fields$ | async"
+    ></flogo-flow-debug-panel-fields>
+  </ng-container>
+</ng-template>
+<ng-template #endOfFlow>
+  <div class="empty-text">
+    <div class="empty-text__lead">
+      {{ 'DEBUGGER:EMPTY-STATE-END-OF-FLOW' | translate }}
+    </div>
+  </div>
+</ng-template>

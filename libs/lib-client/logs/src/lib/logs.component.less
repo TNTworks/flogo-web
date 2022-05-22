@@ -1,0 +1,50 @@
+@import '~@flogo-web/assets/styles/_variables';
+@logs-background-content: #414141;
+
+:host {
+  z-index: 1;
+}
+
+.flogo-logs {
+  display: flex;
+  flex-direction: column;
+
+  .logs-window {
+    position: fixed;
+    height: 427px;
+    min-height: 427px;
+    width: 324px;
+    min-width: 324px;
+    resize: both;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    left: 774px;
+    top: 85px;
+    background-color: @logs-background-content;
+    padding-bottom: 15px;
+
+    .footer-section {
+      height: 5px;
+      background: @logs-background-content;
+      cursor: move;
+    }
+  }
+
+  .command {
+    .log-button {
+      background-color: @color-bg;
+      height: 30px;
+      width: 30px;
+      color: @warm-grey;
+      font-size: 1.5em;
+      padding: 0;
+      text-align: center;
+    }
+
+    .log-button:hover,
+    .log-button-selected {
+      color: @primary-blue;
+    }
+  }
+}

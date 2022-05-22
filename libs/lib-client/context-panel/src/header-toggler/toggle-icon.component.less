@@ -1,0 +1,16 @@
+@import (reference) '~@flogo-web/assets/styles/_variables';
+
+:host {
+  transition: background-color 100ms ease-out;
+  color: @color-dark-gray;
+  padding: 2px;
+  border-radius: 4px;
+
+  > * {
+    display: block;
+  }
+}
+
+:host:hover {
+  background-color: fade(@color-dark-gray, 20%);
+}

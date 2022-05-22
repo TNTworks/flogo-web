@@ -1,0 +1,55 @@
+@import '../_variables';
+
+.uxpl-button {
+  height: @size-height-button;
+  border-radius: 3px;
+  min-width: 78px;
+  border: solid 1px @primary-blue;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-left: 18px;
+  &:hover {
+    border: solid 1px @color-link-hover;
+    transition: all 0.2s ease-in-out;
+  }
+
+  &:active {
+    box-shadow: inset 0 0 0 2px @color-link-hover;
+    border: solid 1px @color-link-hover;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+
+.uxpl-button-primary {
+  .uxpl-button;
+  height: @size-height-button;
+  color: @color-bg;
+  background-color: @primary-blue;
+
+  &:hover {
+    background-color: @color-link-hover;
+  }
+  &:disabled {
+    background-color: @primary-blue;
+  }
+}
+
+.uxpl-button-secondary {
+  .uxpl-button;
+  background-color: @color-bg;
+  color: @primary-blue;
+
+  &:hover {
+    color: @color-link-hover;
+  }
+  &:active {
+    color: @color-link-hover;
+  }
+  &:disabled {
+    background-color: @color-bg;
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "name": "@flogo-web/tools-builders",
+  "license": "UNLICENSED",
+  "version": "v1.0.0",
+  "dependencies": {},
+  "builders": "builders.json"
+}

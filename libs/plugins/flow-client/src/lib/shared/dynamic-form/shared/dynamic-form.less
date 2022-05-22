@@ -1,0 +1,31 @@
+@import '~@flogo-web/assets/styles/_variables';
+
+.form-invalid-states() {
+  &.ng-invalid {
+    &.ng-touched,
+    &.ng-dirty {
+      border-color: #e76e3c;
+    }
+  }
+}
+
+.tc-inputs {
+  height: 30px;
+  padding: 0 10px;
+  color: @color-disabled;
+}
+
+.form-invalid-states();
+
+.df-container {
+  &.ng-invalid {
+    &.ng-touched,
+    &.ng-dirty {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.df-resize-vertical {
+  resize: vertical;
+}

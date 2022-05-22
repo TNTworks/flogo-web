@@ -1,0 +1,112 @@
+{
+  "name": "Sample app",
+  "type": "flogo:app",
+  "version": "0.0.1",
+  "appModel": "1.0.0",
+  "description": "Sample flogo app",
+  "triggers": [
+    {
+      "id": "receiver",
+      "ref": "github.com/TNTworks/flogo-contrib/trigger/rest",
+      "name": "Receiver",
+      "description": "Simple REST Trigger",
+      "settings": {
+        "port": "9998"
+      },
+      "handlers": [
+        {
+          "action": {
+            "ref": "github.com/project-flogo/flow",
+            "data": {
+              "flowURI": "res://flow:aws_iot_sample"
+            },
+            "mappings": {
+              "output": [
+                {
+                  "mapTo": "code",
+                  "type": "assign",
+                  "value": "$.code"
+                },
+                {
+                  "mapTo": "data",
+                  "type": "assign",
+                  "value": "$.message"
+                }
+              ]
+            }
+          },
+          "settings": {
+            "method": "GET",
+            "path": "/awsiot/status",
+            "autoIdReply": "true",
+            "useReplyHandler": "true"
+          }
+        }
+      ]
+    },
+    {
+      "id": "timer_trigger",
+      "ref": "github.com/TNTworks/flogo-contrib/trigger/timer",
+      "name": "Timer Trigger",
+      "description": "Simple Timer trigger",
+      "settings": {},
+      "handlers": [
+        {
+          "action": {
+            "ref": "github.com/project-flogo/flow",
+            "data": {
+              "flowURI": "res://flow:hello_world"
+            }
+          },
+          "settings": {
+            "repeating": "true",
+            "startDate": "",
+            "hours": "",
+            "minutes": "",
+            "seconds": "15"
+          }
+        }
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "id": "flow:hello_world",
+      "data": {
+        "name": "HelloWorld",
+        "tasks": [
+          {
+            "id": "counter_1",
+            "name": "Number Counter",
+            "description": "Simple Global Counter Activity",
+            "activity": {
+              "ref": "github.com/TNTworks/flogo-contrib/activity/counter",
+              "settings": {
+                "counterName": "myCounter"
+              }
+            }
+          },
+          {
+            "id": "log_1",
+            "name": "Logger",
+            "description": "Simple Log Activity",
+            "activity": {
+              "ref": "github.com/TNTworks/flogo-contrib/activity/log",
+              "input": {
+                "message": "hello world",
+                "flowInfo": "true",
+                "addToFlow": "true"
+              }
+            }
+          }
+        ],
+        "links": [
+          {
+            "from": "counter_1",
+            "to": "log_1"
+          }
+        ]
+      }
+    }
+  ]
+}

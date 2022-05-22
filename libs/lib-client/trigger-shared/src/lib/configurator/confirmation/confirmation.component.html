@@ -1,0 +1,30 @@
+<div cdkTrapFocus [cdkTrapFocusAutoCapture]="true">
+  <button class="uxpl-modal__close" (click)="closeModal()">
+    <span class="sr-only">Close</span>
+  </button>
+
+  <div class="uxpl-modal-confirmation__body" (fgOnEscape)="closeModal()">
+    <p class="uxpl-modal-confirmation__lead">
+      Save or discard your changes before leaving this trigger
+    </p>
+    <p>
+      <a role="button" tabindex="0" (click)="closeModal()" (keyup.enter)="closeModal()"
+        >Continue editing this trigger</a
+      >
+    </p>
+  </div>
+
+  <div class="uxpl-modal-confirmation__footer footer">
+    <button class="flogo-button--secondary" (click)="control.discard()">
+      Discard changes</button
+    ><!-- comment to avoid gap bc style:inline-blocks
+  -->
+    <button
+      *ngIf="status?.isValid"
+      class="flogo-button--primary"
+      (click)="control.confirm()"
+    >
+      Save
+    </button>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<svg
+      class="trigger-icon-background"
+      viewBox="0 0 50 52"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <use
+        xlink:href="/assets/svg/trigger-icon.svg#defaultTrigger"
+        class="bg-placeholder"
+      ></use>
+</svg>

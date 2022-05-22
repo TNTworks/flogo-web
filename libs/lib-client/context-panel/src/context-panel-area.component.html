@@ -1,0 +1,45 @@
+<div
+  class="content"
+  #content
+  [@wrappedContentState]="panelStatus"
+  (@wrappedContentState.done)="onAnimationEnd($event)"
+>
+  <ng-content select="[context-panel-role='primary-area']"></ng-content>
+  <flogo-context-panel-trigger
+    [label]="panelTitle"
+    (open)="openPanel()"
+    [ngStyle]="triggerStyles"
+  >
+    {{ panelTitle }}
+  </flogo-context-panel-trigger>
+</div>
+<div
+  class="context-panel-container"
+  [class.is-open]="isOpen"
+  [@contextPanelContainerState]="{
+    value: panelStatus,
+    params: toggleButtonAnimationParams
+  }"
+>
+  <div
+    class="context-panel-container__content"
+    *ngIf="isOpen"
+    [class.is-open]="isOpen"
+    [@contextPanelState]="{
+      value: panelStatus,
+      params: toggleButtonAnimationParams
+    }"
+  >
+    <flogo-context-panel-header-toggler
+      [isOpen]="isOpen"
+      [label]="panelTitle"
+      (open)="openPanel()"
+      (close)="closePanel()"
+    >
+    </flogo-context-panel-header-toggler>
+
+    <div class="js-context-panel-content context-panel__content">
+      <ng-content select="[context-panel-role='panel-content']"></ng-content>
+    </div>
+  </div>
+</div>

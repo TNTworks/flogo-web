@@ -1,0 +1,118 @@
+@import (reference) '~@flogo-web/assets/styles/_variables';
+@import '~@flogo-web/assets/styles/_drag-drop-animation';
+@import '~@flogo-web/assets/styles/_mixins';
+
+:host {
+  background-color: #eaeaea;
+  overflow: auto;
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  --diagram-secondary: #96a7f8;
+  --add-button-width: 48px;
+}
+
+.tile {
+  display: flex;
+  position: relative;
+}
+
+.tiles-wrapper {
+  display: flex;
+  padding: 8px 15px;
+  margin-top: 24px;
+  width: 100%;
+  z-index: 0;
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    .visible-on-hover {
+      opacity: 1;
+    }
+    .add-button:before {
+      opacity: 0.5;
+    }
+  }
+  .is-selected {
+    opacity: 1;
+  }
+}
+
+.tile__add-between {
+  .btn-insert-between(#f0f0f0);
+}
+
+flogo-diagram {
+  flex: 1;
+}
+
+.tile__separator {
+  position: relative;
+  min-width: 128px;
+  &:before {
+    content: '';
+    position: absolute;
+    display: block;
+    background: #96a7f8;
+    opacity: 0.5;
+    width: 36px;
+    height: 8px;
+    top: 44%;
+    left: -22px;
+    z-index: -1;
+  }
+}
+.add-button {
+  margin: 0 4px 0 48px;
+  min-width: 44px;
+  &:before {
+    width: 52px;
+    left: -48px;
+    opacity: 0;
+  }
+  &.visible-on-hover:before {
+    opacity: 0.5;
+  }
+}
+.tile-placeholders {
+  display: flex;
+  margin-left: 2px;
+  .tile-placeholder:first-child {
+    &:before {
+      width: 54px;
+    }
+  }
+}
+.tile-placeholder {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  height: 60px;
+  width: 128px;
+  &:before {
+    content: '';
+    position: absolute;
+    display: block;
+    background: #96a7f8;
+    opacity: 0.5;
+    width: 88px;
+    height: 8px;
+    top: 42%;
+    right: 84px;
+  }
+  &:after {
+    background-color: #96a7f8;
+    opacity: 0.5;
+    display: block;
+    content: '';
+    border-radius: 8px;
+    height: 40px;
+    width: 40px;
+  }
+}
+
+.visible-on-hover {
+  opacity: 0;
+  transition: opacity 0.25s ease-out;
+}

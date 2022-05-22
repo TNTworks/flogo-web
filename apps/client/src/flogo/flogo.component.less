@@ -1,0 +1,54 @@
+@import '~@flogo-web/assets/styles/_variables';
+
+:host {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+}
+
+.router-output {
+  height: 100%;
+}
+
+.flogo-footerContainer {
+  background: @gainsboro-nine;
+  border: 1px solid @color-medium-gray;
+  height: @size-height-footer;
+  padding: 0 70px;
+  width: 100%;
+}
+
+.flogo-footerText {
+  padding: 10px 0;
+}
+
+.flogo-copyright {
+  display: inline-block;
+  height: 20px;
+  width: 550px;
+  font-size: 14px;
+  line-height: 1.43;
+  letter-spacing: 1px;
+  color: @warm-grey;
+  margin: 0;
+}
+
+.flogo-privacyText {
+  font-size: 14px;
+  line-height: 1.43;
+  letter-spacing: 1px;
+  text-align: right;
+  color: @warm-grey;
+  border-right: 1px solid @warm-grey;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 0px 17px;
+}
+
+.flogo-footerPrivacy {
+  float: right;
+  width: 422px;
+  height: 20px;
+}

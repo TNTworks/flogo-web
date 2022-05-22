@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 40.3 (33839) - http://www.bohemiancoding.com/sketch -->
+    <title>E523199F-4276-4283-8760-CA02E8479FC6</title>
+    <desc>Created with sketchtool.</desc>
+    <defs></defs>
+    <g id="Error-Handler" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Flogo_ErrorHandler" transform="translate(-51.000000, -926.000000)" fill="#FFFFFF">
+            <g id="Group-8" transform="translate(39.000000, 914.000000)">
+                <g id="error-icon" transform="translate(12.000000, 12.000000)">
+                    <path d="M16,32 C24.836556,32 32,24.836556 32,16 C32,7.163444 24.836556,0 16,0 C7.163444,0 0,7.163444 0,16 C0,24.836556 7.163444,32 16,32 Z M16,7.11111111 C15.0186667,7.11111111 14.2222222,8.0402963 14.2222222,9.18518519 L14.2222222,17.4814815 C14.2222222,18.6263704 15.0186667,19.5555556 16,19.5555556 C16.9813333,19.5555556 17.7777778,18.6263704 17.7777778,17.4814815 L17.7777778,9.18518519 C17.7777778,8.0402963 16.9813333,7.11111111 16,7.11111111 Z M14.2222222,24.3333333 C14.2222222,25.3146667 15.0186667,26.1111111 16,26.1111111 C16.9813333,26.1111111 17.7777778,25.3146667 17.7777778,24.3333333 C17.7777778,23.352 16.9813333,22.5555556 16,22.5555556 C15.0186667,22.5555556 14.2222222,23.352 14.2222222,24.3333333 Z" id="Combined-Shape"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

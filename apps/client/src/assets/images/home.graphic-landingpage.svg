@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="124" viewBox="0 0 1440 124">
+    <defs>
+        <linearGradient id="a" x1="50%" x2="50%" y1="0%" y2="100%">
+            <stop offset="0%" stop-color="#B1DDF0"/>
+            <stop offset="100%" stop-color="#36BFBB"/>
+        </linearGradient>
+        <linearGradient id="b" x1="50%" x2="50%" y1="-79.726%" y2="109.769%">
+            <stop offset="0%" stop-color="#FECB38"/>
+            <stop offset="100%" stop-color="#36BFBB"/>
+        </linearGradient>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <path fill="url(#a)" fill-opacity=".2" d="M0 100.472C97.335 66.157 207.89 58.477 331.662 77.43c185.66 28.43 160.26 62.223 529.5 3.569 144.79-23 421.203-26.916 578.841 81 9.137 6.255 9.137-47.745 0-162H0v100.472z" transform="translate(-.003 -38)"/>
+        <path fill="url(#b)" fill-opacity=".1" d="M0 162C92.168 92.667 191.559 58 298.173 58c159.921 0 474.274 128.176 735.246 53 173.98-50.117 309.509-58.095 406.584-23.932V0H0v162z" transform="translate(-.003 -38)"/>
+        <g stroke="#FFF" stroke-width="7" opacity=".431" transform="translate(27 -17)">
+            <circle cx="896" cy="110" r="31"/>
+            <circle cx="1373.33" cy="51.238" r="31" transform="rotate(-145 1373.33 51.238)"/>
+            <circle cx="1296.565" cy="71.954" r="18" transform="rotate(-145 1296.565 71.954)"/>
+            <circle cx="31" cy="31" r="31"/>
+            <circle cx="878" cy="18" r="18"/>
+            <circle cx="111" cy="28" r="8"/>
+            <circle cx="829.5" cy="69.5" r="9.5"/>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,53 @@
+<h2>Search</h2>
+
+<div>
+  Search:
+  <flogo-search
+    placeholder="Type and I will search"
+    (search)="search($event)"
+    [emitOnKey]="emitOnKey"
+  ></flogo-search>
+  Last query: {{ lastQuery }}
+</div>
+
+<div>
+  <label>
+    <input
+      type="checkbox"
+      #checkbox
+      checked="true"
+      (change)="setEmitOnKey(checkbox.checked)"
+    />
+    Emit on key
+  </label>
+</div>
+
+<div class="lists">
+  <demo-search-people title="List" [people]="people"></demo-search-people>
+  <demo-search-people
+    title="Filtered list"
+    [people]="filteredPeopleList$ | async"
+  ></demo-search-people>
+</div>
+
+<h3>Alternate icon position</h3>
+
+<div>
+  <flogo-search iconPosition="left" placeholder="Left positioned icon"></flogo-search>
+  <flogo-search iconPosition="right" placeholder="Right positioned icon"></flogo-search>
+</div>
+
+<h3>Control the value from outside</h3>
+<input type="text" #customText value="customValue" /><button
+  type="button"
+  (click)="setCustomValue(customText.value)"
+>
+  Set value
+</button>
+<flogo-search
+  iconPosition="left"
+  placeholder="Left positioned icon"
+  [query]="customValue"
+  (search)="customQueryChanged($event)"
+></flogo-search>
+Last: {{ lastCustomQuery }}

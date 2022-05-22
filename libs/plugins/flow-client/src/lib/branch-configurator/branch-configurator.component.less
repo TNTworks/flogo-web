@@ -1,0 +1,55 @@
+@import '~@flogo-web/assets/styles/_mapper-modal.less';
+@import '~@flogo-web/assets/styles/_variables';
+
+.modal-wrapper {
+  background-color: @color-bg;
+
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 2;
+}
+
+//// layout
+
+.content {
+  flex: 1;
+  height: 100%;
+  border: solid 1px @color-medium-gray;
+  display: flex;
+  flex-direction: row;
+
+  /deep/ .content__sidebar {
+    width: 30%;
+    max-width: 30%;
+  }
+
+  /deep/ .content__main {
+    flex: 1;
+  }
+}
+
+.header__title {
+  background: url('/assets/svg/branch-configure.svg') no-repeat left center;
+  padding-left: 53px;
+}
+
+.header__title--configure {
+  font-size: 14px;
+  color: @color-dark-gray;
+}
+
+.header__title--links {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: @color-ink;
+}
+
+.link-separator {
+  font-size: 18px;
+  padding: 0 8px;
+  font-weight: normal;
+}

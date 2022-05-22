@@ -1,0 +1,54 @@
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.editor-spinner {
+  position: relative;
+  margin-top: -40px;
+  width: 100%;
+  display: block;
+}
+
+.editor-spinner__indicator {
+  width: 28px;
+  height: 28px;
+  margin: 0 auto;
+  fill: #062e79;
+}
+
+:host ::ng-deep {
+  .monaco-editor:not(.focused) .current-line ~ .line-numbers {
+    color: #cad3df;
+  }
+}
+
+.editor-container {
+  position: relative;
+
+  ::ng-deep .monaco-editor {
+    position: absolute;
+  }
+
+  &.is-disabled ::ng-deep .monaco-editor {
+    .cursor {
+      background-color: transparent;
+    }
+  }
+
+  &.is-disabled ::ng-deep {
+    .monaco-editor,
+    .monaco-editor-background,
+    .monaco-editor .margin,
+    .inputarea.ime-input {
+      background-color: #eee;
+    }
+
+    .monaco-editor,
+    .margin,
+    .editor-scrollable {
+      border-radius: 4px;
+    }
+  }
+}

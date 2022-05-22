@@ -1,0 +1,9 @@
+{
+  "name": "Empty app",
+  "type": "flogo:app",
+  "version": "0.0.1",
+  "description": "Empty flogo app",
+  "imports": [],
+  "triggers": [],
+  "resources": []
+}

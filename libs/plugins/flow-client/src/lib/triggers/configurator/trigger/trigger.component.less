@@ -1,0 +1,109 @@
+@import '~@flogo-web/assets/styles/_variables';
+
+@trigger-height: 47px;
+@arrow-width: 8px;
+
+:host {
+  display: block;
+  width: 100%;
+  padding-right: @arrow-width;
+  margin-bottom: 8px;
+
+  cursor: pointer;
+  color: #1c4874;
+  position: relative;
+  height: @trigger-height;
+
+  &:after {
+    display: block;
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: @trigger-height / 2 0 @trigger-height / 2 @arrow-width;
+    border-color: transparent transparent transparent @color-trigger-bg-color;
+    top: 0;
+    right: 0;
+    transition: border-left-color 0.2s ease;
+  }
+}
+
+:host(:hover) {
+  .trigger-content {
+    background-color: @color-trigger-hover-bg-color;
+  }
+
+  &:after {
+    border-left-color: @color-trigger-hover-bg-color;
+  }
+}
+
+:host(.is-selected) {
+  color: @color-white;
+
+  .trigger-content {
+    background-color: @color-trigger-selected-bg-color;
+  }
+
+  &:after {
+    border-left-color: @color-trigger-selected-bg-color;
+  }
+}
+
+.trigger-content {
+  transition: background-color 0.2s ease;
+  background: @color-trigger-bg-color;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding-left: 3px;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.trigger-label {
+  display: flex;
+  margin-left: 8px;
+  width: 148px;
+}
+
+.trigger-name {
+  max-width: 90%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+}
+
+.trigger-modified {
+  font-size: 16px;
+  top: -5px;
+}
+
+.trigger-error.has-error {
+  opacity: 1;
+}
+
+.trigger-error {
+  opacity: 0;
+  transition: opacity 0.25s ease-in-out;
+  width: 16px;
+  height: 16px;
+  background: url('/assets/svg/flogo.flows.diagram.icon.error.svg') no-repeat;
+  background-size: 100%;
+}
+
+.trigger-icon-margin {
+  margin: 0 7px;
+}
+
+.trigger-content.has-error .trigger-error {
+  opacity: 1;
+}
+
+:host(.ng-animating) {
+  .trigger-content {
+    overflow: hidden;
+  }
+}

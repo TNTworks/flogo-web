@@ -1,0 +1,86 @@
+<div class="canvas-stream" *ngIf="streamState">
+  <flogo-designer-header
+    [name]="streamState?.name"
+    [appName]="streamState?.app?.name"
+    [description]="streamState?.description"
+    (goBack)="navigateToApp()"
+    (changeName)="changeStreamName($event)"
+    (changeDescription)="changeStreamDescription($event)"
+  >
+    <div header-role="resource-logo" class="stream-logo"></div>
+    <flogo-stream-run-stream
+      (simulationStarted)="changePanelState(true)"
+      header-role="right-block"
+    ></flogo-stream-run-stream>
+    <flogo-logs header-role="right-block"></flogo-logs>
+    <div
+      header-role="right-block"
+      class="menu-dropdown"
+      (fgClickOutside)="closeStreamMenu()"
+    >
+      <i
+        class="flogo-icon-kebabmenu kebabmenu-icon menu-dropdown-more-button"
+        [class.active]="isStreamMenuOpen"
+        (click)="toggleStreamMenu()"
+        role="button"
+        id="streamMenuButton"
+        aria-haspopup="true"
+        [attr.aria-expanded]="isStreamMenuOpen"
+      ></i>
+      <div
+        class="menu-dropdown__content menu-dropdown__content--more"
+        aria-labelledby="streamMenuButton"
+        [class.active]="isStreamMenuOpen"
+      >
+        <ul class="dropdown-list">
+          <li class="dropdown-list__item" (click)="deleteStream()">
+            <i class="flogo-icon flogo-icon-delete"></i>{{ 'CANVAS:DELETE' | translate }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </flogo-designer-header>
+
+  <flogo-context-panel-area
+    class="context-panel-container"
+    [isOpen]="isSimulatorOpen$ | async"
+    panelTitle="Stream simulator"
+    openHeight="60vh"
+    [triggerStyles]="triggerPosition"
+    (open)="changePanelState(true)"
+    (close)="changePanelState(false)"
+  >
+    <div context-panel-role="primary-area" class="primary-area">
+      <ng-container *ngTemplateOutlet="streamContent"></ng-container>
+    </div>
+
+    <div class="panel-content" context-panel-role="panel-content">
+      <ng-container *ngTemplateOutlet="simulator"></ng-container>
+    </div>
+  </flogo-context-panel-area>
+
+  <ng-template #streamContent>
+    <flogo-stream-triggers [iconIndex]="iconIndex"></flogo-stream-triggers>
+    <flogo-stream-params-schema-button
+      role="button"
+      [streamMetadata]="streamState?.metadata"
+      (click)="openInputSchemaModal()"
+    ></flogo-stream-params-schema-button>
+    <flogo-stream-diagram
+      fgAddStage
+      [currentSelection]="currentSelection$ | async"
+      [iconIndex]="iconIndex"
+    ></flogo-stream-diagram>
+    <flogo-stream-stage-configurator></flogo-stream-stage-configurator>
+  </ng-template>
+
+  <ng-template #simulator>
+    <flogo-stream-simulator
+      *ngIf="isSimulatorOpen$ | async"
+      [simulationId]="simulationId"
+      [simulateActivity]="selectedStageInfo$ | async"
+      [metadata]="streamState?.metadata"
+      [currentStageId]="currentSimulationStage$ | async"
+    ></flogo-stream-simulator>
+  </ng-template>
+</div>

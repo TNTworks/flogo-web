@@ -1,0 +1,79 @@
+<div
+  *ngFor="let notification of notifications$ | async"
+  @notificationAnim
+  [attr.data-notification-type]="notification.type"
+  class="uxpl-notification"
+  [ngClass]="{
+    'is-success': notification.type === 'success',
+    'is-error': notification.type === 'error'
+  }"
+>
+  <svg
+    *ngIf="notification.type === 'success'; else errorIcon"
+    class="uxpl-notification__icon"
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    role="presentation"
+    focusable="false"
+  >
+    <path
+      fill="currentColor"
+      fill-rule="evenodd"
+      d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm4.412-11.733a.938.938 0 1 0-1.326-1.326L10.75 13.28l-2.15-2.15a.937.937 0 1 0-1.326 1.325l2.813 2.813a.935.935 0 0 0 1.326 0l5-5z"
+    />
+  </svg>
+
+  <span
+    class="uxpl-notification__text"
+    *ngIf="!notification?.message?.key; else translatable"
+  >
+    {{ notification.message }}
+  </span>
+  <ng-template #translatable>
+    <span
+      class="uxpl-notification__text"
+      [translate]="notification.message.key"
+      [translateParams]="notification.message.params"
+    ></span>
+  </ng-template>
+
+  <button
+    class="uxpl-notification__close qa-close"
+    type="button"
+    (click)="close(notification)"
+    aria-label="Close"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="12"
+      height="12"
+      viewBox="0 0 12 12"
+      role="presentation"
+      focusable="false"
+    >
+      <path
+        fill="currentColor"
+        fill-rule="evenodd"
+        d="M11.69 1.807L7.497 6l4.193 4.192a1.06 1.06 0 1 1-1.497 1.497L6 7.497l-4.192 4.192A1.06 1.06 0 1 1 .31 10.192L4.502 6 .31 1.807A1.059 1.059 0 0 1 1.807.31L6 4.503 10.192.31a1.059 1.059 0 1 1 1.497 1.497"
+      />
+    </svg>
+  </button>
+</div>
+
+<ng-template #errorIcon>
+  <svg
+    class="uxpl-notification__icon"
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+  >
+    <path
+      fill="currentColor"
+      fill-rule="evenodd"
+      d="M12.976 13.866c0 .78-.336 1.435-.976 1.435-.64 0-.976-.624-.976-1.435v-4.43C11.024 8.655 11.36 8 12 8c.64 0 .976.655.976 1.436v4.43zM12 18.953c-.64 0-1.19-.563-1.19-1.218s.52-1.217 1.19-1.217c.672 0 1.19.562 1.19 1.217 0 .686-.55 1.218-1.19 1.218zm10.735.063L13.691 2.998A1.93 1.93 0 0 0 10.309 3L1.265 19.015C.513 20.346 1.452 22 2.955 22h18.09c1.503 0 2.442-1.653 1.69-2.984z"
+    />
+  </svg>
+</ng-template>

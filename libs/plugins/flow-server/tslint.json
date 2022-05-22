@@ -1,0 +1,7 @@
+{
+  "extends": "../../../tslint.json",
+  "rules": {
+    "directive-selector": [true, "attribute", "flogo-web", "camelCase"],
+    "component-selector": [true, "element", "flogo-web", "kebab-case"]
+  }
+}

@@ -1,0 +1,41 @@
+@import '_variables';
+
+.modal__close() {
+  color: @pale-gray;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+}
+
+.custom-scrollbar() {
+  // scrollbar-x css is still in draft mode, currently only supported by firefox >= v64
+  // https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Scrollbars
+  scrollbar-color: rgba(114, 114, 114, 0.2) transparent;
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 100px;
+    background-color: rgba(114, 114, 114, 0.2);
+  }
+}
+
+.btn-insert-between(@bgColor) {
+  position: absolute;
+  z-index: 6;
+  left: 1px;
+  height: 18px;
+  width: 18px;
+  margin: 20px 0 0 2px;
+  opacity: 0;
+  background-color: @bgColor;
+  &.is-selected {
+    opacity: 1;
+  }
+}

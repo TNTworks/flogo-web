@@ -1,0 +1,66 @@
+@import '~@flogo-web/assets/styles/_variables';
+
+:host {
+  position: absolute;
+  top: 73px;
+  right: 105px;
+  z-index: 1;
+  width: 512px;
+  border-radius: 3px;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.35);
+  background-color: #fff;
+  padding: 24px;
+}
+
+.import-header {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0.27px;
+  color: #212121;
+}
+
+.file-upload {
+  padding: 36px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: @lightest-gray;
+}
+
+.file-upload--empty {
+  background-color: transparent;
+  border: 2px dashed @color-medium-gray;
+}
+
+.file-name {
+  font-size: 12px;
+  line-height: 1.17;
+  margin-top: 4px;
+  margin-bottom: 16px;
+}
+
+.upload-instructions {
+  color: @color-dark-gray;
+}
+
+.upload-instructions__link {
+  color: #0081cb;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.upload-instructions__lead {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.5;
+  text-align: center;
+  display: block;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+}

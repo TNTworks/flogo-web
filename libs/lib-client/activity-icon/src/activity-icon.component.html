@@ -1,0 +1,21 @@
+<ng-container [ngSwitch]="mode">
+  <img
+    *ngSwitchCase="Mode.CustomIcon"
+    [alt]="customAltText"
+    class="icon icon--custom"
+    [src]="iconUrl"
+  />
+  <img
+    *ngSwitchCase="Mode.Subflow"
+    class="icon icon--subflow"
+    src="/assets/svg/subflow.svg"
+    alt="Subflow"
+  />
+  <img
+    *ngSwitchCase="Mode.Terminal"
+    class="icon icon--return"
+    src="/assets/svg/flogo-return-activity.svg"
+    alt="Return"
+  />
+  <img class="icon" src="/assets/svg/flogo.icon.gears-action.svg" *ngSwitchDefault />
+</ng-container>

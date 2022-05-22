@@ -1,0 +1,145 @@
+@import '~@flogo-web/assets/styles/_variables';
+@import (reference) '~@flogo-web/assets/styles/uxpl/dropdown';
+@import (reference) '~@flogo-web/assets/styles/_typography';
+
+@flogo-header-background-color: #36bfbb;
+@flogo-header-height: 40px;
+@help-icon-active-color: @color-bg;
+@install-contrib-txt-color: @color-bg;
+
+:host {
+  background-color: @flogo-header-background-color;
+  color: rgba(255, 255, 255, 0.87);
+  display: block;
+  width: 100%;
+  height: @flogo-header-height;
+  padding: 0 16px;
+  //box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+  z-index: 2;
+}
+
+.flogo-header {
+  display: inline;
+  font-size: 20px;
+  font-weight: normal;
+  line-height: @flogo-header-height;
+  margin: 0;
+
+  img {
+    height: 19px;
+  }
+}
+
+.flogo-header__logo {
+  height: 19px;
+  position: relative;
+  bottom: 3px;
+}
+
+.flogo-header__install-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 1.3333333;
+  outline: none;
+  padding: 10px;
+  opacity: 0.75;
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.flogo-icon-download {
+  position: relative;
+  bottom: 2px;
+}
+
+.flogo-header__install-txt {
+  position: relative;
+  bottom: 3.5px;
+  left: 8px;
+  color: @install-contrib-txt-color;
+}
+
+.flogo-header__help-menu {
+  display: inline-block;
+  position: relative;
+  bottom: 1px;
+
+  &.--active {
+    .flogo-header__help-menu-btn {
+      color: @help-icon-active-color;
+    }
+
+    .flogo-header__help-menu-content {
+      animation: scale-in-ver-top 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    }
+  }
+}
+
+.flogo-header__help-menu-content {
+  .uxpl-dropdown-container();
+  min-width: 369px;
+  position: absolute;
+  right: 8px;
+  top: 42px;
+  transform: scale(0, 0);
+  transition: all 300ms ease-in;
+  color: @color-header-text;
+
+  ul {
+    .uxpl-dropdown();
+    li {
+      cursor: pointer;
+      margin: 0;
+      line-height: normal;
+      letter-spacing: 0.3px;
+
+      a {
+        .body-small();
+        .uxpl-dropdown__item();
+        padding: 8px 24px;
+        display: block;
+        width: 100%;
+        color: @cerulean;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+.flogo-header__divider {
+  border-top: 1px solid @gainsboro;
+}
+
+.flogo-header__help-menu-btn {
+  padding: 0;
+  margin: 10px 24px 5px;
+  font-size: 1em;
+  opacity: 0.75;
+
+  &:hover {
+    color: @help-icon-active-color;
+    opacity: 1;
+  }
+}
+
+.header-help {
+  .secondary-header();
+  margin: 24px 24px 10px;
+  line-height: 1.5;
+  letter-spacing: 0.3px;
+}
+
+.secondary-text {
+  .body-small();
+  color: @color-dark-gray;
+  margin: 10px 24px;
+}
+
+.copy-notice {
+  letter-spacing: 0.7px;
+  margin-bottom: 24px;
+}

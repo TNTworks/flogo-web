@@ -1,0 +1,66 @@
+<section class="container">
+  <header class="page-header"><h3>Services Configuration</h3></header>
+
+  <div class="form-horizontal">
+    <div>
+      <ul>
+        <li *ngFor="let log of logs">
+          <a [href]="log.url" target="_blank">{{ log.label }}</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="form-group" *ngFor="let server of servers$ | async">
+      <!-- TODO: replace [innerHTML] with [textContent] https://github.com/angular/angular/issues/8413 -->
+      <label class="col-lg-2 col-md-2 col-sm-3" [innerHTML]="server._label"></label>
+      <div class="col-lg-8 col-md-8 col-sm-12">
+        <div class="input-group">
+          <input
+            readonly
+            type="text"
+            name="server-protocol"
+            class="form-control"
+            placeholder="{{ location.protocol.replace(':', '') }}"
+            [value]="server.config.protocol"
+          />
+          <div class="input-group-addon">://</div>
+          <input
+            readonly
+            type="text"
+            name="server-host"
+            class="form-control"
+            placeholder="{{ location.hostname }}"
+            [value]="server.config.host"
+          />
+          <div class="input-group-addon">:</div>
+          <input
+            readonly
+            type="text"
+            name="server-port"
+            class="form-control"
+            placeholder="port"
+            [value]="server.config.port"
+          />
+          <div class="input-group-addon">
+            <flogo-config-service-status-indicator
+              [urlConfig]="server.config"
+            ></flogo-config-service-status-indicator>
+          </div>
+        </div>
+      </div>
+      <button
+        class="col-lg-2 col-md-2 col-sm-3"
+        [ngClass]="{
+          'flogo-display': server._display,
+          'flogo-hide': !server._display
+        }"
+        style="float:left;"
+        type="button"
+        class="btn btn-default"
+        (click)="onRestart(server)"
+      >
+        Restart
+      </button>
+    </div>
+  </div>
+</section>

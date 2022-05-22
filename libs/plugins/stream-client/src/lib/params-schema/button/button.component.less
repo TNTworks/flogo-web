@@ -1,0 +1,91 @@
+@import '~@flogo-web/assets/styles/_variables';
+
+@bg-color-default: #dedede;
+@bg-color-default--hover: #f0f0f0;
+@bg-color-configured: #eaedfe;
+@bg-color-configured--hover: #d5dcfc;
+
+.schema-button {
+  width: 70px;
+  height: 100%;
+  padding: 0 10px 10px;
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  background-color: @bg-color-default;
+  font-weight: bold;
+  text-align: center;
+  font-size: 0.75em;
+  box-shadow: 2px 0px 1px 0 rgba(0, 0, 0, 0.1);
+  transition: all 0.15s ease-in-out;
+
+  // arrow
+  &:after {
+    position: absolute;
+    left: 56px;
+    top: 52px;
+    z-index: 1;
+    content: '';
+    display: block;
+    width: 28px;
+    height: 16px;
+    transform: rotate(71deg) skewX(50deg);
+    background: @bg-color-default;
+    box-shadow: 2px -2px 1px 0 rgba(0, 0, 0, 0.1);
+    transition: all 0.15s ease-in-out;
+  }
+
+  &:hover {
+    background-color: @bg-color-default--hover;
+
+    &:after {
+      background-color: @bg-color-default--hover;
+    }
+  }
+
+  &.--is-configured {
+    background-color: @bg-color-configured;
+
+    &:after {
+      background-color: @bg-color-configured;
+    }
+
+    &:hover {
+      background-color: @bg-color-configured--hover;
+
+      &:after {
+        background-color: @bg-color-configured--hover;
+      }
+    }
+  }
+
+  &__icon {
+    color: @color-stream-icon;
+    font-size: 20px;
+    line-height: 1;
+    height: 24px;
+    width: 24px;
+    margin: 33px 0 7px;
+  }
+}
+
+.schema-input-output {
+  margin-left: 8px;
+}
+
+.schema-label {
+  color: @color-dark-gray;
+  font-size: 10px;
+  margin: 2rem 0 0;
+}
+
+.schema-grouped {
+  width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  font-weight: 600;
+}

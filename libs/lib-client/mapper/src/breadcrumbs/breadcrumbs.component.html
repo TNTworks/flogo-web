@@ -1,0 +1,8 @@
+<ul class="breadcrumbs">
+  <li class="breadcrumb" *ngFor="let node of branch">
+    <svg class="flogo-mapper-icon breadcrumb__icon">
+      <use [fgMapperInlineHref]="getIcon(node)"></use>
+    </svg>
+    {{ node.label }} <span class="breadcrumb__separator fa fa-angle-right"></span>
+  </li>
+</ul>

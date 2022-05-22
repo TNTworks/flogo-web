@@ -1,0 +1,17 @@
+<div class="mapper-functions-list row">
+  <flogo-mapper-tree
+    class="tree-functions-list col-md-6"
+    [treeNodes]="functions$ | async"
+    [searchTerm]="filterTerm$ | async"
+    [dragType]="dragType"
+    (select)="onSelect($event)"
+    (hover)="onHover($event)"
+    (search)="onSearch($event)"
+  >
+  </flogo-mapper-tree>
+  <flogo-mapper-function-details
+    class="col-md-6"
+    [name]="name"
+    [description]="description"
+  ></flogo-mapper-function-details>
+</div>

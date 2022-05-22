@@ -1,0 +1,8 @@
+.mapper-input-list {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  list-style: none;
+  margin: 0;
+  position: relative;
+}

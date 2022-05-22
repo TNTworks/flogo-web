@@ -1,0 +1,72 @@
+@import '~@flogo-web/assets/styles/_variables';
+
+.form-input {
+  width: 100%;
+  display: flex;
+}
+
+.form-input-name-wrapper {
+  flex: 0.6;
+}
+
+.form-input__name {
+  border-radius: 4px;
+  border: solid 1px @link-water;
+  width: 100%;
+  height: 45px;
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+
+  &.--invalid {
+    border: 1px solid @color-invalid;
+    &:focus {
+      outline-color: @color-invalid;
+    }
+  }
+}
+
+.form-input__delete {
+  justify-content: center;
+  align-items: center;
+  width: 45px;
+  height: 45px;
+  font-weight: bold;
+  border: 0;
+  display: flex;
+  background-color: inherit;
+
+  &:hover .delete-icon {
+    color: @color-secondary;
+  }
+}
+
+.type-selector {
+  flex: 0.4;
+  width: 100%;
+  margin-right: 25px;
+  margin-left: 20px;
+}
+
+.type-selector__label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  text-align: left;
+  height: 45px;
+  position: relative;
+}
+
+.type-selector__caret {
+  color: @color-secondary;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.dropdown-menu.type-selector__dropdown-menu {
+  top: 91%;
+  min-width: 100%;
+  display: block;
+}

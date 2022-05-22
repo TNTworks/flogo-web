@@ -1,0 +1,62 @@
+@import '../_styles';
+@import (reference) '~@flogo-web/assets/styles/_variables';
+
+:host {
+  .tile-container();
+}
+
+.btn-insert {
+  .tile-placeholder;
+  .flex-center;
+  color: var(--diagram-secondary, @color-secondary);
+  background-color: transparent;
+  border: 2px dashed var(--diagram-secondary, @color-secondary);
+  box-shadow: none;
+  &:hover {
+    color: var(--diagram-secondary, @columbia-blue);
+    background-color: @tile-color-bg;
+    transform: translateY(-2px);
+    outline: none;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+    transition: all 0.25s ease;
+    border: none;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.btn-insert__icon {
+  height: @tile-placeholder-dimension / 3;
+  width: @tile-placeholder-dimension / 3;
+}
+
+.btn-insert-between {
+  height: 18px;
+  width: 18px;
+  .btn-insert__icon {
+    height: 6.5px;
+    width: 6.5px;
+    margin-right: 0.5px;
+  }
+  &:hover {
+    transform: scale(1.8);
+  }
+}
+
+:host(.is-selected) {
+  .btn-insert,
+  .btn-insert:hover {
+    box-shadow: 1px 2px 9px 0 rgba(0, 0, 0, 0.3);
+    transform: translateY(0);
+    background-color: var(--diagram-secondary, @tile-color-bg--selected);
+    color: @color-bg;
+    border: none;
+  }
+
+  .btn-insert-between,
+  .btn-insert-between:hover {
+    transform: scale(1.8);
+  }
+}

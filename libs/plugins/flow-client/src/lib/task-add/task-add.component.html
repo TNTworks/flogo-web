@@ -1,0 +1,32 @@
+<div class="head">
+  <h2 class="title">{{ 'TASKS:ADD-ACTIVITY' | translate }}</h2>
+  <input
+    cdkFocusRegionStart
+    type="text"
+    class="search"
+    placeholder="{{ 'ADD:SEARCH-ACTIVITIES' | translate }}"
+    (keyup)="filterActivities($event.target.value)"
+  />
+  <span class="flogo-icon-search icon-search"></span>
+</div>
+<div class="content" *ngIf="filteredActivities$ | async as activities">
+  <button
+    class="list-item install-item qa-install-item"
+    (click)="handleInstallerWindow(true)"
+  >
+    <div class="install-activity">
+      <i class="install-icon flogo-icon-add"></i>
+      <span>{{ 'FLOWS-DETAILS-TASKS:INSTALL-NEW-ACTIVITY' | translate }}</span>
+    </div>
+  </button>
+
+  <flogo-flow-activity-list
+    *ngIf="activities.length > 0; else emptyCase"
+    [activities]="activities"
+    (selectActivity)="selectActivity($event.ref)"
+  ></flogo-flow-activity-list>
+  <ng-template #emptyCase>
+    <p class="empty-text qa-no-tasks">{{ 'ADD:NO-TASKS' | translate }}</p>
+  </ng-template>
+  <input type="hidden" cdkFocusRegionEnd />
+</div>

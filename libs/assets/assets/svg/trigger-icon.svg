@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="52" height="52" viewBox="0 0 52 52">
+  <defs>
+    <path id="triggerPlaceholder" d="M40 .12V0H2.4A2.4 2.4 0 0 0 0 2.4v43.2A2.4 2.4 0 0 0 2.4 48H40v-.12L48 24 40 .12z"/>
+  </defs>
+  <g id="defaultTrigger" fill-rule="evenodd" transform="translate(2 1)">
+    <use fill="#000" filter="url(#flogoFlowsDetailTriggersPanelTriggerShadow)" xlink:href="#triggerPlaceholder"/>
+    <use xlink:href="#triggerPlaceholder"/>
+  </g>
+  <g id="addTrigger" fill-rule="evenodd" transform="translate(2 1)">
+    <use xlink:href="#triggerPlaceholder"/>
+  </g>
+</svg>

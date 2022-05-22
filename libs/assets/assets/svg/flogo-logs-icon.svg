@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="43px" height="43px" viewBox="0 0 43 43" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 41 (35326) - http://www.bohemiancoding.com/sketch -->
+    <title>2ACF2BB6-C903-4A07-926F-981C807E7909</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <path d="M14.1878576,5.75 C15.3804867,7.45480647 16.1,9.66287207 16.1,12.075 C16.1,17.4735834 12.4958922,21.85 8.05,21.85 C3.60410776,21.85 0,17.4735834 0,12.075 C0,9.66287207 0.71951327,7.45480647 1.91214244,5.75 C3.38873657,7.86072083 5.59056606,9.2 8.05,9.2 C10.5094339,9.2 12.7112634,7.86072083 14.1878576,5.75 Z" id="path-1"></path>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="16.1" height="16.1" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="All-Screens" stroke="#ffffff" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Flogo_debuglog" transform="translate(-1020.000000, -100.000000)">
+            <g id="flow-title" transform="translate(0.000000, 65.000000)">
+                <g id="debug-button-selected" transform="translate(1021.000000, 36.000000)">
+                    <g>
+                        <g id="menu-btn-copy" stroke="none" stroke-width="2" fill="none">
+                            <g id="menu-btn" transform="translate(20.500000, 20.500000) rotate(-270.000000) translate(-20.500000, -20.500000) ">
+                                <rect id="tc-gen-cmpt-button-primary-default" transform="translate(20.035000, 20.035000) rotate(-270.000000) translate(-20.035000, -20.035000) " x="-2.13162821e-14" y="-4.49290324e-13" width="40.0699997" height="40.0699997"></rect>
+                            </g>
+                        </g>
+                        <g id="debug-icon-white" transform="translate(9.000000, 9.000000)">
+                            <g id="Group-4" transform="translate(0.000000, 0.575000)">
+                                <g id="Group-2" transform="translate(0.000000, 8.050000)" stroke="#ffffff">
+                                    <path d="M0.575,0.575 L4.025,1.725" id="Line"></path>
+                                    <path d="M1.725,8.625 L5.175,9.775" id="Line-Copy" transform="translate(3.450000, 9.200000) scale(1, -1) translate(-3.450000, -9.200000) "></path>
+                                    <path d="M0.575,5.175 L4.025,5.175" id="Line-Copy-2" transform="translate(2.300000, 5.175000) scale(1, -1) translate(-2.300000, -5.175000) "></path>
+                                </g>
+                                <g id="Group-2-Copy" transform="translate(20.125000, 13.225000) scale(-1, 1) translate(-20.125000, -13.225000) translate(17.250000, 8.050000)" stroke="#ffffff">
+                                    <path d="M0.575,0.575 L4.025,1.725" id="Line"></path>
+                                    <path d="M1.725,8.625 L5.175,9.775" id="Line-Copy" transform="translate(3.450000, 9.200000) scale(1, -1) translate(-3.450000, -9.200000) "></path>
+                                    <path d="M0.575,5.175 L4.025,5.175" id="Line-Copy-2" transform="translate(2.300000, 5.175000) scale(1, -1) translate(-2.300000, -5.175000) "></path>
+                                </g>
+                                <g id="Group-3" transform="translate(3.450000, 0.000000)">
+                                    <use id="Combined-Shape" stroke="#ffffff" mask="url(#mask-2)" stroke-width="2" xlink:href="#path-1"></use>
+                                    <path d="M13.5246803,4.90855952 C12.0882313,3.28977404 10.164305,2.3 8.05,2.3 C5.93569501,2.3 4.01176871,3.28977404 2.57531969,4.90855952 C4.01176871,6.800141 5.93569501,8.05 8.05,8.05 C10.164305,8.05 12.0882313,6.800141 13.5246803,4.90855952 Z" id="Combined-Shape" fill="#FFFFFF"></path>
+                                    <polyline id="Triangle" stroke="#ffffff" points="12.65 1.02140518e-15 8.05 5.75 8.05 5.75 3.45 0"></polyline>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

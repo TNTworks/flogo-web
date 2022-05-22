@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="30px" height="30px" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 41 (35326) - http://www.bohemiancoding.com/sketch -->
+    <title>41D40732-EE3F-4545-91EF-1C015162B250</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g id="All-Screens" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Flogo_debuglog" transform="translate(-1384.000000, -165.000000)" fill="#FFFFFF">
+            <g id="debug-sidepanel" filter="url(#filter-1)" transform="translate(1089.000000, 64.000000)">
+                <g id="edit-panel-copy-5" transform="translate(25.000000, 0.000000)">
+                    <g id="Search-Copy" transform="translate(20.000000, 92.000000)">
+                        <path d="M275.486189,29.1498763 C275.860015,29.5153086 276.090674,30.0209231 276.090674,30.5792556 C276.090674,31.6959208 275.166815,32.6005155 274.025757,32.6005155 C273.455534,32.6005155 272.939763,32.3746663 272.565325,32.008635 L266.514352,26.0832405 C265.284579,26.7943358 263.85535,27.2088918 262.324558,27.2088918 C257.763384,27.2088918 254.064888,23.589315 254.064888,19.1214562 C254.064888,14.6553945 257.763384,11.0340206 262.324558,11.0340206 C266.885731,11.0340206 270.584228,14.6553945 270.584228,19.1214562 C270.584228,20.6209266 270.160231,22.0203525 269.434604,23.2238828 L275.486189,29.1498763 L275.486189,29.1498763 Z M262.324558,13.0564786 C258.903219,13.0564786 256.129805,15.7726588 256.129805,19.1214562 C256.129805,22.4720508 258.903219,25.1870329 262.324558,25.1870329 C265.745896,25.1870329 268.51931,22.4720508 268.51931,19.1214562 C268.51931,15.7726588 265.745896,13.0564786 262.324558,13.0564786 L262.324558,13.0564786 Z" id="35-copy-5"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

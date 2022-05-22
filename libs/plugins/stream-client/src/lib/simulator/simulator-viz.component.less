@@ -1,0 +1,77 @@
+@import '~@flogo-web/assets/styles/_variables';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+flogo-loading-indicator {
+  z-index: 1;
+  background-color: #fff;
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+
+  ::ng-deep .flogo-spin-loading {
+    position: absolute;
+    transform: scale(0.4) translateY(10%);
+  }
+}
+
+perspective-viewer {
+  flex: 1;
+  z-index: 0;
+}
+
+.starting-msg {
+  font-size: 18px;
+  font-weight: 600;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  line-height: 1.5;
+  border-radius: 4px;
+  background-color: #fafafa;
+  color: #727272;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+}
+
+.is-starting {
+  font-size: 14px;
+}
+
+.header {
+  display: flex;
+}
+
+.header__title {
+  flex: 1;
+}
+
+.view-selector {
+  background: transparent;
+  border: none;
+  padding: 0;
+  height: 24px;
+  color: @color-dark-gray;
+  transition: color 0.15s ease-in-out;
+
+  &:hover,
+  &.is-selected {
+    color: @primary-blue;
+  }
+}
+
+.view-selector + .view-selector {
+  margin-left: 10px;
+}

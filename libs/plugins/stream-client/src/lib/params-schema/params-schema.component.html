@@ -1,0 +1,162 @@
+<form [formGroup]="paramsForm" novalidate (submit)="saveParams()" class="fullscreen">
+  <flogo-modal [showClose]="false" (close)="cancelInputSchemaModel()">
+    <flogo-modal-header>
+      <div class="stream-input-params-header">
+        <div class="stream-input-params-header__title">
+          <span class="stream-input-params-header__icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              width="32"
+              height="26"
+              viewBox="0 0 32 26"
+            >
+              <defs>
+                <path
+                  id="a"
+                  d="M27.427 3.591a2.332 2.332 0 0 1 2.335 2.33 2.332 2.332 0 0 1-2.335 2.33H9.272v2.362a.646.646 0 0 1-.976.558L.32 6.479a.646.646 0 0 1 0-1.114L8.296.673a.649.649 0 0 1 .976.556v2.364l18.155-.002zm-5.78 19.801H3.633c-1.367 0-2.475-1.044-2.475-2.33s1.108-2.33 2.475-2.33h18.014V16.29c0-.323.277-.583.619-.583.115 0 .228.03.327.088l8.115 4.773a.563.563 0 0 1 0 .988l-8.115 4.772a.642.642 0 0 1-.852-.185.558.558 0 0 1-.094-.31v-2.442.001z"
+                />
+              </defs>
+              <use
+                fill="#96A7F8"
+                fill-rule="evenodd"
+                transform="translate(.348 -.652)"
+                xlink:href="#a"
+              />
+            </svg>
+          </span>
+          {{ 'STREAMS.INPUT-PARAMS:DEFINE' | translate }}
+        </div>
+        <button
+          type="button"
+          class="flogo-button--secondary"
+          data-dismiss="modal"
+          (click)="cancelInputSchemaModel()"
+        >
+          {{ 'INPUT-PARAMS:CANCEL' | translate }}
+        </button>
+        <button
+          type="submit"
+          class="flogo-button--default"
+          data-dismiss="modal"
+          [disabled]="!paramsForm.valid"
+        >
+          {{ 'INPUT-PARAMS:SAVE' | translate }}
+        </button>
+      </div>
+    </flogo-modal-header>
+    <flogo-modal-body>
+      <div class="stream-input-params-container">
+        <div class="stream-input-params-categories">
+          <ul>
+            <li
+              class="stream-input-params__category"
+              [ngClass]="{
+                'stream-input-params__category--selected': displayInputParams
+              }"
+              (click)="showInputParams()"
+            >
+              <span>{{ 'STREAMS.INPUT-PARAMS:INPUT-GROUPBY' | translate }}</span>
+              <i
+                class="flogo-icon flogo-icon-info-outline stream-input-params__category-error"
+                *ngIf="paramsForm?.get('input').invalid"
+              ></i>
+            </li>
+            <li
+              class="stream-input-params__category"
+              [ngClass]="{
+                'stream-input-params__category--selected': !displayInputParams
+              }"
+              (click)="showOutputParams()"
+            >
+              <span>{{ 'STREAMS.INPUT-PARAMS:OUTPUT' | translate }}</span>
+              <i
+                class="flogo-icon flogo-icon-info-outline stream-input-params__category-error"
+                *ngIf="paramsForm?.get('output').invalid"
+              ></i>
+            </li>
+          </ul>
+        </div>
+        <div
+          class="stream-input-params-pane"
+          formArrayName="input"
+          *ngIf="displayInputParams"
+        >
+          <div class="stream-input-params-pane__input-fields">
+            <div
+              *ngFor="let inputParam of paramsForm.get('input').controls; let i = index"
+              class="stream-input-params-pane__each-field"
+            >
+              <div [formGroupName]="i" class="stream-input-params-pane__new-field">
+                <flogo-stream-params-schema-input-param-row
+                  (removeParam)="removeParam(i, 'input')"
+                  (selectGroupBy)="updateGroupBy($event)"
+                  (unselectGroupBy)="updateGroupBy(null)"
+                  [dropdownOptions]="selectTypes"
+                  [paramGroup]="inputParam"
+                  [inputIndex]="i"
+                  [groupBy]="groupBy"
+                ></flogo-stream-params-schema-input-param-row>
+              </div>
+            </div>
+            <div class="stream-input-params-pane__each-field">
+              <button
+                class="stream-input-params-pane__add-btn"
+                (click)="addParams('input')"
+                type="button"
+              >
+                <span
+                  class="flogo-icon flogo-icon-add stream-input-params-pane__add-btn__icon"
+                ></span>
+                <span
+                  class="stream-input-params-pane__add-btn__text"
+                  *ngIf="paramsForm.get('input').controls.length == 0"
+                >
+                  {{ 'STREAMS.INPUT-PARAMS:ADD-INPUT' | translate }}
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div
+          class="stream-input-params-pane"
+          formArrayName="output"
+          *ngIf="!displayInputParams"
+        >
+          <div class="stream-input-params-pane__input-fields">
+            <div
+              *ngFor="let outputParam of paramsForm.get('output').controls; let i = index"
+              class="stream-input-params-pane__each-field"
+            >
+              <div [formGroupName]="i" class="stream-input-params-pane__new-field">
+                <flogo-stream-params-schema-output-param-row
+                  (removeParam)="removeParam(i, 'output')"
+                  [dropdownOptions]="selectTypes"
+                  [paramGroup]="outputParam"
+                  [inputIndex]="i"
+                ></flogo-stream-params-schema-output-param-row>
+              </div>
+            </div>
+            <div class="stream-input-params-pane__each-field">
+              <button
+                class="stream-input-params-pane__add-btn"
+                (click)="addParams('output')"
+                type="button"
+              >
+                <span
+                  class="flogo-icon flogo-icon-add stream-input-params-pane__add-btn__icon"
+                ></span>
+                <span
+                  class="stream-input-params-pane__add-btn__text"
+                  *ngIf="paramsForm.get('output').controls.length == 0"
+                >
+                  {{ 'STREAMS.INPUT-PARAMS:ADD-OUTPUT' | translate }}
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </flogo-modal-body>
+  </flogo-modal>
+</form>

@@ -1,0 +1,23 @@
+<div class="layout" [class.has-error]="!!error">
+  <a (click)="back()">&lt; Back</a> <br />
+
+  <h1>{{ resource?.name }}</h1>
+
+  <div class="info">
+    <strong>Id:</strong> {{ resource?.id }} <br />
+    <strong>Created At:</strong> {{ resource?.createdAt | date: 'medium' }} <br />
+    <strong>Updated At:</strong> {{ resource?.updatedAt | date: 'medium' }} <br />
+  </div>
+
+  <textarea #resourceEdit name="" id="" cols="30" rows="10" [value]="editData"></textarea>
+  <div class="error" *ngIf="error">{{ error }}</div>
+  <br />
+  <button class="flogo-button--primary" (click)="save(resourceEdit.value)">
+    {{ isSaving ? 'Saving...' : 'Save' }}
+  </button>
+
+  <div class="detail">{{ resource?.data | json }}</div>
+</div>
+<div class="layout diagram-wrapper">
+  <flogo-diagram [flow]="renderableResource" [isReadOnly]="true"></flogo-diagram>
+</div>

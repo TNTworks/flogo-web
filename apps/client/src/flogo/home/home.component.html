@@ -1,0 +1,54 @@
+<div class="content-wrapper header">
+  <div class="header__content">
+    <p class="welcome-message">{{ 'FLOWS:WELCOME-BACK' | translate }}</p>
+  </div>
+  <div class="header__flynn" [class.is-flying]="isFlying">
+    <object
+      (load)="onFlynnLoaded($event)"
+      #flynn
+      class="flogo-flows-mascotImg"
+      data="/assets/svg/flogo-flynn.svg"
+      type="image/svg+xml"
+    >
+      <img src="/assets/svg/flogo-flynn.svg" />
+    </object>
+  </div>
+</div>
+<section class="content-wrapper flogo-apps-section">
+  <flogo-home-apps-list
+    class="flogo-apps-section__apps"
+    #appList
+    (appSelected)="onSelectedApp($event)"
+  ></flogo-home-apps-list>
+  <aside class="flogo-apps-section__aside">
+    <h3 class="flogo-main__subtitle">{{ 'FLOWS:RECENTLY-MODIFIED' | translate }}</h3>
+    <div class="recent-flows">
+      <div *ngIf="!recent.length" class="recent-flows__empty">
+        <div class="recent-flows__empty-state"></div>
+        <div class="recent-flows__empty-state__legend">
+          {{ 'FLOWS:EMPTY' | translate }}
+        </div>
+      </div>
+
+      <ul class="recent-flows__list">
+        <li *ngFor="let item of recent" class="recent-flows__list__item">
+          <span class="recent-flows__flow__name"
+            ><a
+              [routerLink]="['/resources', item.id, item.type]"
+              class="flogo-link recent-flows__list__resource"
+              >{{ item.name }}</a
+            ></span
+          >
+          <span
+            >in
+            <a
+              [routerLink]="['/apps', item.appId]"
+              class="flogo-link recent-flows__list__app"
+              >{{ item.app ? item.app.name : item.appId }}</a
+            ></span
+          >
+        </li>
+      </ul>
+    </div>
+  </aside>
+</section>

@@ -1,0 +1,122 @@
+{
+  "name": "RestApp",
+  "type": "flogo:app",
+  "version": "0.0.1",
+  "description": "My rest app",
+  "appModel": "1.0.0",
+  "triggers": [
+    {
+      "id": "receive_http_message",
+      "ref": "some_path_to_repo/trigger/rest",
+      "name": "Receive HTTP Message",
+      "description": "Simple REST Trigger",
+      "settings": {
+        "port": "9094"
+      },
+      "handlers": [
+        {
+          "settings": {
+            "method": "GET",
+            "path": "/status/:id",
+            "autoIdReply": null,
+            "useReplyHandler": "true"
+          },
+          "action": {
+            "ref": "github.com/project-flogo/flow",
+            "data": {
+              "flowURI": "res://flow:get_status"
+            },
+            "mappings": {
+              "input": [
+                {
+                  "mapTo": "id",
+                  "type": "assign",
+                  "value": "params.id"
+                }
+              ],
+              "output": [
+                {
+                  "mapTo": "code",
+                  "type": "assign",
+                  "value": "$.code"
+                },
+                {
+                  "mapTo": "data",
+                  "type": "assign",
+                  "value": "status"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "id": "flow:get_status",
+      "data": {
+        "name": "GetStatus",
+        "description": "",
+        "metadata": {
+          "input": [
+            {
+              "name": "id",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "status",
+              "type": "object"
+            },
+            {
+              "name": "code",
+              "type": "integer"
+            }
+          ]
+        },
+        "tasks": [
+          {
+            "id": "log_2",
+            "activity": {
+              "name": "Log Message",
+              "description": "Simple Log Activity",
+              "ref": "some_path_to_repo/activity/log",
+              "input": {
+              },
+              "mappings": {
+                "input": [
+                  {
+                    "type": "assign",
+                    "value": "$flow.id",
+                    "mapTo": "message"
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "links": [
+        ],
+        "errorHandler": {
+          "tasks": [
+            {
+              "id": "log_6",
+              "activity": {
+                "ref": "some_path_to_repo/activity/log",
+                "input": {
+                  "message": "log in error handler"
+                },
+                "output": {
+                },
+                "mappings": {
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

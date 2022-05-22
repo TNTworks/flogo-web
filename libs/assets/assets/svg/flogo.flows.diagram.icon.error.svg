@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 3.7 (28169) - http://www.bohemiancoding.com/sketch -->
+    <title>FDED7CA3-D708-4F03-8138-D5B3E65DDE58</title>
+    <desc>Created with sketchtool.</desc>
+    <defs></defs>
+    <g id="Components" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="flogo-gen-cmpt-tiles" transform="translate(-371.000000, -1157.000000)">
+            <g id="TILE-badge-Copy-3" transform="translate(284.000000, 1157.000000)">
+                <g id="error-icon" transform="translate(87.000000, 0.000000)">
+                    <circle id="Oval-20" fill="#FF556A" cx="9" cy="9" r="9"></circle>
+                    <path d="M9,4 C8.448,4 8,4.52266667 8,5.16666667 L8,9.83333333 C8,10.4773333 8.448,11 9,11 C9.552,11 10,10.4773333 10,9.83333333 L10,5.16666667 C10,4.52266667 9.552,4 9,4 Z" id="path-1-path" fill="#FFFFFF"></path>
+                    <path d="M9,11 C8.448,11 8,11.448 8,12 C8,12.552 8.448,13 9,13 C9.552,13 10,12.552 10,12 C10,11.448 9.552,11 9,11 L9,11 Z" id="path-1-path" fill="#FFFFFF"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,18 @@
+<div
+  class="schema-button"
+  [class.--is-configured]="
+    streamMetadata?.input?.length > 0 || streamMetadata?.output?.length > 0
+  "
+>
+  <i class="flogo-icon flogo-icon-input-output schema-button__icon"></i>
+  <span class="schema-input-output">{{
+    'STREAMS.INPUT-OUTPUT:STREAM-INTERFACE' | translate
+  }}</span>
+  <!--streams-plugin-todo: wrap below two into single div-->
+  <label class="schema-label" *ngIf="streamMetadata?.groupBy">{{
+    'STREAMS.INPUT-OUTPUT:GROUP-BY' | translate
+  }}</label>
+  <span class="schema-grouped" *ngIf="streamMetadata?.groupBy">{{
+    streamMetadata?.groupBy
+  }}</span>
+</div>

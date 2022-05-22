@@ -1,0 +1,12 @@
+<nav>
+  <a
+    *ngFor="let page of pages"
+    class="nav-item"
+    [routerLink]="page.path"
+    routerLinkActive="is-active"
+    [routerLinkActiveOptions]="{ exact: true }"
+    >{{ page.label }}</a
+  >
+</nav>
+
+<main><router-outlet></router-outlet></main>

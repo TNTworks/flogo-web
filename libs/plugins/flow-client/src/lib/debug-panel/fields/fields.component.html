@@ -1,0 +1,35 @@
+<ng-container
+  *ngIf="
+    fields?.form && (fields.form.get('input') || fields.form.get('output'));
+    else noFields
+  "
+>
+  <div
+    *ngIf="fields?.form?.get('input.formFields'); let fieldGroup"
+    class="activity__field-group"
+  >
+    <div class="fields-title">{{ 'DEBUGGER:INPUT' | translate }}</div>
+    <flogo-flow-dynamic-field-group
+      [fieldGroup]="fieldGroup"
+      [metadata]="fields?.metadata.input"
+    ></flogo-flow-dynamic-field-group>
+  </div>
+  <div
+    *ngIf="fields?.form?.get('output.formFields'); let fieldGroup"
+    class="activity__field-group"
+  >
+    <div class="fields-title">{{ 'DEBUGGER:OUTPUT' | translate }}</div>
+    <flogo-flow-dynamic-field-group
+      [fieldGroup]="fieldGroup"
+      [metadata]="fields?.metadata.output"
+      [readonly]="true"
+    ></flogo-flow-dynamic-field-group>
+  </div>
+</ng-container>
+<ng-template #noFields>
+  <div class="empty-text">
+    <div class="empty-text__lead">
+      {{ 'DEBUGGER:FIELDS-EMPTY-STATE-TITLE' | translate }}
+    </div>
+  </div>
+</ng-template>

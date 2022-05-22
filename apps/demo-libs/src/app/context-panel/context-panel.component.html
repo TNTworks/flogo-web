@@ -1,0 +1,27 @@
+<flogo-context-panel-area
+  class="context-panel-container"
+  [isOpen]="isOpen"
+  [panelTitle]="title"
+  [triggerStyles]="triggerPosition"
+  contextElementSelector=".scroll-to-me"
+  (open)="setPanelState(true)"
+  (close)="setPanelState(false)"
+>
+  <div context-panel-role="primary-area" class="primary-area">
+    <h2>Click the panel to open it</h2>
+    <p>It should reveal more content</p>
+    <button data-testid="change-title-btn" (click)="changeTitle()">
+      Change Panel Title
+    </button>
+    <button data-testid="change-position-btn" (click)="changePosition()">
+      Change Trigger position
+    </button>
+    <div class="context-pusher"></div>
+    <div data-testid="context-element" class="scroll-to-me">
+      It will automatically scroll to reveal this element!
+    </div>
+  </div>
+  <div context-panel-role="panel-content" class="panel-content">
+    Inside the context panel
+  </div>
+</flogo-context-panel-area>

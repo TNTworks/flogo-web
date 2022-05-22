@@ -1,0 +1,52 @@
+@tile-container-dimension: 60px;
+@tile-width: 128px;
+@tile-height: 60px;
+@tile-placeholder-dimension: 40px;
+@tile-radius: 8px;
+@tile-left-margin: 12px;
+@tile-color-bg: #fff;
+@tile-color-bg--selected: #055dab;
+@branch-color-primary: #afbbda;
+@branch-color-secondary: #899bcf;
+
+.flex-center() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tile-placeholder() {
+  border-radius: 5px;
+  height: @tile-placeholder-dimension;
+  width: @tile-placeholder-dimension;
+}
+
+.tile-container {
+  .flex-center;
+  flex-shrink: 0;
+  height: @tile-height;
+  width: var(--add-button-width, @tile-width);
+}
+
+.menu-option() {
+  transition: background-color 150ms ease-in-out;
+  &:hover {
+    background-color: #f3f5fa;
+  }
+}
+
+.animate-menu() {
+  transition-duration: 150ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.6, 1);
+  transition-property: all;
+  transition-delay: 200ms;
+}
+
+.row() {
+  height: 78px;
+  padding: 8px 15px;
+  display: flex;
+  background-color: transparent;
+  transition: background-color 0.15s ease;
+  flex-shrink: 0;
+}

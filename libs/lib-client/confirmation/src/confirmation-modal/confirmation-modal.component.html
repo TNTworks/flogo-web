@@ -1,0 +1,15 @@
+<div class="confirmation-modal-container" [@dialog]>
+  <div>
+    <div class="confirmation-modal-title">{{ data.title }}</div>
+    <p class="confirmation-modal-message">{{ data.textMessage }}</p>
+  </div>
+
+  <div class="confirmation-modal-footer">
+    <button class="flogo-button--secondary" (click)="closeModal()">
+      {{ 'MODAL:CANCEL' | translate }}
+    </button>
+    <button class="flogo-button--primary" (click)="control.confirm()">
+      {{ 'MODAL:DELETE' | translate }}
+    </button>
+  </div>
+</div>

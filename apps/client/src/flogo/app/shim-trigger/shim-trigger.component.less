@@ -1,0 +1,163 @@
+@import '~@flogo-web/assets/styles/_variables';
+@import '~@flogo-web/assets/styles/_mixins';
+@import (reference) '~@flogo-web/assets/styles/uxpl/dropdown';
+@import '~@flogo-web/assets/styles/uxpl/modal';
+
+@trigger-height: 47px;
+@arrow-width: 8px;
+
+:host {
+  .uxpl-modal-confirmation;
+  width: 500px;
+  max-width: 500px;
+}
+
+.shim-trigger__modal-close {
+  color: @pale-gray;
+  position: absolute;
+  top: 0;
+  left: 94%;
+  height: 1.25rem;
+  width: 1.25rem;
+  margin-right: 1.25rem;
+  margin-top: 1.25rem;
+  cursor: pointer;
+}
+
+.shim-triggers-list {
+  margin: 0;
+  padding: 0;
+  max-height: 450px;
+  overflow-y: auto;
+}
+
+.shim-trigger-list__element {
+  display: flex;
+  cursor: pointer;
+  height: 68px;
+  margin-left: 55px;
+  margin-right: 55px;
+  padding: 10px 8px 8px;
+  border: solid 1px transparent;
+  transition: box-shadow 0.2s ease-in-out;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0);
+  &:hover {
+    border-radius: 4px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+    border-color: @gray-lighter;
+  }
+}
+
+.shim-trigger-item {
+  position: relative;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  display: flex;
+  flex: 3;
+
+  min-width: 0;
+  margin-right: 8px;
+  background-color: @color-trigger-bg-color;
+  height: @trigger-height;
+  align-items: center;
+  padding-left: 3px;
+
+  color: @color-trigger-icon;
+  font-weight: 600;
+
+  &:after {
+    display: block;
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: @trigger-height / 2 0 @trigger-height / 2 @arrow-width;
+    border-color: transparent transparent transparent @color-trigger-bg-color;
+    top: 0;
+    right: -8px;
+  }
+}
+
+.shim-trigger-item__name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 0.5em;
+}
+
+.shim-trigger-selected {
+  display: flex;
+  width: 346px;
+  height: 68px;
+  margin-left: 55px;
+  .shim-trigger-item {
+    background-color: @light-grey;
+    &:after {
+      border-left-color: @light-grey;
+    }
+  }
+}
+
+.shim-trigger-flow {
+  flex: 2;
+  margin: 0;
+  padding-left: 16px;
+  min-width: 0;
+}
+
+.shim-trigger-flow__label {
+  font-size: 12px;
+  color: @warm-grey;
+  display: block;
+}
+
+.shim-trigger-flow__name {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.shim-trigger__modal-header {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.shim-trigger-icon {
+  margin: 0 8px;
+}
+
+.select-environment {
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.trigger-build-options {
+  border: solid 1px @light-grey;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 3px;
+}
+
+.build-environment-list-item {
+  .uxpl-dropdown;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+}
+
+.build-environment-link {
+  .uxpl-dropdown__item;
+  display: inline-block;
+  width: 100%;
+  color: @cerulean;
+  text-decoration: none;
+}
+
+.shim-trigger-build-link {
+  text-decoration: none;
+  color: @warm-grey;
+}

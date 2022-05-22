@@ -1,0 +1,16 @@
+<div [formGroup]="fieldGroup" class="df-container form-group">
+  <legend
+    flogo-flow-dynamic-form-label
+    class="form-field-label"
+    [fieldMetadata]="fieldControl"
+    [control]="fieldGroup.get('name')"
+    [noOptionalLabel]="hideOptionalLabel"
+  ></legend>
+  <textarea
+    id="{{ fieldControl.name }}"
+    rows="5"
+    [ngClass]="{ '--invalid': fieldGroup.get('value').invalid }"
+    class="form-control tc-text-areas tc-text-area df-resize-vertical"
+    formControlName="value"
+  ></textarea>
+</div>

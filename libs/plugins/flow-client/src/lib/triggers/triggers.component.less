@@ -1,0 +1,52 @@
+@import '~@flogo-web/assets/styles/_variables';
+
+.main {
+  padding: 2.5em 1.25em;
+  position: relative;
+  height: 100%;
+}
+
+.trigger {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+
+  .bg-placeholder {
+    fill: @color-trigger-bg-color;
+  }
+}
+
+.trigger-icon-background {
+  position: absolute;
+  z-index: 0;
+}
+
+.trigger-content {
+  padding: 14px 12px;
+  z-index: 1;
+}
+
+.icon-svg__def {
+  display: block;
+}
+
+.trigger--add {
+  color: #79b8dc;
+  font-size: 0.85em;
+  margin-bottom: 0;
+  .trigger-content {
+    padding: 16px;
+  }
+  .bg-placeholder {
+    fill: none;
+    stroke: #79b8dc;
+    stroke-width: 2.4;
+    stroke-linejoin: round;
+    stroke-dasharray: 4;
+    stroke-dashoffset: 5;
+  }
+}

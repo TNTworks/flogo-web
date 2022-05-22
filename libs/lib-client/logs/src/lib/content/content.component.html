@@ -1,0 +1,47 @@
+<div class="flogo-logs-content" [ngClass]="{ 'flogo-logs-content--full': isExternal }">
+  <div class="flogo-logs-search">
+    <div class="header-section">
+      <div class="legend" [style.cursor]="isExternal ? 'default' : 'move'">
+        <div class="title">
+          <div class="icon"><i class="flogo-icon-log"></i></div>
+          <div class="caption"><div>Debug Logs</div></div>
+        </div>
+        <div class="commands" *ngIf="!isExternal">
+          <div class="command" (click)="maximize($event)">
+            <i class="flogo-icon-pullout" aria-hidden="true"></i>
+          </div>
+          <div class="command" (click)="close($event)">
+            <i class="flogo-icon-close" aria-hidden="true"></i>
+          </div>
+        </div>
+      </div>
+      <div class="search">
+        <input
+          class="form-control"
+          type="text"
+          (keyup)="onKeyUp($event)"
+          placeholder="Filter"
+        />
+        <div class="search-button"><i class="flogo-icon-search"></i></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flogo-logs-lines" [style.overflow-y]="isExternal ? 'none' : 'auto'">
+    <div class="content-section">
+      <div
+        *ngFor="let message of logService.lines | flogoLogsSearch: searchValue"
+        class="log-line"
+      >
+        <div class="log-line__timestamp">{{ message.timestamp }}</div>
+        <div
+          class="log-line__level"
+          [class.log-line__level--error]="message.level == 'error'"
+        >
+          <img *ngIf="isError(message)" src="/assets/svg/flogo-logs-error.svg" />
+        </div>
+        <div class="log-line__message">{{ message.message }}</div>
+      </div>
+    </div>
+  </div>
+</div>

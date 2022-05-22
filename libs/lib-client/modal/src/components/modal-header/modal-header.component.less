@@ -1,0 +1,17 @@
+@import (reference) '../../variables';
+
+:host {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  min-height: @min-section-height;
+  padding: 1.125rem (@modal-horizontal-padding + @close-icon-dimension) 1.125rem 1.5rem;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
+}
+
+:host-context(flogo-modal.small) {
+  min-height: unset;
+  padding: 0;
+  box-shadow: none;
+}

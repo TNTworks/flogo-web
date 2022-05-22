@@ -1,0 +1,213 @@
+{
+  "input": {},
+  "expect": {
+    "extractActions": [
+      {
+        "id": "flow:get_status",
+        "name": "GetStatus",
+        "description": "",
+        "metadata": {
+          "input": [
+            {
+              "name": "id",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "status",
+              "type": "any"
+            },
+            {
+              "name": "code",
+              "type": "integer"
+            }
+          ]
+        },
+        "tasks": [
+          {
+            "id": "log_2",
+            "name": "log_2",
+            "description": "",
+            "type": 1,
+            "activityRef": "some_path_to_repo/activity/log",
+            "settings": {},
+            "inputMappings": {
+              "message": "=\"$flow.id\""
+            }
+          }
+        ],
+        "links": [],
+        "errorHandler": {
+          "tasks": [
+            {
+              "id": "log_6",
+              "name": "log_6",
+              "description": "",
+              "type": 1,
+              "activityRef": "some_path_to_repo/activity/log",
+              "settings": {},
+              "inputMappings": {
+                "message": "log in error handler"
+              }
+            }
+          ],
+          "links": []
+        }
+      }
+    ],
+    "extractTriggers": [
+      {
+        "id": "receive_http_message",
+        "ref": "some_path_to_repo/trigger/rest",
+        "name": "Receive HTTP Message",
+        "description": "Simple REST Trigger",
+        "settings": {
+          "port": "9094"
+        },
+        "handlers": [
+          {
+            "settings": {
+              "method": "GET",
+              "path": "/status/:id",
+              "autoIdReply": null,
+              "useReplyHandler": "true"
+            },
+            "action": {
+              "ref": "github.com/project-flogo/flow",
+              "data": {
+                "flowURI": "res://flow:get_status"
+              },
+              "mappings": {
+                "input": [
+                  {
+                    "mapTo": "id",
+                    "type": "assign",
+                    "value": "params.id"
+                  }
+                ],
+                "output": [
+                  {
+                    "mapTo": "code",
+                    "type": "assign",
+                    "value": "$.code"
+                  },
+                  {
+                    "mapTo": "data",
+                    "type": "assign",
+                    "value": "status"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "extractHandlers": [
+      {
+        "settings": {
+          "method": "GET",
+          "path": "/status/:id",
+          "autoIdReply": null,
+          "useReplyHandler": "true"
+        },
+        "actionId": "flow:get_status",
+        "actionMappings": {
+          "input": [
+            {
+              "mapTo": "id",
+              "type": 1,
+              "value": "params.id"
+            }
+          ],
+          "output": [
+            {
+              "mapTo": "code",
+              "type": 1,
+              "value": "$.code"
+            },
+            {
+              "mapTo": "data",
+              "type": 1,
+              "value": "status"
+            }
+          ]
+        }
+      }
+    ],
+    "reconciledTriggers": [
+      {
+        "trigger": {
+          "id": "receive_http_message",
+          "ref": "some_path_to_repo/trigger/rest",
+          "name": "Receive HTTP Message",
+          "description": "Simple REST Trigger",
+          "settings": {
+            "port": "9094"
+          },
+          "handlers": [
+            {
+              "settings": {
+                "method": "GET",
+                "path": "/status/:id",
+                "autoIdReply": null,
+                "useReplyHandler": "true"
+              },
+              "action": {
+                "ref": "github.com/project-flogo/flow",
+                "data": {
+                  "flowURI": "res://flow:get_status"
+                },
+                "mappings": {
+                  "input": [
+                    {
+                      "mapTo": "id",
+                      "type": "assign",
+                      "value": "params.id"
+                    }
+                  ],
+                  "output": [
+                    {
+                      "mapTo": "code",
+                      "type": "assign",
+                      "value": "$.code"
+                    },
+                    {
+                      "mapTo": "data",
+                      "type": "assign",
+                      "value": "status"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "reconciledHandlers": [
+          {
+            "handler": {
+              "settings": {
+                "method": "GET",
+                "path": "/status/:id",
+                "autoIdReply": null,
+                "useReplyHandler": "true"
+              },
+              "actionId": "flow:get_status",
+              "actionMappings": {
+                "input": {
+                  "id": "=$.params.id"
+                },
+                "output": {
+                  "code": "=$.code",
+                  "data": "=$.status"
+                }
+              }
+            },
+            "actionId": "flow:get_status-processed"
+          }
+        ]
+      }
+    ]
+  }
+}

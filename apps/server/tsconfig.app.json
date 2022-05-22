@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "outDir": "../../dist/out-tsc",
+    "lib": ["es2018"],
+    "types": ["node"],
+    "allowJs": true,
+    "checkJs": false,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es2018"
+  },
+  "exclude": ["**/*.spec.ts", "**/tests/*"],
+  "include": ["**/*.ts"]
+}

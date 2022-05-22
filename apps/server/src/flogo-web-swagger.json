@@ -1,0 +1,2029 @@
+{
+  "info": {
+    "title": "Flogo-Web API documentation",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3010",
+  "basePath": "/v1/api",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json",
+    "text/plain"
+  ],
+  "produces": [
+    "application/json",
+    "text/plain"
+  ],
+  "swagger": "2.0",
+  "paths": {
+    "/activities": {
+      "get": {
+        "tags": [
+          "Activity"
+        ],
+        "responses": {
+          "200": {
+            "description": "List all activities installed on the engine",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Activity"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Activity"
+        ],
+        "summary": "Install new activities",
+        "parameters": [
+          {
+            "name": "urls",
+            "in": "body",
+            "description": "Urls of the activities to be installed",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Urls"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Activity installed successfully"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Activity"
+        ],
+        "description": "Uninstall activities from engine",
+        "parameters": [
+          {
+            "name": "urls",
+            "in": "body",
+            "description": "Urls of the activities to be uninstalled",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Urls"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Activity uninstalled successfully"
+          }
+        }
+      }
+    },
+    "/configuration": {
+      "get": {
+        "tags": [
+          "Configuration"
+        ],
+        "responses": {
+          "200": {
+            "description": "Current configuration of the engine.",
+            "schema": {
+              "$ref": "#/definitions/Configuration"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Configuration"
+        ],
+        "parameters": [
+          {
+            "name": "configuration",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Configuration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Change the current configuration of the engine."
+          }
+        }
+      }
+    },
+    "/configuration/reset": {
+      "get": {
+        "tags": [
+          "Configuration"
+        ],
+        "summary": "Restart the engine with the default configuration options",
+        "responses": {
+          "200": {
+            "description": "Reset the configuration of the engine to its default values.",
+            "schema": {
+              "$ref": "#/definitions/Configuration-Reset"
+            }
+          }
+        }
+      }
+    },
+    "/engine/restart": {
+      "get": {
+        "tags": [
+          "Engine"
+        ],
+        "responses": {
+          "200": {
+            "description": "Engine restarted sucessfully.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "default": 200
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error restarting the engine.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "default": 500
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/flows/{flowId}/build": {
+      "get": {
+        "tags": [
+          "Flow"
+        ],
+        "summary": "Builds the flow for external usage.",
+        "parameters": [
+          {
+            "name": "flowId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Encoded ID required for the Flow Building"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Flow built successfully"
+          }
+        }
+      }
+    },
+    "/flows/run/flows/{id}": {
+      "get": {
+        "tags": [
+          "Flow"
+        ],
+        "summary": "Run specific flow",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "attributes": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "model": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "rootTask": {
+                  "type": "object",
+                  "properties": {
+                    "activityType": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "links": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "from": {
+                            "type": "integer"
+                          },
+                          "id": {
+                            "type": "integer"
+                          },
+                          "to": {
+                            "type": "integer"
+                          },
+                          "type": {
+                            "type": "integer"
+                          }
+                        }
+                      }
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "tasks": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "activityType": {
+                            "type": "string"
+                          },
+                          "attributes": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "#/definitions/Attribute"
+                            }
+                          },
+                          "id": {
+                            "type": "integer"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "type": {
+                            "type": "integer"
+                          }
+                        }
+                      }
+                    },
+                    "type": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "type": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/flows/run/restart": {
+      "post": {
+        "tags": [
+          "Flow"
+        ],
+        "summary": "Restart flow execution",
+        "parameters": [
+          {
+            "name": "flowInfo",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "initialState": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "state": {
+                      "type": "number"
+                    },
+                    "status": {
+                      "type": "number"
+                    },
+                    "attrs": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "flowUri": {
+                      "type": "string"
+                    },
+                    "workQueue": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer"
+                          },
+                          "execType": {
+                            "type": "integer"
+                          },
+                          "taskId": {
+                            "type": "integer"
+                          },
+                          "code": {
+                            "type": "integer"
+                          }
+                        }
+                      }
+                    },
+                    "rootTaskEnv": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer"
+                        },
+                        "taskId": {
+                          "type": "integer"
+                        },
+                        "taskDatas": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "state": {
+                                "type": "integer"
+                              },
+                              "done": {
+                                "type": "boolean"
+                              },
+                              "attrs": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object"
+                                }
+                              },
+                              "taskId": {
+                                "type": "integer"
+                              }
+                            }
+                          }
+                        },
+                        "linkDatas": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          }
+                        }
+                      }
+                    },
+                    "actionUri": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "interceptor": {
+                  "type": "object",
+                  "properties": {
+                    "tasks": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer"
+                          },
+                          "inputs": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "name": {
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "type": "string"
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Execution ID"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/flows/run/instances/{idInstance}/snapshot/{idSnapshot}": {
+      "get": {
+        "tags": [
+          "Flow"
+        ],
+        "summary": "...",
+        "parameters": [
+          {
+            "name": "idInstance",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Flow execution ID"
+          },
+          {
+            "name": "idSnapshot",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "Snapshot ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "...",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "state": {
+                  "type": "number"
+                },
+                "status": {
+                  "type": "number"
+                },
+                "attrs": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "flowUri": {
+                  "type": "string"
+                },
+                "workQueue": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number"
+                      },
+                      "execType": {
+                        "type": "number"
+                      },
+                      "taskId": {
+                        "type": "number"
+                      },
+                      "code": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                },
+                "rootTask": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    },
+                    "taskId": {
+                      "type": "number"
+                    },
+                    "taskDatas": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "state": {
+                            "type": "number"
+                          },
+                          "done": {
+                            "type": "boolean"
+                          },
+                          "attrs": {
+                            "type": "array",
+                            "items": {
+                              "type": "object"
+                            }
+                          },
+                          "taskId": {
+                            "type": "integer"
+                          }
+                        }
+                      }
+                    },
+                    "linkDatas": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/flows/run/instances/{id}": {
+      "get": {
+        "tags": [
+          "Flow"
+        ],
+        "summary": "...",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "tbd"
+          }
+        }
+      }
+    },
+    "/flows/run/instances/{id}/steps": {
+      "get": {
+        "tags": [
+          "Flow"
+        ],
+        "summary": "Flow execution steps",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Steps obtained successfully",
+            "schema": {
+              "$ref": "#/definitions/Step"
+            }
+          }
+        }
+      }
+    },
+    "/flows/run/instances/{flowId}/status": {
+      "get": {
+        "tags": [
+          "Flow"
+        ],
+        "summary": "Get the current execution status",
+        "parameters": [
+          {
+            "name": "flowId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "This ID of the flow's execution obtained at 'flows/run/flow/start'"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Execution status obtained successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/flows/run/flow/start": {
+      "post": {
+        "tags": [
+          "Flow"
+        ],
+        "summary": "Starts the flow execution",
+        "parameters": [
+          {
+            "name": "flowInfo",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "flowId": {
+                  "type": "number"
+                },
+                "attrs": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Flow executed successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "flow id"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/flows/run/flows": {
+      "post": {
+        "tags": [
+          "Flow"
+        ],
+        "summary": "Run a flow",
+        "parameters": [
+          {
+            "name": "flowInfo",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "description": {
+                  "type": "string",
+                  "description": "Flow's description"
+                },
+                "flow": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "model": {
+                      "type": "string"
+                    },
+                    "type": {
+                      "type": "number"
+                    },
+                    "attributes": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "rootTask": {
+                      "type": "object",
+                      "allOf": [
+                        {
+                          "$ref": "#/definitions/Task"
+                        },
+                        {
+                          "properties": {
+                            "tasks": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "allOf": [
+                                  {
+                                    "$ref": "#/definitions/Task"
+                                  },
+                                  {
+                                    "properties": {
+                                      "attributes": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "name": {
+                                              "type": "string"
+                                            },
+                                            "value": {
+                                              "type": "string"
+                                            },
+                                            "type": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            },
+                            "links": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "number"
+                                  },
+                                  "from": {
+                                    "type": "number"
+                                  },
+                                  "to": {
+                                    "type": "number"
+                                  },
+                                  "type": {
+                                    "type": "number"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Flow's name"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful run execution",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Flow's name"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "Flow's description"
+                },
+                "id": {
+                  "type": "integer"
+                },
+                "creationDate": {
+                  "type": "string",
+                  "format": "dateTime"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/flows": {
+      "get": {
+        "tags": [
+          "Flow"
+        ],
+        "summary": "Get all the flows information.",
+        "responses": {
+          "200": {
+            "description": "Flows' information obtained successfully.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Full-Flow"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Flow"
+        ],
+        "summary": "Add a new flow.",
+        "parameters": [
+          {
+            "name": "New Flow",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Flow added successfully.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "ok": {
+                  "type": "boolean"
+                },
+                "id": {
+                  "type": "string",
+                  "description": "The new flow's ID"
+                },
+                "rev": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/flows/update": {
+      "post": {
+        "tags": [
+          "Flow"
+        ],
+        "summary": "Update a flow",
+        "parameters": [
+          {
+            "name": "Updated flow",
+            "description": "Updated flow with the same ID and REV value as the one to be updated.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "flow": {
+                  "$ref": "#/definitions/Full-Flow"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Flow updated successfully"
+          }
+        }
+      }
+    },
+    "/flows/{flowId}": {
+      "delete": {
+        "tags": [
+          "Flow"
+        ],
+        "summary": "Delete a flow.",
+        "parameters": [
+          {
+            "name": "flowId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID of the flow to be deleted."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Flow deleted successfully",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/flows/triggers": {
+      "post": {
+        "tags": [
+          "Trigger",
+          "Flow"
+        ],
+        "summary": "Add a new trigger to the flow",
+        "parameters": [
+          {
+            "name": "New trigger",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Trigger name"
+                },
+                "flowId": {
+                  "type": "string",
+                  "description": "Flow's ID"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Trigger added successfully.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "default": 200
+                },
+                "id": {
+                  "type": "string",
+                  "description": "Flow's ID"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Flow's name"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/flows/activities": {
+      "post": {
+        "tags": [
+          "Flow",
+          "Activity"
+        ],
+        "summary": "Add a new activity to an specific flow.",
+        "parameters": [
+          {
+            "name": "New Activity",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "New activity's name"
+                },
+                "flowId": {
+                  "type": "string",
+                  "description": "Flow's ID"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Activity added successfully.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "default": 200
+                },
+                "id": {
+                  "type": "string",
+                  "description": "Flow's ID"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Flow's name"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/flows/{flowId}/json": {
+      "get": {
+        "tags": [
+          "Flow"
+        ],
+        "summary": "Obtain the information of a specific Flow in JSON format",
+        "parameters": [
+          {
+            "name": "flowId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Flow information obtained successfully",
+            "schema": {
+              "$ref": "#/definitions/Flow"
+            }
+          }
+        }
+      }
+    },
+    "/flows/json": {
+      "post": {
+        "tags": [
+          "Flow"
+        ],
+        "summary": "Import a flow from a json",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "Flow",
+            "in": "formData",
+            "required": true,
+            "description": "The flow has to be uploaded as a file",
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Flow imported successfully.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "ok": {
+                  "type": "boolean"
+                },
+                "id": {
+                  "type": "string",
+                  "description": "Flow's ID"
+                },
+                "rev": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ping/service": {
+      "post": {
+        "tags": [
+          "Ping"
+        ],
+        "summary": "Validate id the current configuration is working properly.",
+        "parameters": [
+          {
+            "name": "config",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "config": {
+                  "$ref": "#/definitions/Service"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Everything Ok",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "default": "ok"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error on configuration"
+          }
+        }
+      }
+    },
+    "/triggers": {
+      "get": {
+        "tags": [
+          "Trigger"
+        ],
+        "summary": "Get all the triggers installed in the engine.",
+        "responses": {
+          "200": {
+            "description": "All triggers obtained successfully.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Trigger"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Trigger"
+        ],
+        "summary": "Install new Triggers in the engine",
+        "parameters": [
+          {
+            "name": "urls",
+            "in": "body",
+            "description": "Urls to the triggers to be installed",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Urls"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "New triggers installed successfully"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Trigger"
+        ],
+        "summary": "Not implemented yet",
+        "responses": {
+          "200": {
+            "description": "To be defined"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Activity": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Attribute"
+          }
+        },
+        "outputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Attribute"
+          }
+        }
+      }
+    },
+    "Urls": {
+      "type": "object",
+      "properties": {
+        "urls": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Database": {
+      "type": "object",
+      "properties": {
+        "protocol": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "port": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "testPath": {
+          "type": "string"
+        }
+      }
+    },
+    "Activities-Triggers": {
+      "type": "object",
+      "properties": {
+        "protocol": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "port": {
+          "type": "string"
+        },
+        "testPath": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "db": {
+          "type": "object",
+          "properties": {
+            "port": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            }
+          }
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "Engine-Server": {
+      "type": "object",
+      "properties": {
+        "protocol": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "port": {
+          "type": "string"
+        },
+        "testPath": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "Configuration": {
+      "type": "object",
+      "properties": {
+        "db": {
+          "$ref": "#/definitions/Database"
+        },
+        "activities": {
+          "$ref": "#/definitions/Activities-Triggers"
+        },
+        "triggers": {
+          "$ref": "#/definitions/Activities-Triggers"
+        },
+        "engine": {
+          "$ref": "#/definitions/Engine-Server"
+        },
+        "stateServer": {
+          "$ref": "#/definitions/Engine-Server"
+        },
+        "flowServer": {
+          "$ref": "#/definitions/Engine-Server"
+        }
+      }
+    },
+    "Configuration-Reset": {
+      "type": "object",
+      "properties": {
+        "db": {
+          "type": "string"
+        },
+        "rootPath": {
+          "type": "string"
+        },
+        "publicPath": {
+          "type": "string"
+        },
+        "app": {
+          "type": "object",
+          "properties": {
+            "basePath": {
+              "type": "string"
+            },
+            "port": {
+              "type": "number"
+            },
+            "cacheTime": {
+              "type": "number"
+            },
+            "gitRepoCachePath": {
+              "type": "string"
+            }
+          }
+        },
+        "activities": {
+          "type": "object",
+          "properties": {
+            "bd": {
+              "type": "string"
+            },
+            "defaultPath": {
+              "type": "string"
+            },
+            "contribPath": {
+              "type": "string"
+            },
+            "defatult": {
+              "type": "object"
+            },
+            "contrib": {
+              "type": "object"
+            }
+          }
+        },
+        "triggers": {
+          "type": "object",
+          "properties": {
+            "db": {
+              "type": "string"
+            },
+            "defaultPath": {
+              "type": "string"
+            },
+            "contribPath": {
+              "type": "string"
+            },
+            "default": {
+              "type": "object"
+            }
+          }
+        },
+        "models": {
+          "type": "object",
+          "properties": {
+            "db": {
+              "type": "string"
+            },
+            "defaultPath": {
+              "type": "string"
+            },
+            "contribPath": {
+              "type": "string"
+            }
+          }
+        },
+        "testEngine": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "port": {
+              "type": "string"
+            },
+            "installConfig": {
+              "type": "object"
+            },
+            "triggers": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "settings": {
+                    "type": "object"
+                  },
+                  "endpoints": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "config": {
+              "type": "object",
+              "properties": {
+                "loglevel": {
+                  "type": "string"
+                },
+                "disableTriggerValidation": {
+                  "type": "boolean"
+                },
+                "flowRunner": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "pooled": {
+                      "type": "object",
+                      "properties": {
+                        "numWorkers": {
+                          "type": "integer"
+                        },
+                        "workQueueSize": {
+                          "type": "integer"
+                        },
+                        "maxStepCpunt": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
+                },
+                "actionRunner": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "pooled": {
+                      "type": "object",
+                      "properties": {
+                        "numWorkers": {
+                          "type": "integer"
+                        },
+                        "workQueueSize": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
+                },
+                "services": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "enabled": {
+                        "type": "boolean"
+                      },
+                      "settings": {
+                        "type": "object",
+                        "properties": {
+                          "host": {
+                            "type": "string"
+                          },
+                          "port": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "buildEngine": {
+          "type": "object",
+          "properties": {
+            "host": {
+              "type": "string"
+            },
+            "port": {
+              "type": "string"
+            },
+            "path": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "installConfig": {
+              "type": "object"
+            },
+            "config": {
+              "type": "object",
+              "properties": {
+                "loglevel": {
+                  "type": "string"
+                },
+                "flowRunner": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "pooled": {
+                      "type": "object",
+                      "properties": {
+                        "numWorkers": {
+                          "type": "integer"
+                        },
+                        "workQueueSize": {
+                          "type": "integer"
+                        },
+                        "maxStepCount": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
+                },
+                "actionRunner": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "pooled": {
+                      "type": "object",
+                      "properties": {
+                        "numWorkers": {
+                          "type": "integer"
+                        },
+                        "workQueueSize": {
+                          "type": "integer"
+                        },
+                        "maxSteepCount": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
+                },
+                "services": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "enabled": {
+                        "type": "boolean"
+                      },
+                      "settings": {
+                        "type": "object",
+                        "properties": {
+                          "host": {
+                            "type": "string"
+                          },
+                          "port": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "flogoWeb": {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "type": "string"
+            },
+            "host": {
+              "type": "string"
+            },
+            "port": {
+              "type": "string"
+            },
+            "testPath": {
+              "type": "string"
+            },
+            "label": {
+              "type": "string"
+            }
+          }
+        },
+        "flogoWebActivities": {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "type": "string"
+            },
+            "host": {
+              "type": "string"
+            },
+            "port": {
+              "type": "string"
+            },
+            "testPath": {
+              "type": "string"
+            },
+            "label": {
+              "type": "string"
+            }
+          }
+        },
+        "flogoWebTriggers": {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "type": "string"
+            },
+            "host": {
+              "type": "string"
+            },
+            "port": {
+              "type": "string"
+            },
+            "testPath": {
+              "type": "string"
+            },
+            "label": {
+              "type": "string"
+            }
+          }
+        },
+        "stateServer": {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "type": "string"
+            },
+            "host": {
+              "type": "string"
+            },
+            "port": {
+              "type": "string"
+            },
+            "testPath": {
+              "type": "string"
+            }
+          }
+        },
+        "processServer": {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "type": "string"
+            },
+            "host": {
+              "type": "string"
+            },
+            "port": {
+              "type": "string"
+            },
+            "testPath": {
+              "type": "string"
+            }
+          }
+        },
+        "webServer": {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "type": "string"
+            },
+            "host": {
+              "type": "string"
+            },
+            "port": {
+              "type": "string"
+            },
+            "testPath": {
+              "type": "string"
+            }
+          }
+        },
+        "engine": {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "type": "string"
+            },
+            "host": {
+              "type": "string"
+            },
+            "port": {
+              "type": "string"
+            },
+            "testPath": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "Step": {
+      "type": "object",
+      "properties": {
+        "flow": {
+          "type": "object",
+          "properties": {
+            "attributes": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Attribute"
+              }
+            },
+            "state": {
+              "type": "number"
+            },
+            "status": {
+              "type": "number"
+            }
+          }
+        },
+        "id": {
+          "type": "string"
+        },
+        "taskId": {
+          "type": "number"
+        },
+        "tasks": {
+          "type": "string"
+        }
+      }
+    },
+    "Attribute": {
+      "type": "object",
+      "required": [
+        "name",
+        "type"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "required": {
+          "type": "boolean",
+          "description": "Just required when the value is true"
+        },
+        "allowed": {
+          "type": "array",
+          "description": "An array of the possible options",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Task": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "number"
+        },
+        "type": {
+          "type": "number"
+        },
+        "activityType": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "Full-Flow": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "paths": {
+          "type": "object",
+          "properties": {
+            "root": {
+              "type": "object",
+              "properties": {
+                "is": {
+                  "type": "string"
+                }
+              }
+            },
+            "nodes": {
+              "type": "object"
+            }
+          }
+        },
+        "items": {
+          "type": "object"
+        },
+        "$table": {
+          "type": "string"
+        },
+        "errorHandler": {
+          "type": "object",
+          "properties": {
+            "paths": {
+              "type": "object",
+              "properties": {
+                "root": {
+                  "type": "object",
+                  "properties": {
+                    "is": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "items": {
+              "type": "object"
+            }
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "dateTime"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "dateTime"
+        },
+        "_id": {
+          "type": "string"
+        },
+        "_rev": {
+          "type": "string"
+        }
+      }
+    },
+    "Flow": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "paths": {
+          "type": "object",
+          "properties": {
+            "root": {
+              "type": "object",
+              "properties": {
+                "is": {
+                  "type": "string"
+                }
+              }
+            },
+            "nodes": {
+              "type": "object"
+            }
+          }
+        },
+        "items": {
+          "type": "object"
+        },
+        "$table": {
+          "type": "string"
+        },
+        "errorHandler": {
+          "type": "object",
+          "properties": {
+            "paths": {
+              "type": "object",
+              "properties": {
+                "root": {
+                  "type": "object",
+                  "properties": {
+                    "is": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "Service": {
+      "type": "object",
+      "properties": {
+        "protocol": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "port": {
+          "type": "string"
+        },
+        "testPath": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "bd": {
+          "type": "object",
+          "properties": {
+            "port": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "Trigger": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "settings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Attribute"
+          }
+        },
+        "outputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Attribute"
+          }
+        },
+        "endpoint": {
+          "type": "object",
+          "properties": {
+            "settings": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Attribute"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "responses": {},
+  "parameters": {},
+  "securityDefinitions": {},
+  "tags": []
+}

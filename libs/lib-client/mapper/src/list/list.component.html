@@ -1,0 +1,47 @@
+<div class="search mapper-tree__search-container" [class.search--has-value]="searchTerm">
+  <input
+    type="text"
+    class="search__text"
+    #search
+    [value]="searchTerm"
+    (keyup)="onSearchChange(search.value)"
+    [placeholder]="searchPlaceholder"
+  />
+  <svg *ngIf="!searchTerm" class="flogo-mapper-icon search__command">
+    <use fgMapperInlineHref="#flogo-mapper-icon-search"></use>
+  </svg>
+  <!-- todo: should be a button -->
+  <span
+    [hidden]="!searchTerm"
+    (click)="clearSearch()"
+    class="search__command search__command--active"
+  >
+    <svg class="flogo-mapper-icon search__command">
+      <use fgMapperInlineHref="#flogo-mapper-icon-close"></use>
+    </svg>
+  </span>
+</div>
+
+<div class="nodes" [class.is-filtered]="!!searchTerm" perfect-scrollbar>
+  <div
+    class="node"
+    *ngFor="let node of treeNodes; trackBy: trackNodeByFn"
+    [ngClass]="{
+      'node--selectable': node.isSelectable,
+      'node--required': node.isRequired,
+      'is-selected': node === selected,
+      'has-expression': node.data?.expression,
+      'has-errors': node.isInvalid
+    }"
+    [draggable]="node.isSelectable"
+    (dragstart)="onDragStart($event, node)"
+    (mouseenter)="onMouseHover(node)"
+    (mouseleave)="onMouseLeave(node)"
+    (click)="onSelect(node)"
+  >
+    <svg *ngIf="node.dataType" class="flogo-mapper-icon node__icon">
+      <use [fgMapperInlineHref]="getIcon(node)"></use>
+    </svg>
+    <div class="node__label">{{ node.label }}</div>
+  </div>
+</div>

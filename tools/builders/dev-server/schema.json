@@ -1,0 +1,22 @@
+{
+
+  "title": "Schema for Running the test server",
+  "properties": {
+    "buildTarget": {
+      "name": "main",
+      "type": "string",
+      "description": "The application to build against"
+    },
+    "watch": {
+      "type": "boolean",
+      "description": "Watch for changes",
+      "default": true
+    },
+    "inspect": {
+      "type": "boolean",
+      "description": "Enable remote inspector/debugger",
+      "default": false
+    }
+  },
+  "required": ["buildTarget"]
+}

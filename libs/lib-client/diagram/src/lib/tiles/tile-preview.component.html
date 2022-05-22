@@ -1,0 +1,42 @@
+<div class="task-container">
+  <div class="shape-container">
+    <svg
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      xmlns="http://www.w3.org/2000/svg"
+      width="128"
+      height="62"
+      viewBox="0 0 128 66"
+    >
+      <g class="tile" fill="none" fill-rule="evenodd">
+        <path
+          class="tile__shadow"
+          [attr.filter]="shadow"
+          d="M117.27 60H0l11.264-29.92L0 0h117.371L128 30.376z"
+        />
+        <path
+          class="tile__bg"
+          [attr.fill]="bgFill"
+          d="M117.27 60H0l11.264-29.92L0 0h117.371L128 30.376z"
+        />
+      </g>
+    </svg>
+  </div>
+  <div class="content">
+    <div class="content__items">
+      <flogo-activity-icon
+        [iconUrl]="icon"
+        [isSubflow]="isSubflow"
+        [customAltText]="'Activity icon'"
+        class="content__activity-icon"
+      ></flogo-activity-icon>
+      <div class="content__text-group">
+        <div class="content__text content__text--title">
+          {{ title }}
+        </div>
+        <div class="content__text content__text--id">
+          {{ id }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

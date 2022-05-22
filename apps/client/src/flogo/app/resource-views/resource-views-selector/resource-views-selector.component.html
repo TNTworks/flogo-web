@@ -1,0 +1,35 @@
+<div class="menu-dropdown views-dropdown" (fgClickOutside)="closeViewsDropdown()">
+  <button
+    class="flogo-button--secondary views-dropdown-button"
+    (click)="toggleViewsDropdown()"
+    id="viewsMenuButton"
+    aria-haspopup="true"
+    [attr.aria-expanded]="isOpen"
+  >
+    <span class="views-dropdown-button__label" [class.active]="isOpen">{{
+      selectedViewTranslateKey | translate
+    }}</span>
+    <span
+      class="flogo-icon-back flogo-button-dropdown-caret views-dropdown-button__caret"
+      [ngClass]="{ active: isOpen }"
+    ></span>
+  </button>
+  <div
+    class="menu-dropdown__content views-dropdown__content"
+    aria-labelledby="viewsMenuButton"
+    [ngClass]="{ active: isOpen }"
+  >
+    <ul class="dropdown-list">
+      <li class="dropdown-list__item" (click)="showDetailsView('resources')">
+        <a class="dropdown-list__item-link">{{
+          'DETAILS-VIEW-MENU:FLOWS' | translate
+        }}</a>
+      </li>
+      <li class="dropdown-list__item" (click)="showDetailsView('triggers')">
+        <a class="dropdown-list__item-link">{{
+          'DETAILS-VIEW-MENU:TRIGGERS' | translate
+        }}</a>
+      </li>
+    </ul>
+  </div>
+</div>

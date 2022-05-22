@@ -1,0 +1,24 @@
+@import '~@flogo-web/assets/styles/uxpl/dropdown';
+@import (reference) '~@flogo-web/assets/styles/_typography';
+@import (reference) '../styles/_variables';
+
+:host {
+  .secondary-header();
+  color: @color-ink;
+  height: @panel-height-minimized;
+  line-height: @panel-height-minimized;
+  margin-top: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-bottom: solid 1px @color-medium-gray;
+}
+
+.toggler {
+  display: block;
+  width: 28px;
+  height: 28px;
+}

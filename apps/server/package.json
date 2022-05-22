@@ -1,0 +1,8 @@
+{
+  "name": "@flogo-web/server",
+  "version": "0.11.0",
+  "scripts": {
+    "start": "node main.js",
+    "configure-engines": "../../node_modules/.bin/ts-node --project tsconfig.app.json -r tsconfig-paths/register  src/configure-engines.ts"
+  }
+}

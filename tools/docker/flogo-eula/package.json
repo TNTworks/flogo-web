@@ -1,0 +1,21 @@
+{
+  "name": "flogo-error",
+  "version": "1.0.0",
+  "description": "Flogo error",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TIBCOSoftware/flogo-web.git"
+  },
+  "keywords": [
+    "flogo"
+  ],
+  "author": "TIBCOSoftware",
+  "bugs": {
+    "url": "https://github.com/TIBCOSoftware/flogo-web/issues"
+  },
+  "homepage": "https://github.com/TIBCOSoftware/flogo-web#readme"
+}

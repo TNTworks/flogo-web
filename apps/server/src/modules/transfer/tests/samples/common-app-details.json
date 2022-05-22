@@ -1,0 +1,6 @@
+{
+  "name": "Test Application",
+  "type": "flogo:app",
+  "version": "0.0.1",
+  "description": "Some description"
+}

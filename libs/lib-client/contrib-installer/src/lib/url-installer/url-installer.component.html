@@ -1,0 +1,21 @@
+<input
+  class="flogo-installer-url-installer-input"
+  type="text"
+  placeholder="{{ 'URL-INSTALLER:PASTE-URL' | translate }}"
+  [ngModel]="sourceUrl"
+  (ngModelChange)="onSourceUrlChange($event)"
+  required
+  #urlInput="ngModel"
+/>
+<div class="flogo-installer-url__button-container">
+  <button class="flogo-button--secondary" (click)="onCancelAction()">
+    {{ 'URL-INSTALLER:CANCEL' | translate }}
+  </button>
+  <button
+    class="flogo-button--default"
+    [disabled]="urlInput.invalid"
+    (click)="onInstallAction()"
+  >
+    {{ 'MODAL:INSTALL' | translate }}
+  </button>
+</div>

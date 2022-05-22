@@ -1,0 +1,12 @@
+<ul *ngIf="!isEmpty; else emptyState" class="flows-list">
+  <li *ngFor="let flow of flows" class="flows-list__flow">
+    <flogo-flow-flows-list-flow
+      [flow]="flow"
+      (select)="selectFlow(flow)"
+    ></flogo-flow-flows-list-flow>
+  </li>
+</ul>
+
+<ng-template #emptyState>
+  <p>{{ 'FLOWS-LIST:NOFLOW' | translate }}</p>
+</ng-template>

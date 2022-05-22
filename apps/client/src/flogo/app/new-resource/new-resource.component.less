@@ -1,0 +1,123 @@
+@import '~@flogo-web/assets/styles/_variables';
+@import '~@flogo-web/assets/styles/uxpl/modal';
+
+@resource-type-button-radius: 3px;
+@resource-type-button-animation-duration: 0.2s;
+@resource-type-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+
+:host {
+  .uxpl-modal-confirmation;
+  display: inline-block;
+  min-width: 617px;
+}
+
+.modal-content {
+  padding: 40px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form__label {
+  font-size: 14px;
+  color: @warm-grey;
+}
+
+.form__input {
+  min-height: 40px;
+}
+
+.form__error {
+  color: red;
+}
+
+.title {
+  margin-top: 0;
+}
+
+.footer {
+  padding-top: 40px;
+  text-align: right;
+}
+
+.resource-types {
+  legend {
+    border: inherit;
+    margin-bottom: 5px;
+  }
+
+  input[type='radio'] {
+    opacity: 0;
+    position: absolute;
+  }
+
+  .resource-type {
+    cursor: pointer;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    flex-direction: row;
+    border: 1px solid @gainsboro-two;
+    border-radius: @resource-type-button-radius;
+    line-height: 1.25;
+    font-size: 1rem;
+    min-width: 7.3rem;
+    padding: 0.62rem;
+    margin-bottom: 0;
+    z-index: 1;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 1;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      border-radius: @resource-type-button-radius;
+      box-shadow: @resource-type-box-shadow;
+      transition: opacity @resource-type-button-animation-duration ease-in-out;
+    }
+  }
+
+  .resource-type__label {
+    flex: 1;
+    margin-left: 0.62rem;
+    margin-right: 0.62rem;
+  }
+
+  .resource-type__checkmark {
+    color: @color-medium-gray;
+    display: block;
+    height: 1rem;
+    transition: opacity ease 150ms;
+    opacity: 0;
+  }
+
+  input[type='radio']:focus + .resource-type {
+    outline: rgba(0, 129, 203, 0.2) auto 2px;
+  }
+
+  input[type='radio']:focus + .resource-type,
+  .resource-type:hover {
+    &::after,
+    .resource-type__checkmark {
+      opacity: 1;
+    }
+  }
+
+  .resource-type:not(:last-of-type) {
+    margin-right: 1.25rem;
+  }
+
+  input[type='radio']:checked + .resource-type {
+    border-color: @primary-blue;
+    box-shadow: @resource-type-box-shadow;
+    .resource-type__checkmark {
+      opacity: 1;
+      color: @primary-blue;
+    }
+  }
+}

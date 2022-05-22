@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./dist/out-tsc",
+    "module": "commonjs",
+    "types": ["jest", "node"],
+    "allowJs": true,
+    "checkJs": false,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es2018",
+    "inlineSourceMap": true
+  },
+  "files": ["jest.setup.ts"],
+  "include": ["**/*.spec.ts", "**/*.spec.js", "**/*.d.ts"]
+}

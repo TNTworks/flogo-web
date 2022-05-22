@@ -1,0 +1,28 @@
+export enum FLOGO_TASK_TYPE {
+  TASK_ROOT, // this is the type for triggers
+  TASK = 1,
+}
+
+export const GRAPH_NAME = 'mainGraph';
+export const ITEMS_DICTIONARY_NAME = 'mainItems';
+
+export const TRIGGER_MENU_OPERATION = {
+  SHOW_SETTINGS: 'show-settings',
+  DELETE: 'delete',
+};
+
+const TYPE_ATTR_ASSIGNMENT = 1;
+const TYPE_LITERAL_ASSIGNMENT = 2;
+const TYPE_EXPRESSION_ASSIGNMENT = 3;
+const TYPE_OBJECT_TEMPLATE = 4;
+export const MAPPING_TYPE = {
+  ATTR_ASSIGNMENT: TYPE_ATTR_ASSIGNMENT,
+  LITERAL_ASSIGNMENT: TYPE_LITERAL_ASSIGNMENT,
+  EXPRESSION_ASSIGNMENT: TYPE_EXPRESSION_ASSIGNMENT,
+  OBJECT_TEMPLATE: TYPE_OBJECT_TEMPLATE,
+};
+
+export const ROOT_TYPES = {
+  STAGE: 'stage',
+  PIPELINE: 'pipeline',
+};

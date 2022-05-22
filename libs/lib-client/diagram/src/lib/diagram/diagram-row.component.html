@@ -1,0 +1,125 @@
+<ng-template
+  ngFor
+  let-tile
+  [ngForOf]="groupedTiles?.preDropZone"
+  [ngForTrackBy]="trackTileBy"
+>
+  <div *ngIf="tile.type === tileTypes.Padding" @tileGeneric class="tile tile--slot"></div>
+  <flogo-diagram-tile-branch
+    *ngIf="tile.type === tileTypes.Task"
+    @tileGeneric
+    class="tile--branch"
+    [tile]="tile"
+    [currentSelection]="selection"
+    [isReadOnly]="isReadOnly"
+    [spanRows]="calculateBranchSpan(tile)"
+    (select)="onTaskSelected($event)"
+    (remove)="onTaskAction($event)"
+  ></flogo-diagram-tile-branch>
+</ng-template>
+<div
+  cdkDropList
+  cdkDropListOrientation="horizontal"
+  [cdkDropListDisabled]="isReadOnly"
+  [cdkDropListEnterPredicate]="restrictTileDrop"
+  (cdkDropListDropped)="moveTile($event)"
+  (mouseenter)="updateDraggingState(draggingPosition.INSIDE, $event.buttons)"
+  (mouseleave)="updateDraggingState(draggingPosition.OUTSIDE, $event.buttons)"
+>
+  <ng-template
+    ngFor
+    let-tile
+    [ngForOf]="groupedTiles?.dropZone"
+    [ngForTrackBy]="trackTileBy"
+  >
+    <div class="tile--group">
+      <flogo-diagram-tile-insert
+        @tileInsert
+        class="tile__add-between"
+        [ngClass]="{ 'tile__add-between--align-center': isPrevTileHasBranch(tile) }"
+        *ngIf="showInsertBtn(tile?.task?.id)"
+        [tile]="tile"
+        [currentSelection]="selection"
+        [insertBetween]="true"
+        (select)="onInsertSelected($event)"
+      ></flogo-diagram-tile-insert>
+      <flogo-diagram-tile-task
+        cdkDrag
+        cdkDragBoundary="flogo-diagram"
+        @tileTask
+        [class.is-disabled]="isDragging && disableTile(tile?.task?.id)"
+        [tile]="tile"
+        [cdkDragData]="tile?.task?.id"
+        [currentSelection]="selection"
+        [isReadOnly]="isReadOnly"
+        [icon]="iconProvider?.getIconUrlById(tile?.task?.id)"
+        (select)="onTaskSelected($event)"
+        (branch)="onTaskAction($event)"
+        (remove)="onTaskAction($event)"
+        (configure)="onTaskAction($event)"
+        (cdkDragStarted)="onTaskDragStart($event)"
+      >
+        <flogo-diagram-tile-placeholder
+          *cdkDragPlaceholder
+          class="tile--task-placeholder"
+        ></flogo-diagram-tile-placeholder>
+        <ng-template cdkDragPreview [matchSize]="true">
+          <flogo-diagram-tile-preview
+            [id]="tile?.task?.id"
+            [title]="tile?.task?.title"
+            [icon]="iconProvider?.getIconUrlById(tile?.task?.id)"
+            [isSubflow]="tile?.task?.features?.subflow"
+          ></flogo-diagram-tile-preview>
+        </ng-template>
+      </flogo-diagram-tile-task>
+    </div>
+  </ng-template>
+</div>
+<ng-template
+  ngFor
+  let-tile
+  [ngForOf]="groupedTiles?.postDropZone"
+  [ngForTrackBy]="trackTileBy"
+>
+  <div *ngIf="tile.type === tileTypes.Task" class="tile--group">
+    <flogo-diagram-tile-insert
+      @tileInsert
+      class="tile__add-between"
+      [ngClass]="{ 'tile__add-between--align-center': isPrevTileHasBranch(tile) }"
+      *ngIf="showInsertBtn(tile.task?.id)"
+      [tile]="tile"
+      [currentSelection]="selection"
+      [insertBetween]="true"
+      (select)="onInsertSelected($event)"
+    ></flogo-diagram-tile-insert>
+    <flogo-diagram-tile-task
+      @tileTask
+      [class.is-disabled]="isDragging"
+      [tile]="tile"
+      [currentSelection]="selection"
+      [isReadOnly]="isReadOnly"
+      (select)="onTaskSelected($event)"
+      (branch)="onTaskAction($event)"
+      (remove)="onTaskAction($event)"
+      (configure)="onTaskAction($event)"
+    ></flogo-diagram-tile-task>
+  </div>
+  <div
+    *ngIf="tile.type == tileTypes.Placeholder"
+    @tileGeneric
+    [@.disabled]="tile.type === tileTypes.Placeholder"
+    class="tile tile--slot"
+    [class.tile--placeholder]="tile.type === tileTypes.Placeholder"
+    [hidden]="isDragging"
+  ></div>
+  <flogo-diagram-tile-insert
+    *ngIf="tile.type === tileTypes.Insert"
+    @tileInsert
+    class="tile--slot"
+    [hidden]="isDragging"
+    [tile]="tile"
+    [currentSelection]="selection"
+    [insertBetween]="false"
+    (select)="onInsertSelected($event)"
+  ></flogo-diagram-tile-insert>
+</ng-template>

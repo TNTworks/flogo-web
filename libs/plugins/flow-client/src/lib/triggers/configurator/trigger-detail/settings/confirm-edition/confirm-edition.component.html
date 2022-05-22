@@ -1,0 +1,27 @@
+<div class="confirmation">
+  <p
+    class="confirmation-title"
+    [innerHTML]="
+      'TRIGGER-CONFIGURATOR:SETTINGS:EDIT-CONFIRMATION-TITLE'
+        | translate: { othersCount: data.flowCount - 1 }
+    "
+  ></p>
+  <p class="confirmation-message">
+    {{ 'TRIGGER-CONFIGURATOR:SETTINGS:EDIT-CONFIRMATION-MESSAGE' | translate }}
+  </p>
+</div>
+
+<div class="footer">
+  <button class="flogo-button--flat" (click)="control.cancel()">
+    {{ 'TRIGGER-CONFIGURATOR:SETTINGS:EDIT-CONFIRMATION-CANCEL' | translate }}
+  </button>
+  <button
+    class="flogo-button--primary confirmation-button__edit"
+    (click)="control.confirm()"
+  >
+    {{
+      'TRIGGER-CONFIGURATOR:SETTINGS:EDIT-CONFIRMATION-CONTINUE'
+        | translate: { count: data.flowCount }
+    }}
+  </button>
+</div>

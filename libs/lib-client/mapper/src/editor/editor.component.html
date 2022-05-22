@@ -1,0 +1,17 @@
+<div
+  class="hints-overlay"
+  *ngIf="valueHints$ | async as hints"
+  (click)="onHintOverlayClick()"
+>
+  <div *ngIf="hints?.length > 0; else placeholder">
+    <button
+      *ngFor="let hint of hints"
+      class="hints-overlay__hint"
+      (click)="onHintSelected($event, hint)"
+    >
+      {{ hint.label }}
+    </button>
+  </div>
+  <ng-template #placeholder> <div>Select a data field or function</div> </ng-template>
+</div>
+<monaco-editor class="editor"></monaco-editor>

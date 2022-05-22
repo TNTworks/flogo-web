@@ -1,0 +1,124 @@
+@import '../_variables';
+
+@uxpl-input: {
+  line-height: 1.5;
+  @label: {
+    font-size: 0.813rem;
+  };
+  @field: {
+    font-size: 1rem;
+  };
+};
+
+.uxpl-input-field {
+  display: flex;
+  flex-direction: column;
+
+  .input-field__label,
+  label {
+    font-size: @uxpl-input[ @label][font-size];
+    line-height: @uxpl-input[line-height];
+    color: @warm-grey;
+    transform-origin: left;
+    // todo: enable after figuring out how to disable animation on form init
+    //transition: all 100ms ease-out;
+  }
+
+  .input-field__input,
+  input {
+    order: 1;
+    background: transparent;
+    width: 100%;
+    border: none;
+    font-size: @uxpl-input[ @field][font-size];
+    line-height: @uxpl-input[line-height];
+    border-bottom: 1px solid @warm-grey;
+
+    &:focus {
+      border-bottom: 1px solid @cerulean;
+
+      ~ .input-field__icon,
+      ~ .input-field__label,
+      ~ label {
+        color: @cerulean;
+      }
+    }
+
+    &.ng-invalid {
+      border-bottom-color: @scarlet;
+    }
+
+    &.is-empty:not(:focus) {
+      & ~ label,
+      &.input-field__label {
+        pointer-events: none;
+        @translate: @uxpl-input[ @field][font-size] * @uxpl-input[line-height];
+        @scale: unit(@uxpl-input[ @field][font-size] / @uxpl-input[ @label][font-size]);
+        transform: translateY(@translate) scale(@scale);
+      }
+    }
+
+    &:disabled {
+      border-bottom-style: dashed;
+      border-bottom-style: @color-medium-gray;
+    }
+  }
+}
+
+/**
+* @deprecated
+*/
+.uxpl-form-div {
+  position: relative;
+
+  input {
+    position: relative;
+    padding-bottom: 0px;
+    padding-top: 20px;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    width: 100%;
+    border-bottom: 1px solid @warm-grey;
+    z-index: 1;
+
+    &:focus {
+      border-bottom: 1px solid @cerulean;
+
+      ~ label {
+        color: @cerulean;
+      }
+    }
+  }
+
+  input.ng-invalid {
+    border-bottom-color: @scarlet;
+  }
+
+  label {
+    position: absolute;
+    left: 0;
+    top: 2px;
+    text-align: left;
+    line-height: 1.31;
+    color: @warm-grey;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 0;
+  }
+
+  input.is-empty:not(:placeholder-shown) {
+    &:not(:focus) ~ label {
+      pointer-events: none;
+      top: 15px;
+      z-index: 2;
+    }
+  }
+
+  input:disabled {
+    border-bottom-style: dashed;
+    border-bottom-style: @color-medium-gray;
+  }
+}

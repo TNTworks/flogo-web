@@ -1,0 +1,415 @@
+{
+  "name": "Standard Sample",
+  "type": "flogo:app",
+  "version": "0.0.1",
+  "appModel": "1.0.0",
+  "description": "my cool app",
+  "triggers": [
+    {
+      "id": "receive_http_message",
+      "name": "Receive HTTP Message",
+      "ref": "some_path_to_repo/trigger/rest",
+      "description": "Simple REST Trigger",
+      "settings": {
+        "port": "9099"
+      },
+      "handlers": [
+        {
+          "settings": {
+            "method": "GET",
+            "path": "/:ISBN",
+            "autoIdReply": "false",
+            "useReplyHandler": "false"
+          },
+          "action": {
+            "ref": "github.com/project-flogo/flow",
+            "data": {
+              "flowURI": "res://flow:get_book_details"
+            },
+            "mappings": {
+              "input": [
+                {
+                  "mapTo": "ISBN",
+                  "type": "assign",
+                  "value": "pathParams.ISBN"
+                }
+              ],
+              "output": [
+                {
+                  "mapTo": "data",
+                  "type": "assign",
+                  "value": "someResponse"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "timer",
+      "name": "Timer",
+      "ref": "some_path_to_repo/trigger/timer",
+      "description": "Simple Timer trigger",
+      "handlers": [
+        {
+          "settings": {
+            "repeating": "true",
+            "notImmediate": "true",
+            "startDate": null,
+            "hours": null,
+            "minutes": null,
+            "seconds": null
+          },
+          "action": {
+            "ref": "github.com/project-flogo/flow",
+            "data": {
+              "flowURI": "res://flow:all_task_types"
+            }
+          }
+        },
+        {
+          "settings": {
+            "repeating": null,
+            "notImmediate": null,
+            "startDate": null,
+            "hours": null,
+            "minutes": null,
+            "seconds": null
+          },
+          "action": {
+            "ref": "github.com/project-flogo/flow",
+            "data": {
+              "flowURI": "res://flow:get_book_details"
+            },
+            "mappings": {
+              "input": []
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "id": "flow:get_book_details",
+      "data": {
+        "name": "GetBookDetails",
+        "description": "some book sample",
+        "ref": "github.com/project-flogo/flow",
+        "metadata": {
+          "input": [
+            {
+              "name": "ISBN",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "someResponse",
+              "type": "string"
+            }
+          ]
+        },
+        "tasks": [
+          {
+            "id": "log_2",
+            "name": "Log Incoming Field",
+            "description": "Simple Log Activity",
+            "type": "standard",
+            "activity": {
+              "ref": "some_path_to_repo/activity/log",
+              "input": {
+                "message": null,
+                "flowInfo": "false",
+                "addToFlow": "true"
+              },
+              "mappings": {
+                "input": [
+                  {
+                    "type": "assign",
+                    "value": "$flow.ISBN",
+                    "mapTo": "message"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "id": "rest_3",
+            "name": "Get Books",
+            "description": "Simple REST Activity",
+            "activity": {
+              "ref": "some_path_to_repo/activity/rest",
+              "input": {
+                "method": "GET",
+                "uri": "https://www.googleapis.com/books/v1/volumes",
+                "proxy": null,
+                "pathParams": null,
+                "queryParams": null,
+                "header": null,
+                "content": null
+              },
+              "mappings": {
+                "input": [
+                  {
+                    "type": "object",
+                    "value": {
+                      "q": "{{$flow.ISBN}}"
+                    },
+                    "mapTo": "queryParams"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "id": "log_5",
+            "name": "Log Message (2)",
+            "description": "Simple Log Activity",
+            "activity": {
+              "ref": "some_path_to_repo/activity/log",
+              "input": {
+                "message": "Error from rest service",
+                "flowInfo": "false",
+                "addToFlow": "false"
+              }
+            }
+          },
+          {
+            "id": "actreturn_6",
+            "name": "Return (2)",
+            "description": "Simple Return Activity",
+            "activity": {
+              "ref":
+                "some_path_to_repo/activity/actreturn",
+              "input": {
+                "mappings": [
+                  {
+                    "type": "assign",
+                    "mapTo": "someResponse",
+                    "value": "${activity.log_5.message}"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "id": "actreturn_7",
+            "name": "Return (3)",
+            "description": "Simple Return Activity",
+            "activity": {
+              "ref":
+                "some_path_to_repo/activity/actreturn",
+              "input": {
+                "mappings": [
+                  {
+                    "mapTo": "someResponse",
+                    "type": "object",
+                    "value": {
+                      "Title":
+                        "{{$activity[rest_3].result.items[0].volumeInfo.title}}",
+                      "PublishedDate":
+                        "{{$activity[rest_3].result.items[0].volumeInfo.publishedDate}}",
+                      "Description":
+                        "{{$activity[rest_3].result.items[0].volumeInfo.description}}"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "links": [
+          {
+            "id": 1,
+            "from": "log_2",
+            "to": "rest_3"
+          },
+          {
+            "id": 2,
+            "from": "rest_3",
+            "to": "log_5",
+            "type": "expression",
+            "value": "$activity[rest_3].status != 200"
+          },
+          {
+            "id": 3,
+            "from": "log_5",
+            "to": "actreturn_6"
+          },
+          {
+            "id": 4,
+            "from": "rest_3",
+            "to": "actreturn_7",
+            "type": "expression",
+            "value": "$activity[rest_3].status == 200"
+          }
+        ]
+      }
+    },
+    {
+      "id": "flow:subflow",
+      "data": {
+        "name": "subflow",
+        "metadata": {
+          "input": [
+            {
+              "name": "flowIn",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "flowOut",
+              "type": "string"
+            }
+          ]
+        },
+        "tasks": [
+          {
+            "id": "log_2",
+            "name": "Log Message",
+            "description": "Simple Log Activity",
+            "activity": {
+              "ref": "some_path_to_repo/activity/log",
+              "input": {
+                "message": "",
+                "flowInfo": "false",
+                "addToFlow": "false"
+              }
+            }
+          },
+          {
+            "id": "actreturn_4",
+            "name": "Return",
+            "description": "Simple Return Activity",
+            "activity": {
+              "ref":
+                "some_path_to_repo/activity/actreturn",
+              "input": {
+                "mappings": []
+              }
+            }
+          }
+        ],
+        "links": [
+          {
+            "id": 1,
+            "from": "log_2",
+            "to": "actreturn_4"
+          }
+        ]
+      }
+    },
+    {
+      "id": "flow:all_task_types",
+      "data": {
+        "name": "All task types",
+        "description": "Flow with all task types",
+        "tasks": [
+          {
+            "id": "counter_2",
+            "name": "Increment Counter",
+            "description": "Simple Global Counter Activity",
+            "activity": {
+              "ref": "some_path_to_repo/activity/counter",
+              "input": {
+                "counterName": "abc",
+                "increment": "true",
+                "reset": false
+              }
+            }
+          },
+          {
+            "id": "log_3",
+            "name": "Log Message",
+            "type": "iterator",
+            "description": "Simple Log Activity",
+            "settings": {
+              "iterate": "$activity[counter_2].value"
+            },
+            "activity": {
+              "ref": "some_path_to_repo/activity/log",
+              "input": {
+                "message": "hardcoded message",
+                "flowInfo": "false",
+                "addToFlow": "true"
+              }
+            }
+          },
+          {
+            "id": "subflow_1",
+            "name": "subflow 1",
+            "description": "Subflow 1",
+            "activity": {
+              "ref": "github.com/project-flogo/flow/activity/subflow",
+              "settings": {
+                "flowURI": "res://flow:subflow"
+              },
+              "mappings": {
+                "input": [
+                  { "mapTo": "flowIn", "type": "literal", "value": "test" }
+                ]
+              }
+            }
+          },
+          {
+            "id": "subflow_2",
+            "name": "iterable subflow 1",
+            "description": "iterable subflow 1",
+            "type": "iterator",
+            "settings": {
+              "iterate": "$activity[counter_2].value"
+            },
+            "activity": {
+              "ref": "github.com/project-flogo/flow/activity/subflow",
+              "settings": {
+                "flowURI": "res://flow:subflow"
+              },
+              "mappings": {
+                "input": [
+                  { "mapTo": "flowIn", "type": "literal", "value": "test" }
+                ]
+              }
+            }
+          }
+        ],
+        "links": [
+          {
+            "id": 1,
+            "from": "counter_2",
+            "to": "log_3"
+          },
+          {
+            "id": 2,
+            "from": "log_3",
+            "to": "subflow_1"
+          },
+          {
+            "id": 3,
+            "from": "subflow_1",
+            "to": "subflow_2"
+          }
+        ],
+        "errorHandler": {
+          "tasks": [
+            {
+              "id": "log_5",
+              "name": "Log Message (2)",
+              "description": "Simple Log Activity",
+              "activity": {
+                "ref": "some_path_to_repo/activity/log",
+                "input": {
+                  "message": "123",
+                  "flowInfo": "false",
+                  "addToFlow": "false"
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

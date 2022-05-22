@@ -1,0 +1,8 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Debug Server" type="NodeJSConfigurationType" node-parameters="--nolazy --require ts-node/register --require tsconfig-paths/register" path-to-js-file="src/server.ts" working-dir="$PROJECT_DIR$/apps/server">
+    <envs>
+      <env name="TS_NODE_PROJECT" value="tsconfig.app.json" />
+    </envs>
+    <method v="2" />
+  </configuration>
+</component>

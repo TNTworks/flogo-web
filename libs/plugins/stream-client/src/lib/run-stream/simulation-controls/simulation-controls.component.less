@@ -1,0 +1,32 @@
+@import '~@flogo-web/assets/styles/uxpl/buttons.less';
+
+:host {
+  display: flex;
+}
+
+.action-button {
+  white-space: nowrap;
+  margin-right: 16px;
+  margin-left: 0;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.action-icon {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+  vertical-align: middle;
+  background-position: center center;
+  background-repeat: no-repeat;
+  &.pause {
+    background-image: url('/assets/svg/ic-pause.svg');
+  }
+  &.stop {
+    background-image: url('/assets/svg/ic-stop.svg');
+  }
+  &.resume {
+    background-image: url('/assets/svg/ic-play.svg');
+  }
+}

@@ -1,0 +1,35 @@
+<!-- class .flogo-group set in host element -->
+<div class="flogo-group__trigger">
+  <div class="flogo-trigger__container flogo-resource-trigger__container">
+    <svg class="trigger" viewBox="0 0 50 52" xmlns="http://www.w3.org/2000/svg">
+      <ng-container *ngIf="trigger">
+        <use
+          xlink:href="/assets/svg/trigger-icon.svg#defaultTrigger"
+          class="trigger__shape"
+        ></use>
+      </ng-container>
+      <ng-container *ngIf="!trigger">
+        <use
+          xlink:href="/assets/svg/trigger-icon.svg#addTrigger"
+          class="trigger__shape trigger__shape--empty"
+        ></use>
+      </ng-container>
+    </svg>
+  </div>
+  <flogo-trigger-icon class="trigger-icon" [iconUrl]="iconUrl"></flogo-trigger-icon>
+</div>
+<flogo-apps-resource-list
+  class="flogo-group__resources"
+  [resources]="resources"
+  (resourceSelected)="onSelect($event)"
+  (deleteResource)="onDeleteResource($event)"
+></flogo-apps-resource-list>
+<div class="add-resource-container">
+  <button
+    class="add-resource flogo-button--flat"
+    *ngIf="trigger"
+    (click)="onAddResource()"
+  >
+    <i class="flogo-icon-add"></i>{{ 'DETAILS:NEW-RESOURCE' | translate }}
+  </button>
+</div>

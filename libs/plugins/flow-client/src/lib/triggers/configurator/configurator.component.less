@@ -1,0 +1,58 @@
+@import '~@flogo-web/assets/styles/_mapper-modal.less';
+
+.trigger-configuration__main {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.background {
+  background-color: #fff;
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.header__title {
+  color: #212121;
+  margin-top: 2px;
+  line-height: 36px;
+  background: url('/assets/svg/flogo.flows.detail.diagram.trigger.icon.svg') no-repeat
+    left center;
+  background-size: 35px;
+  padding-left: 50px;
+}
+
+.trigger-configuration__content {
+  display: flex;
+  // Fix the issue with Edge and Mozilla browsers which has problem with scroll content of a flex element
+  height: 100%;
+  min-height: 0;
+}
+
+.configuration__triggers {
+  width: 224px;
+  margin-right: 5px;
+}
+
+.configuration__trigger {
+  width: 85%;
+  display: flex;
+  height: 100%;
+  border: solid 1px #b6b6b6;
+  flex: 1;
+  flex-direction: column;
+}
+
+.ng-trigger-triggerConfiguratorLayoutElement {
+  opacity: 0;
+}

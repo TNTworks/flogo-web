@@ -1,0 +1,70 @@
+<div
+  [class]="'flogo-common-modal shim-trigger__modal'"
+  #shimTriggersModal
+  (fgOnEscape)="closeModal()"
+>
+  <i class="flogo-icon-close shim-trigger__modal-close" (click)="closeModal()"></i>
+  <div *ngIf="!isTriggerSelected">
+    <div class="shim-trigger__modal-header">
+      {{ 'TRIGGER-SHIM:MULTIPLE-TRIGGERS' | translate }}
+    </div>
+    <ul class="shim-triggers-list">
+      <li
+        class="shim-trigger-list__element"
+        *ngFor="let shimTrigger of shimTriggerData.shimTriggersList"
+        (click)="onTriggerSelectionFinish(shimTrigger)"
+      >
+        <div class="shim-trigger-item">
+          <flogo-trigger-icon
+            class="shim-trigger-icon"
+            [iconUrl]="iconUrl"
+          ></flogo-trigger-icon>
+          <span class="shim-trigger-item__name">{{
+            shimTrigger.configuredTrigger.name
+          }}</span>
+        </div>
+        <div class="shim-trigger-flow">
+          <span class="shim-trigger-flow__label">{{
+            'TRIGGER-SHIM:CONNECTED-FLOW' | translate
+          }}</span>
+          <span class="shim-trigger-flow__name">{{
+            shimTrigger.configuredFlow.name
+          }}</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="!isLambdaTrigger && isTriggerSelected">
+    <div class="shim-trigger-selected">
+      <div class="shim-trigger-item">
+        <flogo-trigger-icon
+          class="shim-trigger-icon"
+          [iconUrl]="iconUrl"
+        ></flogo-trigger-icon>
+        <span class="shim-trigger-item__name">{{ displayOptions.triggerName }}</span>
+      </div>
+      <div class="shim-trigger-flow">
+        <span class="shim-trigger-flow__label">{{
+          'TRIGGER-SHIM:CONNECTED-FLOW' | translate
+        }}</span>
+        <span class="shim-trigger-flow__name">{{ displayOptions.flowName }}</span>
+      </div>
+    </div>
+    <div class="select-environment">
+      {{ 'TRIGGER-SHIM:SELECT-ENVIRONMENT' | translate }}
+    </div>
+    <ul class="list-unstyled trigger-build-options">
+      <li
+        *ngFor="let opt of shimTriggerData.buildOptions"
+        class="build-environment-list-item"
+      >
+        <a
+          class="build-environment-link"
+          (click)="onBuildEnvSelection(opt, displayOptions.triggerId)"
+        >
+          <span>{{ opt.label }}</span></a
+        >
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,61 @@
+/** Usage:
+ <div class="uxpl-checkbox">
+    <input class="uxpl-checkbox__input" type="checkbox" id="my_checkbox">
+    <label  class="uxpl-checkbox__label" for="my_checkbox"></label>
+ </div>
+*/
+@import (reference) '../_variables';
+@checkbox-width: 18px;
+
+.uxpl-checkbox__input {
+  display: none;
+}
+
+.uxpl-checkbox__label {
+  position: relative;
+  display: inline-block;
+  padding-left: @checkbox-width * 1.5;
+
+  &::before,
+  &::after {
+    position: absolute;
+    content: '';
+    display: inline-block;
+    left: 0;
+    top: 0;
+  }
+
+  &::before {
+    width: @checkbox-width;
+    height: @checkbox-width;
+    border-radius: 3px;
+    border: 1px solid @color-dark-gray;
+  }
+}
+
+.uxpl-checkbox__input:checked {
+  + .uxpl-checkbox__label {
+    &::before {
+      background-color: @primary-blue;
+      border-color: @primary-blue;
+    }
+    &::after {
+      display: block;
+      position: absolute;
+      content: '';
+      width: 10px;
+      height: 6px;
+      border-radius: 2px;
+      transform: translate(4px, 5px) rotateZ(-45deg);
+      left: 0;
+      top: 0;
+      border: 2px solid #fff;
+      border-right: none;
+      border-top: none;
+    }
+  }
+}
+
+.uxpl-checkbox__input:focus + .uxpl-checkbox__label::before {
+  outline: rgb(59, 153, 252) auto 5px;
+}

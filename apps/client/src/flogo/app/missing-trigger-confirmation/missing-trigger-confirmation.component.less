@@ -1,0 +1,41 @@
+@import (reference) '~@flogo-web/assets/styles/uxpl/modal';
+
+:host {
+  .uxpl-modal-confirmation();
+  .uxpl-modal--small();
+}
+
+.body {
+  .uxpl-modal-confirmation__body();
+}
+
+.lead {
+  .uxpl-modal-confirmation__lead();
+  .uxpl-modal-confirmation__lead--warning();
+}
+
+.lead__icon {
+  .uxpl-modal-confirmation__lead-icon();
+  transform: rotateZ(180deg);
+  margin-top: -1px;
+}
+
+// cant be named just .close because it clashes with a bootstrap class :face_with_rolling_eyes:
+.modal-close {
+  .uxpl-modal__close();
+}
+
+.footer {
+  .uxpl-modal-confirmation__footer();
+  display: flex;
+  align-items: center;
+}
+
+.dont-show-again {
+  flex: 1;
+  text-align: left;
+}
+
+.message {
+  letter-spacing: normal;
+}

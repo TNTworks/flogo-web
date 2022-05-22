@@ -1,0 +1,47 @@
+@import (reference) '~@flogo-web/assets/styles/_variables';
+@import (reference) '~@flogo-web/assets/styles/uxpl/dropdown';
+
+.menu-dropdown {
+  position: relative;
+}
+
+.menu-dropdown__button-label {
+  margin-right: 10px;
+}
+
+.menu-dropdown__trigger {
+  margin-left: 1.5rem;
+}
+
+.menu-dropdown__content {
+  .uxpl-dropdown-container();
+  color: @color-plain;
+  position: absolute;
+  top: 46px;
+  right: 0;
+  z-index: 1;
+  transform: scale(0, 0);
+
+  &.active {
+    animation: scale-in-ver-top 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  }
+}
+
+.dropdown-list {
+  .uxpl-dropdown();
+}
+
+.dropdown-list__item {
+  cursor: pointer;
+  letter-spacing: 0.3px;
+  margin: 0;
+}
+
+.dropdown-list__item-link {
+  .uxpl-dropdown__item();
+  display: inline-block;
+  width: 100%;
+  font-size: 16px;
+  color: @cerulean;
+  text-decoration: none;
+}

@@ -1,0 +1,144 @@
+@import '~@flogo-web/assets/styles/_variables';
+
+flogo-modal-header {
+  display: block;
+  padding-right: 24px;
+  .flow-input-params-header {
+    margin-bottom: 0;
+  }
+}
+
+.flow-input-params-field {
+  display: flex;
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+.flow-params-new-field {
+  width: 100%;
+}
+
+.flow-input-params-pane {
+  background-color: @lighter-gray;
+  width: 75%;
+  max-height: 422px;
+  overflow-y: auto;
+}
+
+.flow-input-params-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.flow-input-params-header__title {
+  position: relative;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: #262626;
+  flex: 1;
+}
+
+.flow-input-params-close {
+  color: @pale-gray;
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  height: 18px;
+  width: 18px;
+  cursor: pointer;
+}
+
+.btn-input-output-params {
+  color: @color-primary;
+  background-color: @color-bg;
+  border-color: @color-primary;
+}
+
+.btn-input-output-params.active {
+  color: @color-bg;
+  background-color: @color-primary;
+  border-color: @color-primary;
+}
+
+.flow-input-params-container {
+  display: flex;
+  height: 422px;
+}
+
+.flow-input-params-categories {
+  width: 25%;
+  border-right: 1px solid @gainsboro-five;
+  ul {
+    display: block;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.flow-input-params__category {
+  width: 100%;
+  height: 45px;
+  padding-left: 30px;
+  margin: 0;
+  list-style-type: none;
+  text-transform: capitalize;
+  line-height: 1.43;
+  display: flex;
+  align-items: center;
+  color: @warm-grey;
+  cursor: pointer;
+  vertical-align: middle;
+
+  &:hover {
+    color: @primary-blue;
+    background: rgba(197, 202, 233, 0.2);
+    cursor: pointer;
+  }
+}
+
+.flow-input-params__category-error {
+  color: @color-invalid;
+  font-size: 0.75em;
+  margin-left: 0.5em;
+}
+
+.flow-input-params__category--selected {
+  background-color: @link-water;
+  color: @twilight-blue;
+}
+
+.flow-param-fields {
+  margin: 40px;
+}
+
+.flow-input-params-add {
+  border: 0;
+  min-width: 45px;
+  height: 45px;
+  border-radius: 4px;
+  color: @color-bg;
+  background-color: @color-secondary;
+  padding: 0.4em 0.5em 0.5em;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+
+  &:disabled {
+    opacity: 0.5;
+  }
+
+  &__icon {
+    font-size: 0.8em;
+    font-weight: bold;
+    margin-right: 0;
+    padding-top: 3px;
+  }
+
+  &__text {
+    margin-left: 0.5em;
+  }
+}

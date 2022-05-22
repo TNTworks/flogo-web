@@ -1,0 +1,28 @@
+<div class="flogo-group__trigger">
+  <div class="flogo-trigger__container">
+    <svg class="trigger" viewBox="0 0 50 52" xmlns="http://www.w3.org/2000/svg">
+      <ng-container *ngIf="triggers">
+        <use
+          xlink:href="/assets/svg/trigger-icon.svg#defaultTrigger"
+          class="trigger__shape"
+        ></use>
+      </ng-container>
+      <ng-container *ngIf="!triggers">
+        <use
+          xlink:href="/assets/svg/trigger-icon.svg#addTrigger"
+          class="trigger__shape trigger__shape--empty"
+        ></use>
+      </ng-container>
+    </svg>
+    <div class="flogo-trigger__count" *ngIf="triggers?.length > 1">
+      <span>+ {{ triggers.length - 1 }}</span>
+    </div>
+  </div>
+  <flogo-trigger-icon class="trigger-icon"></flogo-trigger-icon>
+</div>
+<flogo-apps-resource
+  class="flogo-group__resources"
+  [resource]="resource"
+  (resourceSelected)="onSelect($event)"
+  (deleteResource)="onDeleteFlow($event)"
+></flogo-apps-resource>

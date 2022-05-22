@@ -1,0 +1,15 @@
+@import (reference) '../styles/panel';
+
+:host {
+  .panel();
+
+  position: sticky;
+  bottom: 0;
+  left: 24px;
+  flex: none;
+  flex-shrink: 0;
+
+  &.is-open {
+    height: 0;
+  }
+}

@@ -1,0 +1,36 @@
+@import '~@flogo-web/assets/styles/_variables';
+@import (reference) '~@flogo-web/assets/styles/uxpl/form';
+
+:host {
+  display: inline-block;
+}
+
+.input-field {
+  .uxpl-input-field();
+  position: relative;
+  padding: 0;
+
+  .input-field__input {
+    cursor: pointer;
+    text-align: left;
+    min-height: unit(@uxpl-input[line-height], rem);
+    padding: 0;
+    margin-top: 1px;
+  }
+
+  .input-field__icon {
+    color: @warm-grey;
+    position: absolute;
+    right: 0;
+    bottom: 0.4rem;
+    width: 1rem;
+    pointer-events: none;
+    font-size: 0.875rem;
+  }
+}
+
+:host(.is-open) {
+  label {
+    transition-delay: 100ms;
+  }
+}

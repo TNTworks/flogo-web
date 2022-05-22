@@ -1,0 +1,80 @@
+@import (reference) '~@flogo-web/assets/styles/uxpl/modal';
+@import (reference) '../../variables';
+
+:host {
+  .modal-base();
+
+  width: 100%;
+  min-height: 350px;
+  max-height: 617px;
+  z-index: 0;
+
+  @media (min-width: 900px) {
+    min-width: 900px;
+    width: 62vw;
+  }
+}
+
+::ng-deep {
+  flogo-modal-header {
+    justify-self: flex-start;
+    z-index: 1;
+  }
+  flogo-modal-footer {
+    z-index: 1;
+  }
+}
+
+.close-icon {
+  z-index: 2;
+}
+
+::ng-deep [data-flogo-modal-title] {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 0;
+  padding: 0;
+}
+
+.close-icon {
+  color: @color-medium-gray;
+  cursor: pointer;
+  position: absolute;
+  top: 1.5rem;
+  right: @modal-horizontal-padding;
+  height: @close-icon-dimension;
+  width: @close-icon-dimension;
+}
+
+:host.small {
+  min-width: unset;
+  min-height: 276px;
+  max-height: 500px;
+  padding: 4.25rem @modal-horizontal-padding @modal-vertical-padding;
+  max-width: 42vw;
+  width: 100%;
+
+  ::ng-deep [data-flogo-modal-title] {
+    padding-bottom: 1rem;
+  }
+
+  @media (min-width: 276px) {
+    min-width: 276px;
+    width: 62vw;
+  }
+}
+
+:host.fullscreen {
+  min-height: unset;
+  max-height: none;
+  min-width: unset;
+  max-width: none;
+  width: unset;
+  position: fixed;
+  border-radius: 0;
+  border: none;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+}

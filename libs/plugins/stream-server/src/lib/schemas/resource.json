@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://github.com/project-flogo/flogo-web/schemas/1.0.0/stream/resource.json",
+  "additionalProperties": true,
+  "required": ["id", "data"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "data": {
+      "$ref": "./data.json"
+    }
+  }
+}

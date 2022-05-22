@@ -1,0 +1,9 @@
+<flogo-diagram
+  [diagramId]="currentDiagramId"
+  fgAddActivity
+  [flow]="items$ | async"
+  [selection]="currentSelection$ | async"
+  [iconProvider]="iconProvider"
+  (action)="onDiagramAction($event)"
+>
+</flogo-diagram>

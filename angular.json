@@ -1,0 +1,694 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "",
+  "projects": {
+    "assets": {
+      "root": "libs/assets",
+      "sourceRoot": "libs/assets/src",
+      "projectType": "library",
+      "prefix": "flogo-web",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/assets/tsconfig.lib.json",
+            "project": "libs/assets/ng-package.json"
+          }
+        }
+      }
+    },
+    "core": {
+      "root": "libs/core",
+      "sourceRoot": "libs/core/src",
+      "projectType": "library",
+      "prefix": "flogo-web",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/core/tsconfig.lib.json", "libs/core/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/core/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "passWithNoTests": true,
+            "jestConfig": "libs/core/jest.config.js",
+            "tsConfig": "libs/core/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "parser": {
+      "root": "libs/parser",
+      "sourceRoot": "libs/parser/src",
+      "projectType": "library",
+      "prefix": "flogo-web",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/parser/jest.config.js",
+            "tsConfig": "libs/parser/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/parser/tsconfig.lib.json",
+              "libs/parser/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/parser/**"]
+          }
+        }
+      }
+    },
+    "server": {
+      "root": "apps/server",
+      "sourceRoot": "apps/server/src",
+      "projectType": "application",
+      "prefix": "server",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/server",
+            "main": "apps/server/src/server.ts",
+            "tsConfig": "apps/server/tsconfig.app.json",
+            "assets": []
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "apps/server/src/environments/environment.ts",
+                  "with": "apps/server/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "./tools/builders:dev-server",
+          "options": {
+            "buildTarget": "server:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/server/tsconfig.app.json",
+              "apps/server/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/server/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/server/jest.config.js",
+            "tsConfig": "apps/server/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "client": {
+      "root": "apps/client/",
+      "sourceRoot": "apps/client/src",
+      "projectType": "application",
+      "prefix": "flogo-web",
+      "schematics": {
+        "@schematics/angular:component": {
+          "prefix": "flogo"
+        },
+        "@schematics/angular:directive": {
+          "prefix": "fg"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-builders/custom-webpack:browser",
+          "options": {
+            "outputPath": "dist/apps/client",
+            "index": "apps/client/src/index.html",
+            "main": "apps/client/src/main.ts",
+            "polyfills": "apps/client/src/polyfills.ts",
+            "tsConfig": "apps/client/tsconfig.app.json",
+            "assets": [
+              "apps/client/src/favicon.ico",
+              "apps/client/src/assets",
+              {
+                "input": "libs/assets/assets",
+                "glob": "**/*",
+                "output": "/assets"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/monaco-editor/min",
+                "output": "/assets/monaco-editor"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/monaco-editor/min-maps",
+                "output": "/assets/min-maps"
+              },
+              {
+                "glob": "**/*",
+                "input": "apps/client/src/i18n",
+                "output": "/i18n"
+              }
+            ],
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/font-awesome/css/font-awesome.min.css",
+              "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
+              "node_modules/@angular/cdk/overlay-prebuilt.css",
+              "apps/client/src/styles.less"
+            ],
+            "scripts": ["node_modules/monaco-editor/min/vs/loader.js"],
+            "customWebpackConfig": {
+              "path": "./extra-webpack.config.js"
+            }
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/client/src/environments/environment.ts",
+                  "with": "apps/client/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-builders/custom-webpack:dev-server",
+          "options": {
+            "browserTarget": "client:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "client:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "client:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "apps/client/src/test.ts",
+            "polyfills": "apps/client/src/polyfills.ts",
+            "tsConfig": "apps/client/tsconfig.spec.json",
+            "karmaConfig": "apps/client/karma.conf.js",
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/font-awesome/css/font-awesome.min.css",
+              "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
+              "node_modules/@angular/cdk/overlay-prebuilt.css",
+              "apps/client/src/styles.less"
+            ],
+            "scripts": [],
+            "assets": [
+              "apps/client/src/favicon.ico",
+              "apps/client/src/assets",
+              {
+                "input": "libs/assets/assets",
+                "glob": "**/*",
+                "output": "/assets"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/monaco-editor/min",
+                "output": "/assets/monaco-editor"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/monaco-editor/min-maps",
+                "output": "/assets/min-maps"
+              },
+              {
+                "glob": "**/*",
+                "input": "apps/client/src/i18n",
+                "output": "/i18n"
+              }
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/client/tsconfig.app.json",
+              "apps/client/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/client/**"]
+          }
+        }
+      }
+    },
+    "lib-server": {
+      "root": "libs/lib-server",
+      "sourceRoot": "libs/lib-server",
+      "projectType": "library",
+      "prefix": "flogo-web",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/lib-server/tsconfig.lib.json",
+              "libs/lib-server/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/lib-server/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/lib-server/jest.config.js",
+            "tsConfig": "libs/lib-server/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "lib-client": {
+      "root": "libs/lib-client",
+      "sourceRoot": "libs/lib-client",
+      "projectType": "library",
+      "prefix": "flogo",
+      "architect": {
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/lib-client/test.ts",
+            "tsConfig": "libs/lib-client/tsconfig.spec.json",
+            "karmaConfig": "libs/lib-client/karma.conf.js",
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/lib-client/tsconfig.lib.json",
+              "libs/lib-client/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/lib-client/**"]
+          }
+        }
+      }
+    },
+    "editor": {
+      "projectType": "library",
+      "root": "libs/editor",
+      "sourceRoot": "libs/editor/src",
+      "prefix": "flogo-web",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/editor/tsconfig.lib.json",
+              "libs/editor/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/editor/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/editor/jest.config.js",
+            "tsConfig": "libs/editor/tsconfig.spec.json",
+            "setupFile": "libs/editor/src/test-setup.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "less"
+        }
+      }
+    },
+    "plugins-flow-server": {
+      "root": "libs/plugins/flow-server",
+      "sourceRoot": "libs/plugins/flow-server/src",
+      "projectType": "library",
+      "prefix": "flogo-web",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/plugins/flow-server/tsconfig.lib.json",
+              "libs/plugins/flow-server/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/plugins/flow-server/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/plugins/flow-server/jest.config.js",
+            "tsConfig": "libs/plugins/flow-server/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "plugins-flow-client": {
+      "root": "libs/plugins/flow-client",
+      "sourceRoot": "libs/plugins/flow-client/src",
+      "projectType": "library",
+      "prefix": "flogo",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/plugins/flow-client/tsconfig.lib.json",
+            "project": "libs/plugins/flow-client/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/plugins/flow-client/src/test.ts",
+            "tsConfig": "libs/plugins/flow-client/tsconfig.spec.json",
+            "karmaConfig": "libs/plugins/flow-client/karma.conf.js",
+            "scripts": [],
+            "assets": [
+              {
+                "input": "libs/assets/assets",
+                "glob": "**/*",
+                "output": "/assets"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/monaco-editor/min",
+                "output": "/assets/monaco-editor"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/monaco-editor/min-maps",
+                "output": "/assets/min-maps"
+              }
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/plugins/flow-client/tsconfig.lib.json",
+              "libs/plugins/flow-client/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/plugins/flow-client/**"]
+          }
+        }
+      }
+    },
+    "plugins-flow-core": {
+      "root": "libs/plugins/flow-core",
+      "sourceRoot": "libs/plugins/flow-core/src",
+      "projectType": "library",
+      "prefix": "flogo-web",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/plugins/flow-core/tsconfig.lib.json",
+              "libs/plugins/flow-core/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/plugins/flow-core/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "passWithNoTests": true,
+            "jestConfig": "libs/plugins/flow-core/jest.config.js",
+            "tsConfig": "libs/plugins/flow-core/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "demo-libs": {
+      "root": "apps/demo-libs/",
+      "sourceRoot": "apps/demo-libs/src",
+      "projectType": "application",
+      "prefix": "demo",
+      "schematics": {
+        "@nrwl/schematics:class": {
+          "skipTests": true
+        },
+        "@nrwl/schematics:component": {
+          "style": "less",
+          "skipTests": true
+        },
+        "@nrwl/schematics:directive": {
+          "skipTests": true
+        },
+        "@nrwl/schematics:guard": {
+          "skipTests": true
+        },
+        "@nrwl/schematics:module": {
+          "skipTests": true
+        },
+        "@nrwl/schematics:pipe": {
+          "skipTests": true
+        },
+        "@nrwl/schematics:service": {
+          "skipTests": true
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/demo-libs",
+            "index": "apps/demo-libs/src/index.html",
+            "main": "apps/demo-libs/src/main.ts",
+            "polyfills": "apps/demo-libs/src/polyfills.ts",
+            "tsConfig": "apps/demo-libs/tsconfig.app.json",
+            "assets": ["apps/demo-libs/src/favicon.ico", "apps/demo-libs/src/assets"],
+            "styles": ["apps/demo-libs/src/styles.less"],
+            "scripts": [],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/demo-libs/src/environments/environment.ts",
+                  "with": "apps/demo-libs/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "demo-libs:build",
+            "port": 4201
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "demo-libs:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "demo-libs:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/demo-libs/tsconfig.app.json",
+              "apps/demo-libs/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/demo-libs/**"]
+          }
+        }
+      }
+    },
+    "demo-libs-e2e": {
+      "root": "apps/demo-libs-e2e",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/demo-libs-e2e/cypress.json",
+            "tsConfig": "apps/demo-libs-e2e/tsconfig.e2e.json",
+            "devServerTarget": "demo-libs:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "demo-libs:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/demo-libs-e2e/tsconfig.e2e.json",
+            "exclude": ["**/node_modules/**", "!apps/demo-libs-e2e/**"]
+          }
+        }
+      }
+    },
+    "plugins-stream-client": {
+      "projectType": "library",
+      "root": "libs/plugins/stream-client",
+      "sourceRoot": "libs/plugins/stream-client/src",
+      "prefix": "flogo-stream",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/plugins/stream-client/tsconfig.lib.json",
+              "libs/plugins/stream-client/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/plugins/stream-client/**"]
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "less"
+        }
+      }
+    },
+    "plugins-stream-core": {
+      "root": "libs/plugins/stream-core",
+      "sourceRoot": "libs/plugins/stream-core/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/plugins/stream-core/tsconfig.lib.json",
+              "libs/plugins/stream-core/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/plugins/stream-core/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "passWithNoTests": true,
+            "jestConfig": "libs/plugins/stream-core/jest.config.js",
+            "tsConfig": "libs/plugins/stream-core/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "plugins-stream-server": {
+      "root": "libs/plugins/stream-server",
+      "sourceRoot": "libs/plugins/stream-server/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/plugins/stream-server/tsconfig.lib.json",
+              "libs/plugins/stream-server/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/plugins/stream-server/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "passWithNoTests": true,
+            "jestConfig": "libs/plugins/stream-server/jest.config.js",
+            "tsConfig": "libs/plugins/stream-server/tsconfig.spec.json"
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "warnings": {
+      "typescriptMismatch": false,
+      "versionMismatch": false
+    },
+    "defaultCollection": "@nrwl/node",
+    "packageManager": "yarn"
+  },
+  "defaultProject": "client",
+  "schematics": {
+    "@nrwl/schematics:library": {
+      "unitTestRunner": "karma",
+      "framework": "angular"
+    },
+    "@nrwl/schematics:application": {
+      "unitTestRunner": "karma",
+      "e2eTestRunner": "protractor"
+    },
+    "@nrwl/schematics:node-application": {
+      "framework": "express"
+    }
+  }
+}

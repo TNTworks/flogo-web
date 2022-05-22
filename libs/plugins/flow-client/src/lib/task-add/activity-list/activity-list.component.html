@@ -1,0 +1,9 @@
+<flogo-flow-task-add-activity
+  *ngFor="let activity of activities"
+  role="option"
+  class="list-item qa-activities"
+  [activity]="activity"
+  [hidden]="isInsertInBetween && activity.isReturnType"
+  (selected)="selectActivity.emit(activity)"
+>
+</flogo-flow-task-add-activity>

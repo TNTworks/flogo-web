@@ -1,0 +1,195 @@
+[
+  {
+    "id": "github-com-tibco-software-flogo-contrib-trigger-rest",
+    "name": "tibco-rest",
+    "type": "flogo:trigger",
+    "ref": "some_path_to_repo/trigger/rest",
+    "version": "0.0.1",
+    "title": "Receive HTTP Message",
+    "description": "Simple REST Trigger",
+    "homepage": "some_path_to_repo/tree/master/trigger/rest",
+    "endpoint": {
+      "settings": [
+        {
+          "name": "method",
+          "type": "string",
+          "required": true,
+          "allowed": [
+            "GET",
+            "POST",
+            "PUT",
+            "PATCH",
+            "DELETE"
+          ]
+        },
+        {
+          "name": "path",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "autoIdReply",
+          "type": "boolean"
+        },
+        {
+          "name": "useReplyHandler",
+          "type": "boolean"
+        }
+      ]
+    },
+    "settings": [
+      {
+        "name": "port",
+        "type": "integer",
+        "required": true
+      }
+    ],
+    "output": [
+      {
+        "name": "params",
+        "type": "params"
+      },
+      {
+        "name": "pathParams",
+        "type": "params"
+      },
+      {
+        "name": "queryParams",
+        "type": "params"
+      },
+      {
+        "name": "content",
+        "type": "object"
+      }
+    ],
+    "reply": [
+      {
+        "name": "code",
+        "type": "integer"
+      },
+      {
+        "name": "data",
+        "type": "object"
+      }
+    ],
+    "handler": {
+      "settings": [
+        {
+          "name": "method",
+          "type": "string",
+          "required": true,
+          "allowed": [
+            "GET",
+            "POST",
+            "PUT",
+            "PATCH",
+            "DELETE"
+          ]
+        },
+        {
+          "name": "path",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "autoIdReply",
+          "type": "boolean"
+        },
+        {
+          "name": "useReplyHandler",
+          "type": "boolean"
+        }
+      ]
+    }
+  },
+  {
+    "id": "github-com-tibco-software-flogo-contrib-trigger-timer",
+    "name": "tibco-timer",
+    "type": "flogo:trigger",
+    "ref": "some_path_to_repo/trigger/timer",
+    "version": "0.0.1",
+    "title": "Timer",
+    "description": "Simple Timer trigger",
+    "homepage": "some_path_to_repo/tree/master/trigger/timer",
+    "endpoint": {
+      "settings": [
+        {
+          "name": "repeating",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "notImmediate",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "startDate",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "hours",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "minutes",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "seconds",
+          "type": "string",
+          "required": false
+        }
+      ]
+    },
+    "settings": [
+    ],
+    "outputs": [
+      {
+        "name": "params",
+        "type": "params"
+      },
+      {
+        "name": "content",
+        "type": "object"
+      }
+    ],
+    "handler": {
+      "settings": [
+        {
+          "name": "repeating",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "notImmediate",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "startDate",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "hours",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "minutes",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "seconds",
+          "type": "string",
+          "required": false
+        }
+      ]
+    }
+  }
+]

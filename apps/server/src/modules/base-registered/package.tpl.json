@@ -1,0 +1,14 @@
+{
+  "name": "flogo-triggers",
+  "version": "0.0.1",
+  "private": true,
+  "author": "TIBCO",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/project-flogo/flogo-web.git"
+  },
+  "dependencies": {
+  }
+}

@@ -1,0 +1,19 @@
+<flogo-modal class="modal" size="large" (close)="closeModal()">
+  <flogo-modal-header class="header">
+    <div class="header__title">
+      {{ 'FLOWS-LIST:HEADER-TEXT' | translate }}
+    </div>
+    <flogo-search
+      class="search"
+      placeholder="{{ 'FLOWS-LIST:FILTER-TEXT' | translate }}"
+      iconPosition="left"
+      (search)="filter($event)"
+    ></flogo-search>
+  </flogo-modal-header>
+  <flogo-modal-body class="body">
+    <flogo-flow-flows-list
+      [flows]="flows$ | async"
+      (flowSelected)="selectedFlow($event)"
+    ></flogo-flow-flows-list>
+  </flogo-modal-body>
+</flogo-modal>

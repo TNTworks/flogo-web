@@ -1,0 +1,35 @@
+[
+  {
+    "id": "github-com-tibco-software-flogo-contrib-tibco-log",
+    "name": "tibco-log",
+    "type": "flogo:activity",
+    "ref": "some_path_to_repo/activity/log",
+    "version": "0.0.1",
+    "title": "Log Message",
+    "description": "Simple Log Activity",
+    "homepage": "some_path_to_repo/tree/master/activity/log",
+    "inputs": [
+      {
+        "name": "message",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "name": "flowInfo",
+        "type": "boolean",
+        "value": "false"
+      },
+      {
+        "name": "addToFlow",
+        "type": "boolean",
+        "value": "false"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "message",
+        "type": "string"
+      }
+    ]
+  }
+]

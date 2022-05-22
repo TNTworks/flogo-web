@@ -1,0 +1,187 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://github.com/project-flogo/flogo-web/schemas/1.0.0/flow.json",
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "metadata": {
+      "$ref": "common.json#/definitions/metadata"
+    },
+    "tasks": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/task"
+      }
+    },
+    "links": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/link"
+      }
+    },
+    "errorHandler": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "tasks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/task"
+          }
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/link"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "task": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "activity"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "type": "string",
+          "enum": ["standard", "iterator"],
+          "default": "standard"
+        },
+        "name": true,
+        "description": true,
+        "settings": {
+          "type": "object",
+          "properties": {
+            "iterate": true
+          },
+          "additionalProperties": true
+        },
+        "activity": {
+          "$ref": "#/definitions/activity"
+        }
+      },
+      "if": {
+        "required": ["type"],
+        "properties": {
+          "type": {
+            "const": "iterator"
+          }
+        }
+      },
+      "then": {
+        "required": [ "settings" ],
+        "properties": {
+          "settings": {
+            "default": {},
+            "required": ["iterate"]
+          }
+        }
+      }
+    },
+    "activity": {
+      "type": "object",
+      "required": ["ref"],
+      "additionalProperties": false,
+      "properties": {
+        "ref": {
+          "type": "string",
+          "activity-installed": true
+        },
+        "settings": {
+          "type": "object",
+          "additionalProperties": true,
+          "properties": {
+            "flowURI": {
+              "type": "string",
+              "pattern": "^res:\/\/.+"
+            }
+          }
+
+        },
+        "input": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "output": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "mappings": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "input": {
+              "$ref": "common.json#/definitions/mappingsCollection"
+            }
+          }
+        }
+      },
+      "if": {
+        "$comment": "check for subflow",
+        "required": ["ref"],
+        "properties": {
+          "ref": {
+            "enum": [
+              "github.com/TIBCOSoftware/flogo-contrib/activity/subflow",
+              "github.com/project-flogo/flow/activity/subflow"
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": ["settings"],
+        "properties": {
+          "settings": {
+            "default": {},
+            "required": ["flowURI"]
+          }
+        }
+      }
+    },
+    "link": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["from", "to"],
+      "properties": {
+        "id": true,
+        "from": {
+          "type": "string"
+        },
+        "to": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["default", "dependency", "expression"]
+        },
+        "value": true
+      },
+      "if": {
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "const": "expression"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "value"
+        ]
+      }
+    }
+  }
+}

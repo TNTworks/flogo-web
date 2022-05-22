@@ -1,0 +1,50 @@
+@import '~@flogo-web/assets/styles/_typography';
+@import (reference) './styles/_variables';
+@import (reference) './styles/panel';
+
+:host {
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.content {
+  flex-direction: row;
+  flex: 1;
+  max-height: 100%;
+  min-height: 0;
+}
+
+.context-panel-container {
+  height: 0;
+  width: 100%;
+  position: relative;
+  display: flex;
+  z-index: 1;
+}
+
+.context-panel-container__content {
+  .panel();
+  position: absolute;
+  top: 0;
+  transform: translate3d(0, -@panel-height-minimized, 0);
+}
+
+.context-panel__content {
+  display: flex;
+  background-color: #fff;
+  flex: 1;
+  width: 100%;
+  overflow-y: auto;
+}
+
+::ng-deep [context-panel-role='panel-content'] {
+  flex: 1;
+}
+
+::ng-deep [context-panel-role='primary-area'] {
+  height: 100%;
+  overflow: auto;
+}

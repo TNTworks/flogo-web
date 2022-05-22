@@ -1,0 +1,47 @@
+<div [formGroup]="fieldGroup" *ngFor="let field of fieldGroup.controls; let i = index">
+  <div [formGroupName]="i" [ngSwitch]="metadata[i].controlType">
+    <flogo-fb-textbox
+      *ngSwitchCase="'FieldTextBox'"
+      [fieldGroup]="field"
+      [fieldControl]="metadata[i]"
+      [hideOptionalLabel]="readonly"
+    ></flogo-fb-textbox>
+    <flogo-fb-number
+      *ngSwitchCase="'FieldNumber'"
+      [fieldGroup]="field"
+      [fieldControl]="metadata[i]"
+      [hideOptionalLabel]="readonly"
+    ></flogo-fb-number>
+    <flogo-fb-textarea
+      *ngSwitchCase="'FieldTextArea'"
+      [fieldGroup]="field"
+      [fieldControl]="metadata[i]"
+      [hideOptionalLabel]="readonly"
+    ></flogo-fb-textarea>
+    <flogo-fb-radio
+      *ngSwitchCase="'FieldRadio'"
+      [fieldGroup]="field"
+      [fieldControl]="metadata[i]"
+      [hideOptionalLabel]="readonly"
+    ></flogo-fb-radio>
+    <flogo-fb-object
+      *ngSwitchCase="'FieldObject'"
+      [fieldGroup]="field"
+      [fieldControl]="metadata[i]"
+      [readonly]="readonly"
+    ></flogo-fb-object>
+    <flogo-fb-textbox
+      *ngSwitchDefault
+      [fieldGroup]="field"
+      [fieldControl]="metadata[i]"
+      [hideOptionalLabel]="readonly"
+    ></flogo-fb-textbox>
+    <flogo-flow-dynamic-field-error
+      *ngIf="
+        field.get('value').invalid &&
+        (field.get('value').touched || field.get('value').dirty)
+      "
+      [validationErrors]="field.get('value').errors"
+    ></flogo-flow-dynamic-field-error>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+@import '~@flogo-web/assets/styles/_variables';
+
+.iterator-panel {
+  border-right: solid 2px @gainsboro-two;
+  padding: 20px;
+}
+
+.description {
+  color: @warm-grey;
+  line-height: 1.5;
+}
+
+.description__lead {
+  font-weight: 600;
+}
+
+.iterator-switch {
+  border-bottom: 2px solid @gainsboro-two;
+  margin-bottom: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.iterator-switch__text {
+  flex: 1;
+}
+
+:host.--is-initing {
+  .flogo-toggle-switch_slider {
+    transition: none;
+    &::before {
+      transition: none;
+    }
+  }
+}

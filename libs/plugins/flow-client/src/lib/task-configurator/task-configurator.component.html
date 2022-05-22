@@ -1,0 +1,126 @@
+<div class="modal-wrapper" *ngIf="isActive" [@dialog] (fgOnEscape)="cancel()">
+  <div class="mapper-modal qa-transform-modal">
+    <div class="mapper-modal__header header">
+      <img [src]="iconUrl" class="header__icon" alt="Activity icon" />
+      <div class="header__title">
+        <div *ngIf="ismapperActivity" class="output-mapper-text">
+          {{ 'TASK-CONFIGURATOR:TITLE-OUTPUT-MAPPER' | translate }}
+        </div>
+        <div class="task-details">
+          <input
+            class="task-name"
+            [ngClass]="{ 'task-name--error': !isValidTaskName }"
+            [(ngModel)]="title"
+            (keyup)="changeTaskDetail($event.target.value, 'name')"
+            [size]="title.length + 1"
+          />
+          <div class="task-id-homepage-wrapper">
+            <span>{{
+              'TASK-CONFIGURATOR:ID' | translate: { value: currentTile.id }
+            }}</span>
+            <a
+              class="task-schema-homepage"
+              *ngIf="activitySchemaUrl"
+              [href]="activitySchemaUrl"
+              target="_blank"
+            >
+              <i class="flogo-icon-info"></i>
+            </a>
+          </div>
+        </div>
+        <div
+          class="unique-name-error-message"
+          *ngIf="!isValidTaskName && title.length > 0"
+        >
+          {{ 'TASK-CONFIGURATOR:NAME-EXISTS' | translate }}
+        </div>
+        <div
+          class="task-description"
+          (fgContentEditableChange)="
+            changeTaskDetail(currentTile.description, 'description')
+          "
+          [(fgContentEditable)]="currentTile.description"
+          [allowNewLines]="true"
+          placeholder="{{ 'TASK-CONFIGURATOR:ADD-DESCRIPTION' | translate }}"
+        ></div>
+      </div>
+      <div class="header__actions configurator-actions">
+        <button class="flogo-button--secondary" (click)="cancel()">Cancel</button>
+        <button
+          class="flogo-button--primary  actions__action--save"
+          [class.disabled]="
+            !(
+              (this.tabs.areDirty() || this.isTaskDetailEdited) &&
+              this.tabs.areValid() &&
+              this.isValidTaskName
+            )
+          "
+          [disabled]="
+            !(
+              (this.tabs.areDirty() || this.isTaskDetailEdited) &&
+              this.tabs.areValid() &&
+              this.isValidTaskName
+            )
+          "
+          (click)="save()"
+        >
+          {{ 'TASK-CONFIGURATOR:SAVE' | translate }}
+        </button>
+      </div>
+      <button class="mapper-modal__close" (click)="cancel()">
+        <span aria-hidden="true" class="sr-only">{{
+          'TASK-CONFIGURATOR:CLOSE' | translate
+        }}</span>
+      </button>
+    </div>
+
+    <div class="mapper-modal__content">
+      <div class="tab-panel">
+        <ul class="tabs">
+          <li
+            class="tabs__tab"
+            *ngFor="let tabData of tabs; trackBy: trackTabsByFn"
+            (click)="selectTab(tabData[0])"
+            [ngClass]="{
+              'tabs__tab--selected': tabData[1].isSelected,
+              'tabs__tab--has-errors': !tabData[1].isValid,
+              'tabs__tab--is-disabled': !tabData[1].enabled
+            }"
+          >
+            {{ tabData[1].labelKey | translate }}
+          </li>
+        </ul>
+      </div>
+      <flogo-mapper
+        class="content"
+        *ngIf="this.tabs.get('inputMappings')?.isSelected"
+        [controller]="inputMapperController"
+        inputsSearchPlaceHolder="{{ inputsSearchPlaceholderKey | translate }}"
+        outputsSearchPlaceHolder="{{ 'TASK-CONFIGURATOR:AVAILABLE-DATA' | translate }}"
+      >
+      </flogo-mapper>
+      <flogo-flow-task-configurator-iterator
+        *ngIf="this.tabs.get('iterator')?.isSelected"
+        class="content"
+        [iteratorModeOn]="iteratorModeOn"
+        [mapperController]="iteratorController"
+        (changeIteratorMode)="onChangeIteratorMode()"
+      ></flogo-flow-task-configurator-iterator>
+      <flogo-flow-task-configurator-subflow
+        *ngIf="isSubflowType && this.tabs.get('subFlow').isSelected"
+        [subflow]="subFlowConfig"
+        [showFlowSelection]="showSubflowList"
+        [flowsList]="subflowList"
+        (startSelection)="selectSubFlow()"
+        (cancelSelection)="subflowSelectionCancel()"
+        (selectDifferentFlow)="subFlowChanged($event)"
+        class="content"
+      ></flogo-flow-task-configurator-subflow>
+      <flogo-flow-task-configurator-settings
+        *ngIf="this.tabs.get('settings')?.isSelected"
+        [mapperController]="settingsController"
+        class="content"
+      ></flogo-flow-task-configurator-settings>
+    </div>
+  </div>
+</div>

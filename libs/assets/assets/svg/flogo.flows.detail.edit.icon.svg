@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="38px" height="22px" viewBox="0 0 38 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 3.6.1 (26313) - http://www.bohemiancoding.com/sketch -->
+    <title>919718B7-6331-4694-8A25-9BF1EFEA9494</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.35 0" in="shadowBlurOuter1" type="matrix" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g id="Spec" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" filter="url(#filter-1)">
+        <g id="flogo-gen-cmpt-buttons" transform="translate(-489.000000, -582.000000)" fill="#727272">
+            <g id="Group-Copy-3" transform="translate(478.000000, 574.000000)">
+                <path d="M16.4394941,20.0814134 L23.8246614,12.7111104 L26.2862866,15.1680724 L18.9014108,22.538084 L16.4394941,20.0814134 L16.4394941,20.0814134 Z M26.2862866,10.2544398 C26.6261226,9.91518672 27.1769718,9.91518672 27.5168078,10.2544398 L28.7476204,11.4829208 C29.0877479,11.8218825 29.0877479,12.3721487 28.7476204,12.7111104 L26.9015472,14.5536861 L24.4399219,12.0967241 L26.2862866,10.2544398 L26.2862866,10.2544398 Z M15,23.9700003 L15.8192788,20.6949253 L18.2811955,23.1521788 L15,23.9700003 L15,23.9700003 Z" id="icon_Edit"></path>
+            </g>
+        </g>
+    </g>
+</svg>

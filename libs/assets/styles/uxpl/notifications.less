@@ -1,0 +1,37 @@
+.uxpl-notification {
+  display: flex;
+  align-items: flex-start;
+  padding: 0.625rem 1rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  border-radius: 3px;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.35);
+  border: solid 1px;
+
+  &.is-success {
+    color: #3bc03a;
+    border-color: #3bc03a;
+    background-color: #e1f7eb;
+  }
+
+  &.is-error {
+    color: #d0021b;
+    border-color: #d0021b;
+    background-color: #f9e1e4;
+  }
+}
+
+.uxpl-notification__icon {
+  margin-right: 1rem;
+}
+
+.uxpl-notification__text {
+  display: block;
+  flex: 1;
+}
+
+.uxpl-notification__close {
+  background: none;
+  border: none;
+  flex-shrink: 0;
+}

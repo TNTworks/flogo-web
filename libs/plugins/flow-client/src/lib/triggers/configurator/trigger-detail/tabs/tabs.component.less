@@ -1,0 +1,42 @@
+.tabs {
+  margin: 0;
+  padding: 0;
+}
+
+.tab {
+  display: inline-block;
+  font-size: 1rem;
+  line-height: 1;
+  margin: 0;
+  padding: 1.25em 1.75em;
+  color: #0081cb;
+  border-bottom: 7px solid transparent;
+  cursor: pointer;
+  // spacing to compensate for font size in "active" state being bolder than the one in normal states
+  // this avoids the "jump" effect caused by the change of the width of the tab when switching between states
+  letter-spacing: 0.013em;
+
+  &:hover {
+    color: #062e79;
+  }
+
+  &.is-active {
+    color: #062e79;
+    font-weight: 600;
+    border-bottom-color: #062e79;
+    letter-spacing: unset;
+  }
+
+  &.is-disabled,
+  &[disabled] {
+    pointer-events: none;
+    color: #bdbdbd;
+  }
+
+  &.has-errors {
+    color: #d0011b;
+  }
+  &.is-active.has-errors {
+    border-color: #d0011b;
+  }
+}

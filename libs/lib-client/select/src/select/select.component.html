@@ -1,0 +1,24 @@
+<div class="input-field">
+  <button
+    #origin
+    class="input-field__input"
+    [class.is-empty]="!currentOption"
+    (click)="open()"
+    (keydown)="onKeyDown($event)"
+    attr.aria-haspopup="listbox"
+    attr.aria-labelledby="label-{{ fieldId }} field-{{ fieldId }}"
+    [attr.aria-expanded]="isOpen"
+  >
+    {{ currentOption?.label || '' }}
+  </button>
+  <label id="label-{{ fieldId }}">{{ label }}</label>
+  <i class="flogo-icon-dropdown input-field__icon"></i>
+</div>
+<flogo-select-panel
+  labeledBy="label-{{ fieldId }}"
+  [origin]="origin"
+  [activeDescendantId]="activeDescendant"
+  (select)="onSelectOption($event)"
+>
+  <ng-content select="flogo-select-option"></ng-content>
+</flogo-select-panel>

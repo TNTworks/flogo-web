@@ -1,0 +1,35 @@
+<div
+  @configurationPanel
+  class="trigger-configuration__main"
+  *ngIf="isOpen && selectedTriggerId"
+  (fgOnEscape)="onCloseOrDismiss()"
+>
+  <div class="background"></div>
+  <div class="mapper-modal__header header" @triggerConfiguratorLayoutElement>
+    <h2 class="header__title">{{ 'TRIGGER-CONFIGURATOR:TITLE' | translate }}</h2>
+    <button class="mapper-modal__close" (click)="onCloseOrDismiss()">
+      <span aria-hidden="true" class="sr-only">{{
+        'TRIGGER-CONFIGURATOR:CLOSE' | translate
+      }}</span>
+    </button>
+  </div>
+  <div class="trigger-configuration__content">
+    <div class="configuration__triggers js-triggers-list">
+      <flogo-triggers-configure-trigger
+        class="js-trigger-element"
+        *ngFor="let trigger of triggerStatuses$ | async"
+        [triggerData]="trigger"
+        [iconProvider]="iconProvider"
+        [selectedTriggerId]="selectedTriggerId"
+        (selectTrigger)="changeTriggerSelection($event)"
+      >
+      </flogo-triggers-configure-trigger>
+    </div>
+    <div class="configuration__trigger" @triggerConfiguratorLayoutElement>
+      <flogo-flow-triggers-configurator-detail
+        *ngIf="(isConfiguratorInitialized$ | async) && selectedTriggerId"
+      >
+      </flogo-flow-triggers-configurator-detail>
+    </div>
+  </div>
+</div>

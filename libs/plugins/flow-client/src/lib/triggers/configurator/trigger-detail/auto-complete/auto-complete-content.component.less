@@ -1,0 +1,41 @@
+@import (reference) '~@flogo-web/assets/styles/_variables';
+@import (reference) '~@flogo-web/assets/styles/uxpl/dropdown';
+
+:host {
+  .uxpl-dropdown-container;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+}
+
+.help {
+  //flex: 0 0 auto;
+  padding: 16px;
+  color: @color-dark-gray;
+  line-height: 1.3;
+  strong {
+    color: @color-ink;
+  }
+  border-bottom: 1px solid @color-medium-gray;
+}
+
+.all-options-wrapper {
+  flex: 1;
+  overflow: auto;
+  min-height: 62px;
+}
+
+.options-group {
+  .uxpl-dropdown();
+}
+
+.options-group__option {
+  .uxpl-dropdown__item();
+}
+
+.options-group-divider {
+  border-top: 1px solid @color-medium-gray;
+  margin-left: 16px;
+  margin-right: 16px;
+}

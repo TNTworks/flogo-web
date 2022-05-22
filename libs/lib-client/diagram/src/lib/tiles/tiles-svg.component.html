@@ -1,0 +1,81 @@
+<svg
+  class="shape"
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="0"
+  height="0"
+>
+  <defs>
+    <linearGradient
+      id="flogo-diagram-tile__bg"
+      x1="0%"
+      x2="31.438%"
+      y1="52.069%"
+      y2="52.069%"
+    >
+      <stop offset="0%" stop-color="#F4F4F4" />
+      <stop offset="100%" stop-color="#FFF" />
+    </linearGradient>
+    <linearGradient
+      id="flogo-diagram-tile__bg--has-run"
+      x1="0%"
+      x2="33.893%"
+      y1="50%"
+      y2="50%"
+    >
+      <stop offset="0%" stop-color="#D2EDFD" />
+      <stop offset="100%" stop-color="#DEF2FD" />
+    </linearGradient>
+    <filter
+      id="flogo-diagram-tile__shadow"
+      width="105.9%"
+      height="111.7%"
+      x="-3%"
+      y="-4.2%"
+      filterUnits="objectBoundingBox"
+    >
+      <feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter1" />
+      <feGaussianBlur
+        in="shadowOffsetOuter1"
+        result="shadowBlurOuter1"
+        stdDeviation="1"
+      />
+      <feComposite in="shadowBlurOuter1" in2="SourceAlpha" result="shadowBlurOuter1" />
+      <feColorMatrix
+        in="shadowBlurOuter1"
+        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"
+      />
+    </filter>
+    <filter
+      id="flogo-diagram-tile__shadow--active"
+      width="135.3%"
+      height="139.2%"
+      x="-17.7%"
+      y="-15.4%"
+      filterUnits="objectBoundingBox"
+    >
+      <feOffset dy="5" in="SourceAlpha" result="shadowOffsetOuter2" />
+      <feGaussianBlur
+        in="shadowOffsetOuter2"
+        result="shadowBlurOuter2"
+        stdDeviation="1"
+      />
+      <feColorMatrix
+        in="shadowBlurOuter2"
+        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"
+      />
+    </filter>
+    <filter id="flogo-diagram-tile__shadow--preview">
+      <feOffset dx="-2" dy="2" in="SourceAlpha" result="shadowOffsetOuter3"></feOffset>
+      <feGaussianBlur
+        in="shadowOffsetOuter3"
+        result="shadowBlurOuter3"
+        stdDeviation="4"
+      ></feGaussianBlur>
+      <feColorMatrix
+        in="shadowBlurOuter3"
+        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.3 0"
+      ></feColorMatrix>
+    </filter>
+  </defs>
+</svg>

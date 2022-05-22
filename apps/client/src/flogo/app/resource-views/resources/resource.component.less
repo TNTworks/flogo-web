@@ -1,0 +1,116 @@
+@import '~@flogo-web/assets/styles/_variables';
+@breakpoint: 700px;
+
+:host {
+  display: block;
+  cursor: pointer;
+  position: relative;
+  min-height: 100px;
+  background: @color-bg;
+  border: 1px solid @gainsboro;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 0 4px 4px 4px;
+  padding: 1.18rem 2.5rem;
+  color: @color-disabled;
+  display: flex;
+  flex-flow: row wrap;
+
+  &:hover {
+    border-color: @color-bg;
+    box-shadow: 0 0 5px 0 @color-secondary;
+
+    .resource-menu__delete-btn {
+      visibility: visible;
+    }
+  }
+}
+
+.resource-details,
+.resource-metadata {
+  flex-basis: 100%;
+  // explicit width so ellipsis can be displayed for truncated text
+  min-width: 0;
+}
+
+@media (min-width: @breakpoint) {
+  .resource-details {
+    flex: 7;
+  }
+
+  .resource-metadata {
+    flex: 2;
+    padding-left: 1.8rem;
+  }
+}
+
+.resource-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.resource-badge {
+  flex-shrink: 0;
+  margin-left: 10px;
+}
+
+.resource-title {
+  color: @color-ink;
+  display: block;
+  margin: 0;
+  line-height: 1.25;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  text-transform: capitalize;
+}
+
+.resource-description {
+  color: @color-dark-gray;
+  line-height: 1;
+  font-size: 0.75em;
+  margin: 0;
+  padding: 0;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.resource-date {
+  font-size: 0.75em;
+  min-height: 15px;
+  opacity: 0.54;
+  line-height: 1.25;
+  display: inline-block;
+  margin: 0 1em 0 0;
+
+  &:after {
+    display: inline-block;
+    content: '.';
+  }
+}
+
+@media (min-width: 750px) {
+  .resource-date {
+    display: block;
+    margin: 1em 0 0;
+    &:after {
+      display: none;
+    }
+  }
+}
+
+.resource-menu {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+}
+
+.resource-menu__delete-btn {
+  visibility: hidden;
+  cursor: pointer;
+}

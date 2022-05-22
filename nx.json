@@ -1,0 +1,61 @@
+{
+  "npmScope": "flogo-web",
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": "*",
+    "tsconfig.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "projects": {
+    "assets": {
+      "tags": ["client"]
+    },
+    "core": {
+      "tags": ["shared"]
+    },
+    "lib-client": {
+      "tags": ["client"]
+    },
+    "lib-server": {
+      "tags": ["server"]
+    },
+    "parser": {
+      "tags": ["shared"]
+    },
+    "plugins-flow-server": {
+      "tags": ["server", "plugin"]
+    },
+    "plugins-flow-client": {
+      "tags": ["client", "plugin"]
+    },
+    "plugins-flow-core": {
+      "tags": ["shared", "plugin"]
+    },
+    "server": {
+      "tags": ["server"]
+    },
+    "client": {
+      "tags": ["client"]
+    },
+    "demo-libs": {
+      "tags": []
+    },
+    "demo-libs-e2e": {
+      "tags": [],
+      "implicitDependencies": ["demo-libs"]
+    },
+    "plugins-stream-client": {
+      "tags": ["client", "plugins", "streams"]
+    },
+    "plugins-stream-core": {
+      "tags": ["streams"]
+    },
+    "plugins-stream-server": {
+      "tags": ["streams", "server"]
+    },
+    "editor": {
+      "tags": []
+    }
+  }
+}

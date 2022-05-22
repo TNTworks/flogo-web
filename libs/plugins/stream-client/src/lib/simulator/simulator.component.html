@@ -1,0 +1,90 @@
+<div *ngIf="simulateActivity" class="activity column">
+  <div class="activity__details">
+    <flogo-activity-icon
+      [iconUrl]="iconUrl"
+      [customAltText]="'Activity icon'"
+      class="activity__icon"
+    ></flogo-activity-icon>
+    <div class="activity__name">
+      <span>{{ simulateActivity.name }}</span>
+      <a
+        class="schema-homepage"
+        *ngIf="simulateActivity.schemaHomepage"
+        [href]="simulateActivity.schemaHomepage"
+        target="_blank"
+      >
+        <i class="flogo-icon-info"></i>
+      </a>
+    </div>
+    <div class="activity__id">{{ simulateActivity.id }}</div>
+  </div>
+  <div class="activity__description">{{ simulateActivity.description }}</div>
+</div>
+
+<div class="column">
+  <flogo-stream-simulator-viz
+    *ngIf="!isInputEmpty; else noInput"
+    class="viewer"
+    [graphFields]="metadata?.inputGraphFields"
+    [graphView]="metadata?.inputGraph"
+    [simulationId]="simulationId"
+    [values$]="input$"
+    [schema]="schemas?.input"
+  >
+    <div class="section-title">
+      <svg
+        class="section-title__icon"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+      >
+        <path
+          fill="currentColor"
+          fill-rule="evenodd"
+          d="M20 20v-2a1 1 0 0 1 2 0v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h18a1 1 0 0 1 1 1v3a1 1 0 0 1-2 0V4H4v16h16zm-9.502-7.228a1.034 1.034 0 0 1 0-1.544l3.462-3.115a1.038 1.038 0 0 1 1.39 1.543l-1.451 1.306h7.216a1.038 1.038 0 1 1 0 2.076H13.9l1.45 1.306a1.038 1.038 0 1 1-1.39 1.543l-3.46-3.115z"
+        />
+      </svg>
+      <span>{{ simulateActivity?.name || 'Stream' }} Input</span>
+    </div>
+  </flogo-stream-simulator-viz>
+  <ng-template #noInput
+    ><div class="section-empty">
+      Input data is not yet available for display
+    </div></ng-template
+  >
+</div>
+
+<div class="column">
+  <flogo-stream-simulator-viz
+    *ngIf="!isOutputEmpty; else noOutput"
+    class="viewer"
+    [graphView]="metadata?.outputGraph"
+    [simulationId]="simulationId"
+    [values$]="output$"
+    [schema]="schemas?.output"
+    [view]="metadata?.outputGraph"
+  >
+    <div class="section-title">
+      <svg
+        class="section-title__icon"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+      >
+        <path
+          fill="currentColor"
+          fill-rule="evenodd"
+          d="M20 20v-2a1 1 0 0 1 2 0v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h18a1 1 0 0 1 1 1v3a1 1 0 0 1-2 0V4H4v16h16zm1.81-8.772a1.034 1.034 0 0 1 0 1.544l-3.462 3.115a1.038 1.038 0 0 1-1.39-1.543l1.45-1.306h-7.216a1.038 1.038 0 1 1 0-2.076h7.217l-1.45-1.306a1.038 1.038 0 1 1 1.39-1.543l3.46 3.115z"
+        />
+      </svg>
+      <span>{{ simulateActivity?.name || 'Stream' }} Output</span>
+    </div>
+  </flogo-stream-simulator-viz>
+  <ng-template #noOutput
+    ><div class="section-empty">
+      Output data is not yet available to display
+    </div></ng-template
+  >
+</div>

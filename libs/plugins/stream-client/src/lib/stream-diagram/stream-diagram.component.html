@@ -1,0 +1,64 @@
+<flogo-diagram-tiles-svg> </flogo-diagram-tiles-svg>
+<div class="tiles-wrapper">
+  <div
+    cdkDropList
+    cdkDropListOrientation="horizontal"
+    (cdkDropListDropped)="moveStage($event)"
+    (mouseenter)="updateDraggingState(draggingPosition.INSIDE, $event.buttons)"
+    (mouseleave)="updateDraggingState(draggingPosition.OUTSIDE, $event.buttons)"
+  >
+    <div class="tile" *ngFor="let tile of tiles; trackBy: trackTileBy">
+      <flogo-diagram-tile-insert
+        *ngIf="hideInsertTile"
+        class="tile__add-between"
+        [tile]="tile"
+        [currentSelection]="currentSelection"
+        [insertBetween]="true"
+        (select)="addStage(tile.parentId)"
+        [class.visible-on-hover]="tiles.length"
+        [hidden]="isDragging"
+      ></flogo-diagram-tile-insert>
+      <flogo-diagram-tile-task
+        class="tile__separator"
+        cdkDrag
+        cdkDragBoundary="flogo-stream-diagram"
+        [cdkDragData]="tile?.task?.id"
+        [tile]="tile"
+        [currentSelection]="currentSelection"
+        [icon]="iconIndex[tile?.task?.id]"
+        (select)="selectStage($event)"
+        (remove)="onDiagramAction($event)"
+        (configure)="onDiagramAction($event)"
+        (cdkDragStarted)="onStageDragStart()"
+      >
+        <flogo-diagram-tile-placeholder
+          *cdkDragPlaceholder
+        ></flogo-diagram-tile-placeholder>
+        <ng-template cdkDragPreview [matchSize]="true">
+          <flogo-diagram-tile-preview
+            [id]="tile?.task?.id"
+            [title]="tile?.task?.title"
+            [icon]="iconIndex[tile?.task?.id]"
+          ></flogo-diagram-tile-preview>
+        </ng-template>
+      </flogo-diagram-tile-task>
+    </div>
+  </div>
+  <flogo-diagram-tile-insert
+    *ngIf="hideInsertTile"
+    class="add-button tile__separator"
+    [tile]="insertTile"
+    [currentSelection]="currentSelection"
+    [insertBetween]="false"
+    (select)="addStage(insertTile.parentId)"
+    [class.visible-on-hover]="tiles.length"
+    [hidden]="isDragging"
+  ></flogo-diagram-tile-insert>
+  <div class="tile-placeholders">
+    <div
+      class="tile-placeholder visible-on-hover"
+      [hidden]="isDragging"
+      *ngFor="let i of placeholders"
+    ></div>
+  </div>
+</div>

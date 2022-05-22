@@ -1,0 +1,31 @@
+<div cdkTrapFocus cdkTrapFocusAutoCapture="true">
+  <span class=" flogo-error__close" (click)="closeModal()"></span>
+  <div class="flogo-error__header">
+    <h4 class="flogo-error__head">
+      <i class="flogo-icon-info flogo-error__warning"></i>
+      <span class="flogo-error_head-text">{{
+        'IMPORT-ERROR:IMPORT_FAILED' | translate
+      }}</span>
+    </h4>
+  </div>
+  <div class="flogo-error__container">
+    <p class="flogo-error__content flogo-error__count">
+      {{ 'IMPORT-ERROR:ERRORS_FOUND' | translate: { value: errorDetails.length } }}
+    </p>
+    <ul class="flogo-error__list-container">
+      <li class="flogo-error__list qa-error" *ngFor="let detail of errorDetails">
+        <span class="flogo-error__list-head">
+          {{ errorFormatter.formatMessageHeader(detail.keyword) }}
+        </span>
+        <span class="flogo-error__content">{{
+          errorFormatter.formatErrorMessage(detail)
+        }}</span>
+      </li>
+    </ul>
+  </div>
+  <div class="flogo-error__btn-container">
+    <button class="flogo-button--default flogo-error__confirm" (click)="closeModal()">
+      {{ 'MODAL:OKAY' | translate }}
+    </button>
+  </div>
+</div>

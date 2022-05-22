@@ -1,0 +1,68 @@
+<div [formGroup]="paramGroup" class="form-input">
+  <div class="form-input-wrapper">
+    <input
+      class="form-input__name"
+      type="text"
+      formControlName="name"
+      placeholder="parameter name"
+      [ngClass]="{ '--invalid': !paramGroup.get('name').valid }"
+      (blur)="updateGroupByParam()"
+    />
+    <div
+      class="dropdown form-input__type type-selector"
+      (fgClickOutside)="closeDropdown()"
+    >
+      <button
+        class="btn btn-default dropdown-toggle type-selector__label"
+        type="button"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="true"
+        (click)="toggleDropdown()"
+      >
+        <span>{{ paramGroup.get('type').value | lowercase }}</span>
+        <input type="hidden" formControlName="type" />
+        <i class="flogo-icon-dropdown type-selector__caret"></i>
+      </button>
+      <ul
+        class="dropdown-menu type-selector__dropdown-menu"
+        [style.display]="isOpen ? 'block' : 'none'"
+      >
+        <li
+          *ngFor="let option of dropdownOptions"
+          class="list-label"
+          (click)="selectType(option)"
+        >
+          <a>{{ option }}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div
+    class="group-by-section"
+    [ngClass]="{ 'group-by-section--selected': selectedAsGroupBy }"
+  >
+    <button
+      class="btn btn-default dropdown-toggle group-by-section__btn"
+      [ngClass]="{
+        'group-by-section__btn--disable': paramGroup.get('name').value === ''
+      }"
+      type="button"
+      data-toggle="dropdown"
+      aria-haspopup="true"
+      aria-expanded="true"
+      (click)="updateGroupBy()"
+    >
+      <i class="flogo-icon-done group-by-section__icon"></i>
+      <span *ngIf="showGroupByBtn; else changeGroupBy">Group by</span>
+      <ng-template #changeGroupBy>
+        <span>Change group by</span>
+      </ng-template>
+    </button>
+
+    <div class="form-input__delete">
+      <i class="flogo-icon-delete delete-icon" (click)="onRemoveParam()"></i>
+    </div>
+  </div>
+</div>

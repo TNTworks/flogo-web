@@ -1,0 +1,39 @@
+<div class="content__sidebar iterator-panel">
+  <div class="iterator-switch">
+    <div class="iterator-switch__text">
+      {{ 'TASK-CONFIGURATOR:ITERATOR:ITERATE' | translate }}
+    </div>
+    <div class="flogo-toggle-switch_container">
+      <span *ngIf="iteratorModeOn">{{
+        'TASK-CONFIGURATOR:ITERATOR:ON' | translate
+      }}</span>
+      <span *ngIf="!iteratorModeOn">{{
+        'TASK-CONFIGURATOR:ITERATOR:OFF' | translate
+      }}</span>
+      <label class="flogo-toggle-switch">
+        <input
+          type="checkbox"
+          [checked]="iteratorModeOn"
+          (change)="onChangeIteratorMode()"
+        />
+        <span class="flogo-toggle-switch_slider toggle-switch_round"></span>
+      </label>
+    </div>
+  </div>
+  <div class="description">
+    <p
+      class="description__lead"
+      [innerHTML]="'TASK-CONFIGURATOR:ITERATOR:INTRODUCTION' | translate"
+    ></p>
+    <p [innerHTML]="'TASK-CONFIGURATOR:ITERATOR:EXAMPLE-NUMBER' | translate"></p>
+    <p [innerHTML]="'TASK-CONFIGURATOR:ITERATOR:EXAMPLE-ARRAY' | translate"></p>
+  </div>
+</div>
+<flogo-mapper
+  class="content__main"
+  *ngIf="iteratorModeOn"
+  [isSingleInputMode]="true"
+  [controller]="mapperController"
+  outputsSearchPlaceHolder="{{ 'TASK-CONFIGURATOR:AVAILABLE-DATA' | translate }}"
+>
+</flogo-mapper>

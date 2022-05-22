@@ -1,0 +1,29 @@
+@import '~@flogo-web/assets/styles/_variables';
+
+:host {
+  position: relative;
+}
+
+:host(:hover) .add-resource-container {
+  opacity: 1;
+}
+
+.resources {
+  min-width: 0;
+  display: flex;
+}
+
+.add-resource-container {
+  background: @color-app-detail-bg;
+  opacity: 0;
+  transition: opacity 250ms;
+  position: absolute;
+  top: -18px;
+  right: 0;
+}
+
+.add-resource {
+  font-size: 1em;
+  border: solid 1px @gainsboro;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2);
+}

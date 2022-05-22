@@ -1,0 +1,31 @@
+<fieldset [formGroup]="fieldGroup" class="df-container form-group">
+  <legend
+    flogo-flow-dynamic-form-label
+    class="form-field-label"
+    [fieldMetadata]="fieldControl"
+    [control]="fieldGroup.get('name')"
+    [noOptionalLabel]="hideOptionalLabel"
+  ></legend>
+  <div class="tc-radio-buttons tc-radio-button df-radio__option">
+    <input
+      id="true-{{ fieldGroup.get('name').value }}"
+      type="radio"
+      formControlName="value"
+      [value]="true"
+    />
+    <label for="true-{{ fieldGroup.get('name').value }}">
+      <span class="df-boolean__label-text">True</span>
+    </label>
+  </div>
+  <div class="tc-radio-buttons tc-radio-button df-radio__option">
+    <input
+      id="false-{{ fieldGroup.get('name').value }}"
+      type="radio"
+      formControlName="value"
+      [value]="false"
+    />
+    <label for="false-{{ fieldGroup.get('name').value }}">
+      <span class="df-boolean__label-text">False</span>
+    </label>
+  </div>
+</fieldset>

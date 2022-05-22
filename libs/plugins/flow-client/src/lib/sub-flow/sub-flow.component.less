@@ -1,0 +1,39 @@
+@import '~@flogo-web/assets/styles/_variables';
+@import (reference) '~@flogo-web/assets/styles/_mixins';
+
+:host {
+  height: 100%;
+}
+
+@media screen and (min-height: 600px) {
+  .modal {
+    min-height: 600px;
+    height: 600px;
+  }
+}
+
+@bg-image-size: 76px;
+.header {
+  padding-left: @bg-image-size;
+  padding-right: 3.75rem;
+  background: url(/assets/svg/subflow.svg) no-repeat 24px center;
+  font-size: 1.5rem;
+  justify-content: space-between;
+}
+
+.header__title {
+  font-weight: 600;
+  font-size: 1.125rem;
+  flex: 2;
+}
+
+.search {
+  flex: 1;
+}
+
+.body {
+  display: flex;
+  background-color: @lighter-gray;
+  padding: 1.5rem 1.75rem 1.5rem 1.5rem;
+  .custom-scrollbar();
+}

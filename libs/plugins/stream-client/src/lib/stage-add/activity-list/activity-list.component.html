@@ -1,0 +1,8 @@
+<flogo-stream-stage-add-activity
+  *ngFor="let activity of activities"
+  role="option"
+  class="list-item qa-activities"
+  [activity]="activity"
+  (selected)="selectActivity.emit(activity)"
+>
+</flogo-stream-stage-add-activity>

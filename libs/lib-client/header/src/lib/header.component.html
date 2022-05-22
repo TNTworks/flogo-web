@@ -1,0 +1,37 @@
+<div class="header" [class.--with-bottom-content]="!!bottomAreaContent">
+  <i
+    class="flogo-icon flogo-icon-back header-back qa-icon-back"
+    [class.--hover]="isHoveredOnBack"
+    (click)="goBack.emit()"
+    (mouseover)="onMouseOverBackControl()"
+    (mouseout)="onMouseOutBackControl()"
+  ></i>
+  <ng-content select="[header-role='resource-logo']"></ng-content>
+  <div class="header-content">
+    <div class="resource-app-details">
+      <div
+        class="resource-name qa-resource-name"
+        [fgContentEditable]="name"
+        (fgContentEditableChange)="changeName.emit($event)"
+      ></div>
+      <span>in</span>
+      <span
+        class="resource-app-name qa-app-name"
+        (click)="goBack.emit()"
+        [class.--hover]="isHoveredOnBack"
+        (mouseover)="onMouseOverBackControl()"
+        (mouseout)="onMouseOutBackControl()"
+        >{{ appName }}</span
+      >
+    </div>
+    <p
+      class="resource-description qa-resource-description"
+      [fgContentEditable]="description"
+      (fgContentEditableChange)="changeDescription.emit($event)"
+      [allowNewLines]="true"
+      placeholder="{{ 'CANVAS:ADD-FLOW-DESCRIPTION' | translate }}"
+    ></p>
+  </div>
+  <ng-content select="[header-role='right-block']"></ng-content>
+</div>
+<ng-content select="[header-role='bottom-block']"></ng-content>

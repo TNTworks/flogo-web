@@ -1,0 +1,192 @@
+@import '~@flogo-web/assets/styles/_variables';
+
+@column-width: 100% / 12;
+
+:host {
+  display: block;
+  background-image: url('/assets/images/home.graphic-landingpage.svg');
+  background-position: left top;
+  background-repeat: no-repeat;
+  color: @color-plain;
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.content-wrapper {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1096px;
+  padding: 0 @column-width / 2;
+}
+
+@media (min-width: 1440px) {
+  :host {
+    background-position: center top;
+    background-size: contain;
+  }
+}
+
+.header {
+  color: @color-ink;
+  display: flex;
+  padding-top: 1.5rem;
+  padding-bottom: 2.1rem;
+
+  .welcome-message {
+    font-size: 3em;
+    font-weight: 300;
+    letter-spacing: 0.05rem;
+    line-height: 1;
+    margin-bottom: 0;
+    margin-top: 3.3rem;
+  }
+
+  .description-message {
+    line-height: 1.3;
+    word-wrap: break-word;
+  }
+}
+
+.header__content {
+  margin-right: 2.5rem;
+}
+
+.header__flynn {
+  // approx half column gutter
+  margin-left: 2%;
+  align-self: center;
+  width: 200px;
+  max-height: 133px;
+}
+
+.flogo-apps-section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+@media (min-width: 780px) {
+  .flogo-apps-section {
+    flex-direction: row;
+  }
+
+  .flogo-apps-section__apps {
+    flex: 7;
+  }
+
+  .flogo-apps-section__aside {
+    flex: 2;
+    margin-left: 3%;
+    width: 20%;
+  }
+}
+
+@media (min-width: 1440px) {
+  .flogo-apps-section__apps {
+    flex: 8;
+  }
+}
+
+.flogo-main__subtitle {
+  color: @color-ink;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  line-height: 1;
+}
+
+.recent-flows {
+  .recent-flows__list {
+    font-size: 0.875em;
+    list-style: none;
+    letter-spacing: 0.2px;
+    padding: 0;
+    overflow: hidden;
+
+    .recent-flows__list__item {
+      margin: 0 0 1rem;
+
+      .recent-flows__flow__name {
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+    .recent-flows__list__resource,
+    .recent-flows__list__app {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .recent-flows__list__app {
+      font-size: 0.875em;
+      font-style: italic;
+      &:not(:hover) {
+        color: @color-dark-gray;
+      }
+    }
+  }
+
+  .recent-flows__empty {
+    margin-top: 1.5em;
+  }
+
+  .recent-flows__empty-state {
+    width: 100%;
+    height: 50px;
+    background-size: cover;
+    background: url('/assets/svg/placeholder-flows.svg') center no-repeat;
+  }
+  .recent-flows__empty-state__legend {
+    font-size: 14px;
+    line-height: 1.14;
+    letter-spacing: 0.3px;
+    text-align: center;
+    color: @color-disabled;
+    margin-top: 19px;
+  }
+}
+
+.is-flying {
+  animation: fly-away 1.5s both;
+}
+
+@keyframes fly-away {
+  0% {
+    transform: translateY(0);
+    animation-timing-function: ease-out;
+  }
+  2% {
+    transform: translateY(-30px);
+    animation-timing-function: ease-in;
+  }
+  8% {
+    transform: translateY(0);
+    animation-timing-function: ease-out;
+  }
+  12% {
+    transform: translateY(-38px);
+    animation-timing-function: ease-in;
+  }
+  25% {
+    transform: translateY(0);
+    animation-timing-function: ease-out;
+  }
+  30% {
+    transform: translateY(-75px);
+    animation-timing-function: ease-in;
+  }
+  32% {
+    transform: translateX(0) rotateY(0) scale(1);
+    filter: blur(0);
+    transform-origin: 2000px 50%;
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-150vw, 50px) rotateY(30deg) scale(0);
+    transform-origin: -100% 50%;
+    filter: blur(40px);
+    opacity: 0;
+  }
+}

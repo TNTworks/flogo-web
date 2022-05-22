@@ -1,0 +1,8 @@
+{
+  "name": "@flogo-web/lib-client",
+  "version": "0.10.0",
+  "peerDependencies": {
+    "@angular/common": "~7.2.10",
+    "@angular/core": "~7.2.10"
+  }
+}

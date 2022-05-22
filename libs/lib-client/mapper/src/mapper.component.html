@@ -1,0 +1,59 @@
+<div class="mapper">
+  <flogo-mapper-icons></flogo-mapper-icons>
+  <div *ngIf="!isSingleInputMode" class="mapper__left-panel">
+    <flogo-mapper-input-list
+      [searchPlaceholder]="inputsSearchPlaceHolder"
+    ></flogo-mapper-input-list>
+  </div>
+  <div
+    class="mapper__right-panel"
+    [class.mapper__right-panel--working-input]="currentInput"
+  >
+    <div *ngIf="!currentInput" class="editor-container editor-container--empty">
+      <p class="editor-container-empty__message">
+        <svg
+          class="editor-container-empty__image"
+          width="46"
+          height="23"
+          viewBox="0 0 46 23"
+        >
+          <path
+            fill="#FF7800"
+            fill-rule="evenodd"
+            d="M5.12 9.2c-1.826 2.662-6.928 6.915-2.5 9.473 4.953 2.861 10.352 2.591 15.066 4.3 1.319-.772 1.944-2.378 1.07-3.31-.382-.691-1.024-.158-1.542-.207-3.845-1.04-7.862-1.274-11.523-3.18 6.37-5.698 15.505-10.363 23.286-9.69 3.9.335 9.283 2.029 11.926 4.73 1.245 1.271 1.11 2.985 2.857 3.78.929.41 1.688-1.44 1.946-2.27-2.303-4.373-6.064-6.77-9.78-7.935-8.975-2.808-19.097-.293-28.635 6.723 1.299-3.14 3.948-5.992 6.053-8.962-.138-.883.396-1.623-.296-2.624C9.223 1.64 7.566 5.633 5.12 9.2"
+          />
+        </svg>
+        Click on an input to start mapping
+      </p>
+    </div>
+
+    <div class="workspace" *ngIf="currentInput">
+      <flogo-mapper-breadcrumbs [inputNode]="currentInput"></flogo-mapper-breadcrumbs>
+
+      <div
+        *ngIf="currentInput"
+        class="workspace__editor-container"
+        [class.workspace__editor-container--droppable]="isDraggingOver"
+        (drop)="onDrop($event)"
+        (dragover)="onDragOver($event)"
+        (dragenter)="onDragEnter()"
+        (dragleave)="onDragLeave()"
+      >
+        <flogo-mapper-editor class="workspace__editor"></flogo-mapper-editor>
+      </div>
+
+      <div class="workspace__parameters parameters">
+        <div class="parameters__parameter mapper__output-list">
+          <flogo-mapper-output-list
+            (selectNode)="onOutputSelected($event)"
+            [searchPlaceholder]="outputsSearchPlaceHolder"
+          >
+          </flogo-mapper-output-list>
+        </div>
+        <div class="parameters__parameter mapper__functions-list col-md-8">
+          <flogo-mapper-functions></flogo-mapper-functions>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

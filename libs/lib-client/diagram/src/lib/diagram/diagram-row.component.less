@@ -1,0 +1,64 @@
+@import '../_styles';
+@import '~@flogo-web/assets/styles/_drag-drop-animation';
+@import '~@flogo-web/assets/styles/_mixins';
+
+:host {
+  .row();
+}
+
+.tile {
+  .tile-container();
+}
+
+.tile--group {
+  display: flex;
+  position: relative;
+}
+
+.tile__add-between {
+  .btn-insert-between(#e2e9ed);
+  &--align-center {
+    left: -2px;
+  }
+}
+
+.tile--slot {
+  flex-shrink: 0;
+  opacity: 0;
+  transition: opacity 0.25s ease-out;
+  margin-left: @tile-left-margin;
+  &.is-selected {
+    opacity: 1;
+  }
+}
+
+.tile--placeholder {
+  &::before {
+    background-color: rgba(170, 208, 232, 0.4);
+    display: block;
+    content: '';
+    .tile-placeholder();
+  }
+}
+
+.tile--task-placeholder {
+  margin-left: @tile-left-margin;
+}
+
+:host:not(.is-readonly) {
+  .tile--slot.is-root {
+    opacity: 1;
+  }
+
+  &:hover {
+    background-color: rgba(182, 217, 237, 0.2);
+    .tile--slot,
+    .tile__add-between {
+      opacity: 1;
+    }
+  }
+}
+
+.is-disabled {
+  opacity: 0.35;
+}

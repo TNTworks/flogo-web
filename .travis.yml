@@ -1,0 +1,65 @@
+sudo: required
+language: node_js
+addons:
+  apt:
+    # needed for cypress https://github.com/cypress-io/cypress/issues/1526
+    packages:
+      - libgconf-2-4
+node_js:
+  - "10"
+cache:
+  bundler: false
+  yarn: true
+  directories:
+    - .build-cache
+    - ~/.cache
+git:
+  submodules: false
+install: yarn install --frozen-lockfile --non-interactive --audit --silent
+
+jobs:
+  include:
+    - stage: test
+      name: "Unit tests and code checks"
+      script: |
+          set -e
+          if [[ "$TRAVIS_PULL_REQUEST" == "false" ]]
+          then
+            export NX_BASE=$(git rev-parse HEAD~1)
+          else
+            export  NX_BASE="remotes/origin/$TRAVIS_BRANCH"
+          fi
+          echo "Base => $NX_BASE"
+          yarn format:check --base=$NX_BASE
+          yarn nx affected --target=lint --base=$NX_BASE --head=HEAD --parallel
+          yarn nx affected --target=test --all --parallel
+    - stage: test
+      name: "E2E tests"
+      script: yarn e2e:ci
+    - stage: build
+      language: bash
+      name: "Build the docker image"
+      node_js:
+      services:
+        - docker
+      install: skip
+      script: |
+        RELEASE_VERSION=latest ./make-web.sh --build-ml
+
+        if [ "${TRAVIS_BRANCH}" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
+          echo 'Master banch build detected, pushing to docker hub'
+          echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+          docker tag flogo/flogo-web:latest flogo/flogo-docker:unstable
+          docker push flogo/flogo-docker:unstable
+          docker tag flogo/flogo-web:latest-ml flogo/flogo-docker:unstable-ml
+          docker push flogo/flogo-docker:unstable-ml
+        fi
+
+        if [ ! -z "$TRAVIS_TAG" ]; then
+          echo "Tag detected, pushing tag '${TRAVIS_TAG}' to docker hub"
+          docker tag flogo/flogo-web:latest "flogo/flogo-docker:${TRAVIS_TAG}"
+          docker tag flogo/flogo-web:latest "flogo/flogo-docker:latest"
+          echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+          docker push "flogo/flogo-docker:${TRAVIS_TAG}"
+          docker push "flogo/flogo-docker:latest"
+        fi

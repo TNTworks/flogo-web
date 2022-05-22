@@ -1,0 +1,39 @@
+@import '~@flogo-web/assets/styles/_variables';
+
+:host {
+  position: fixed;
+  z-index: 1001;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.confirmation-modal-container {
+  background: @color-bg;
+  padding: 40px;
+  margin: 40px auto;
+  width: 40%;
+  border-radius: 4px;
+  box-shadow: 0 8px 14px 0 rgba(0, 0, 0, 0.3);
+  color: @color-plain;
+}
+
+.confirmation-modal-title {
+  padding: 17px 0;
+  border-bottom: 1px solid @gainsboro;
+  font-size: 24px;
+  line-height: 0.8;
+  letter-spacing: 0.4px;
+}
+
+.confirmation-modal-message {
+  padding: 20px 0;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  margin-bottom: 50px;
+}
+
+.confirmation-modal-footer {
+  text-align: right;
+}

@@ -1,0 +1,79 @@
+@import '~@flogo-web/assets/styles/_variables';
+
+.settings-form {
+  color: @color-ink;
+  padding: 2em 2.625em;
+}
+
+.settings-block {
+  margin-bottom: 1em;
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    .settings-icon__edit {
+      opacity: 1;
+    }
+  }
+}
+
+.settings-label {
+  font-size: 1em;
+  color: @warm-grey;
+  position: relative;
+}
+
+.settings-field {
+  width: 100%;
+  font-size: 0.875em;
+  min-height: 40px;
+  padding: 10px;
+  border-radius: 3px;
+  border: solid 1px @color-medium-gray;
+
+  &:disabled {
+    background-color: #eee;
+  }
+
+  &.ng-invalid {
+    border-color: @scarlet;
+  }
+
+  &:focus {
+    outline-color: @cerulean;
+  }
+
+  &.ng-invalid:focus {
+    outline-color: lighten(@scarlet, 40%);
+  }
+}
+
+.settings-field--code-editor {
+  height: 10rem;
+  padding: 0;
+}
+
+.settings-label__optional {
+  float: right;
+  font-size: 0.875em;
+  margin: 0 5px;
+}
+
+.settings-icon__edit {
+  float: right;
+  font-size: 18px;
+  text-align: right;
+  color: @warm-grey;
+  position: absolute;
+  padding: 0.5em;
+  top: 1.65em;
+  right: 0.1em;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 150ms;
+
+  &:hover,
+  &:active {
+    color: @cerulean;
+  }
+}

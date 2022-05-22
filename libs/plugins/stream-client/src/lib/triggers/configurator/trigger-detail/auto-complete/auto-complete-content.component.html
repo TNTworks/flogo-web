@@ -1,0 +1,42 @@
+<div
+  *ngIf="!options || !(options.filterTerm | async)"
+  class="help"
+  [innerHTML]="'TRIGGER-CONFIGURATOR:SETTINGS:AUTOCOMPLETE-HELP' | translate"
+></div>
+<div
+  class="all-options-wrapper"
+  *ngIf="
+    (options?.allowedValues | async)?.length > 0 ||
+    (options?.appVariables | async)?.length > 0
+  "
+>
+  <ng-container *ngIf="options?.allowedValues | async as allowedValues">
+    <ul role="listbox" *ngIf="allowedValues.length > 0" class="options-group">
+      <li
+        *ngFor="let value of allowedValues"
+        role="option"
+        class="options-group__option"
+        (click)="onOptionClicked(value)"
+      >
+        {{ value }}
+      </li>
+    </ul>
+  </ng-container>
+  <ng-container *ngIf="options?.appVariables | async as variables">
+    <div class="options-group-divider"></div>
+    <ul
+      role="listbox"
+      *ngIf="variables.length > 0"
+      class="options-group app-variables-list"
+    >
+      <li
+        *ngFor="let variable of variables"
+        role="option"
+        class="options-group__option"
+        (click)="onOptionClicked(variable)"
+      >
+        {{ variable }}
+      </li>
+    </ul>
+  </ng-container>
+</div>

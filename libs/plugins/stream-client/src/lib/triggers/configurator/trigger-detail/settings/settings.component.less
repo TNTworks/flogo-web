@@ -1,0 +1,89 @@
+@import '~@flogo-web/assets/styles/_variables';
+@import '~@flogo-web/assets/styles/uxpl/form';
+@import 'shared/form-error';
+
+:host {
+  flex: 1;
+  overflow: auto;
+  background-color: @lighter-gray;
+}
+
+monaco-editor {
+  height: 16rem;
+  border: solid 1px #b6b6b6;
+  border-radius: 4px;
+  &.ng-invalid {
+    border-color: @scarlet;
+  }
+  ::ng-deep {
+    .monaco-editor,
+    .margin,
+    .editor-scrollable {
+      border-radius: 4px;
+    }
+  }
+}
+
+.settings-block__name {
+  .uxpl-form-div;
+
+  input {
+    font-size: 1.125em;
+
+    &:focus {
+      ~ .settings-label {
+        color: @warm-grey;
+      }
+    }
+
+    &[disabled].--isValid {
+      ~ .settings-label {
+        top: 2px;
+        letter-spacing: normal;
+        text-align: left;
+        z-index: 2;
+      }
+    }
+  }
+
+  .settings-label {
+    width: 100%;
+  }
+
+  .settings-icon__edit {
+    position: absolute;
+    top: 0.65em;
+    z-index: 2;
+  }
+}
+
+.settings-label {
+  font-size: 0.875em;
+}
+
+.settings-field__description {
+  resize: none;
+  font-size: 1em;
+}
+
+.settings-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+.settings-group__content {
+  width: 45%;
+}
+
+.settings-group__header {
+  margin: 1em 0;
+  display: flex;
+  align-items: center;
+}
+
+.settings-group__icon {
+  margin-right: 5px;
+  color: @color-dark-gray;
+  font-size: 18px;
+  font-weight: 600;
+}

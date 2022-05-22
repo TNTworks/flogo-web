@@ -1,0 +1,24 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  // new z-index context to ensure action bar drop shadow is always on top of the rest of the content
+  position: relative;
+}
+
+.content__mapper {
+  border: none;
+  height: 100%;
+  flex: 1;
+  overflow: auto;
+}
+
+.action-bar {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  // make sure box shadow is always on top of the rest of the content
+  z-index: 1;
+}

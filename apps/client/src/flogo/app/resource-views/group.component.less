@@ -1,0 +1,63 @@
+@import '~@flogo-web/assets/styles/_variables';
+
+@action-fore-color: #449ed8;
+@apps__trigger-border-width--empty: 3px;
+
+/*
+README!!
+// Group of resources
+// z-indexes inside the resource-group context
+// 0: default resource card
+// 1: hovered resource card
+// 2: new resource button/delete popover
+**/
+
+:host(.flogo-group),
+.flogo-group {
+  margin: 1.25rem 0;
+  display: flex;
+}
+
+.flogo-group__trigger {
+  position: relative;
+  width: 56px;
+  z-index: 2;
+  margin-top: -1px;
+}
+
+.flogo-group__resources {
+  min-width: 0;
+  flex: 1;
+  margin-left: -16px;
+}
+
+.flogo-icon-add {
+  margin-right: 10px;
+}
+
+.trigger {
+  width: 50px;
+  height: 50px;
+}
+
+.trigger__shape {
+  fill: @color-trigger-bg-color;
+}
+
+.trigger__shape--empty {
+  fill: #fff;
+  stroke: @gainsboro-six;
+  stroke-width: 2.4;
+  stroke-linejoin: round;
+  stroke-dasharray: 4;
+  stroke-dashoffset: 5;
+  transform: translate(-1px, 1px);
+}
+
+.trigger-icon {
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  margin-top: 0.5rem;
+  margin-left: 0.5rem;
+}

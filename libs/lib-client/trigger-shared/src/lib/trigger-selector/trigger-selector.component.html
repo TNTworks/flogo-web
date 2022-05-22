@@ -1,0 +1,111 @@
+<flogo-modal (close)="closeTriggerSelector()">
+  <flogo-modal-header>
+    <span class="trigger-selector__logo"></span>
+    <span class="trigger-selector__title">{{
+      'TRIGGER-SELECTOR:SELECT-TRIGGER-TO-START' | translate
+    }}</span></flogo-modal-header
+  >
+  <flogo-modal-body>
+    <div class="trigger-menu">
+      <div
+        *ngIf="showExistingTriggersTab"
+        class="trigger-menu-item qa-existing-trigger-tab"
+        (click)="displayExistingTriggers()"
+        [class.selected]="showExistingTriggers"
+      >
+        {{ 'TRIGGER-SELECTOR:EXISTING-TRIGGERS' | translate }}
+      </div>
+      <div
+        class="trigger-menu-item"
+        (click)="displayInstalledTriggers()"
+        [class.selected]="!showExistingTriggers"
+      >
+        {{ 'TRIGGER-SELECTOR:CREATE-NEW' | translate }}
+      </div>
+    </div>
+    <div class="triggers-container">
+      <div *ngIf="showExistingTriggers; else newTriggerContent" class="existing-triggers">
+        <div class="existing-triggers-header">
+          <div>{{ 'TRIGGER-SELECTOR:MY-EXISTING-TRIGGERS' | translate }}</div>
+          <flogo-search
+            placeholder="Search..."
+            iconPosition="left"
+            [query]="existingTriggersSearcher.query$ | async"
+            (search)="searchExistingTriggers($event)"
+          ></flogo-search>
+        </div>
+        <div class="triggers-list">
+          <div *ngFor="let trigger of existingTriggersSearcher.list$ | async">
+            <div
+              class="existing-trigger"
+              (click)="addExistingTriggerToApp(trigger, 'existing')"
+            >
+              <div class="trigger-details">
+                <div class="trigger-banner">
+                  <flogo-trigger-icon
+                    class="flogo-icon-trigger-margin"
+                    [iconUrl]="getTriggerIconUrl(trigger.ref)"
+                  >
+                  </flogo-trigger-icon>
+                  <div class="trigger-title" title="{{ trigger.name }}">
+                    {{ trigger.name }}
+                  </div>
+                </div>
+                <div class="trigger-date">Created on {{ trigger.createdAt | date }}</div>
+              </div>
+              <button class="select-button">Select</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ng-template #newTriggerContent>
+        <div class="installed-triggers"></div>
+        <div class="installed-triggers-header">
+          <div>
+            {{ 'TRIGGER-SELECTOR:SELECT-TRIGGER-TYPE' | translate
+            }}<span class="install-new" (click)="openInstallTriggerWindow()"
+              >{{ 'TRIGGER-SELECTOR:INSTALL-NEW' | translate }}
+            </span>
+          </div>
+          <flogo-search
+            placeholder="Search..."
+            iconPosition="left"
+            [query]="installedTriggersSearcher.query$ | async"
+            (search)="searchInstalledTriggers($event)"
+          ></flogo-search>
+        </div>
+        <div class="triggers-list">
+          <div *ngFor="let trigger of installedTriggersSearcher.list$ | async">
+            <div
+              class="installed-trigger"
+              (click)="addNewTriggerToApp(trigger, 'installed')"
+            >
+              <div class="installed-trigger-details">
+                <svg
+                  class="trigger-icon-background"
+                  viewBox="0 0 50 52"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <use
+                    xlink:href="/assets/svg/trigger-icon.svg#defaultTrigger"
+                    class="bg-placeholder"
+                  ></use>
+                </svg>
+                <flogo-trigger-icon
+                  class="trigger-icon"
+                  [iconUrl]="getTriggerIconUrl(trigger.ref)"
+                >
+                </flogo-trigger-icon>
+                <div>
+                  <div>{{ trigger.title }}</div>
+                  <div class="trigger-ref">{{ trigger.ref }}</div>
+                </div>
+              </div>
+              <button class="select-button">Select</button>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </flogo-modal-body>
+</flogo-modal>

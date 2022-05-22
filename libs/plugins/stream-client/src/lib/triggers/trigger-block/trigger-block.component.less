@@ -1,0 +1,72 @@
+@import '~@flogo-web/assets/styles/_variables';
+@trigger-padding-vertical: 14px;
+@trigger-padding-horizontal: 16px;
+@trigger-icon-clickable-padding: 8px;
+
+.trigger {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 16px;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  background-color: @color-trigger-bg-color;
+
+  &:hover {
+    background-color: @color-trigger-hover-bg-color;
+  }
+}
+
+.trigger-content {
+  margin-right: 3px;
+  border-radius: 2px;
+}
+
+.trigger_block {
+  position: relative;
+
+  .trigger_menu {
+    transform: scale(0);
+    transform-origin: top left;
+    opacity: 0;
+    transition: all 250ms ease-in;
+    position: absolute;
+    left: 40px;
+    width: 135px;
+
+    .trigger_menu-list {
+      margin: 0;
+      border: solid 1px #d8d8d8;
+      border-radius: 0 5px 5px 5px;
+      background: #ffffff;
+
+      .trigger_menu-item {
+        margin: 5px 0;
+        border: 0;
+        font-size: 12px;
+        padding: 5px 5px 5px 20px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: rgba(197, 202, 233, 0.2);
+        }
+
+        .trigger_menu-icon {
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+}
+
+.trigger_block--menu-open {
+  .trigger_menu {
+    transform: scale(1);
+    opacity: 1;
+    z-index: 2;
+  }
+}

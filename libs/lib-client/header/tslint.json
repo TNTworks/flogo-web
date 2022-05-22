@@ -1,0 +1,17 @@
+{
+  "extends": "../tslint.json",
+  "rules": {
+    "directive-selector": [
+      true,
+      "attribute",
+      "flogo-designer-header",
+      "camelCase"
+    ],
+    "component-selector": [
+      true,
+      "element",
+      "flogo-designer-header",
+      "kebab-case"
+    ]
+  }
+}

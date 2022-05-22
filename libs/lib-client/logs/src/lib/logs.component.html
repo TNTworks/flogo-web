@@ -1,0 +1,16 @@
+<div class="flogo-logs">
+  <div class="command">
+    <button
+      class="btn log-button"
+      [ngClass]="{ 'log-button-selected': isOpen || isChildWindowOpen() }"
+      (click)="toggleLogs()"
+      title="Show logs"
+    >
+      <i class="flogo-icon-log"></i>
+    </button>
+  </div>
+  <div *ngIf="isOpen" style="position: fixed" class="logs-window" fgDraggable>
+    <flogo-logs-content (windowAction)="windowAction($event)"></flogo-logs-content>
+    <div class="footer-section">&nbsp;</div>
+  </div>
+</div>

@@ -1,0 +1,89 @@
+@import '~@flogo-web/assets/styles/_mixins';
+@import '~@flogo-web/assets/styles/_variables';
+@import (reference) '~@flogo-web/assets/styles/uxpl/modal';
+
+@error-header-color: #ee3342;
+
+:host {
+  .uxpl-modal-confirmation;
+  display: inline-block;
+  min-width: 500px;
+  /* position: relative; */
+}
+.flogo-error__close {
+  .uxpl-modal__close;
+  //color:transparent;
+}
+
+.flogo-error__head {
+  color: @error-header-color;
+  margin-top: 0px;
+  margin-bottom: 1.3em;
+
+  .flogo-error__warning {
+    transform: scaleY(-1);
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    margin-top: -2px;
+  }
+
+  .flogo-error_head-text {
+    margin-left: 28px;
+    letter-spacing: 0.5px;
+  }
+}
+
+.flogo-error__content {
+  font-size: 12px;
+  color: @warm-grey;
+  letter-spacing: 0.3px;
+  line-height: 1.33;
+}
+
+.flogo-error__count {
+  letter-spacing: 0.5px;
+  color: @gainsboro-ten;
+  line-height: inherit;
+}
+
+.flogo-error__btn-container {
+  text-align: right;
+  .flogo-error__confirm {
+    width: 124px;
+  }
+}
+
+.flogo-error__list-container {
+  max-height: 294px;
+  overflow-y: auto;
+  border: 1px solid @link-water;
+  border-radius: 4px 4px 0 0;
+  margin-bottom: 18px;
+  list-style-type: none;
+  padding: 0px;
+
+  .flogo-error__list {
+    border-bottom: 1px solid @lighter-gray;
+    padding: 12px;
+    display: block;
+
+    .flogo-error__list-head {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.43;
+      letter-spacing: 0.3px;
+      color: @error-header-color;
+      display: block;
+    }
+  }
+}
+
+.flogo-error__list-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.flogo-error__list-container::-webkit-scrollbar-thumb {
+  border-radius: 100px;
+  background-color: rgba(114, 114, 114, 0.2);
+}

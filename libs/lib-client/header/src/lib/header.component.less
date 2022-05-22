@@ -1,0 +1,83 @@
+@import (reference) '~@flogo-web/assets/styles/_variables';
+@import (reference) '~@flogo-web/assets/styles/_typography';
+
+:host {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.header {
+  display: flex;
+  padding: 1.5rem;
+  align-items: center;
+  justify-content: flex-end;
+  z-index: 1;
+
+  &.--with-bottom-content {
+    padding-bottom: 4px;
+  }
+}
+
+.header-back {
+  font-size: 1.25rem;
+  color: @color-dark-gray;
+  margin-right: 2.25rem;
+  padding: 2px;
+  cursor: pointer;
+
+  &.--hover {
+    color: @primary-blue;
+  }
+}
+
+.header-content {
+  flex: 2;
+  padding: 4px;
+  overflow: hidden;
+  margin-right: 1rem;
+}
+
+.resource-app-details {
+  .body-small();
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  color: @color-dark-gray;
+}
+
+.resource-name {
+  .secondary-header();
+  color: @color-ink;
+  line-height: 1.5;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.resource-app-name {
+  .body-small();
+  letter-spacing: 0.3px;
+  color: @warm-grey;
+  font-style: italic;
+  margin-left: 6px;
+  cursor: pointer;
+
+  &.--hover {
+    color: @primary-blue;
+    font-weight: 600;
+  }
+}
+
+.resource-description {
+  .body-small();
+  letter-spacing: 0.3px;
+  color: @warm-grey;
+  margin: 0;
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 2rem;
+  max-width: 100%;
+}

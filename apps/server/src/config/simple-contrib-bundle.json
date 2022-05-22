@@ -1,0 +1,12 @@
+{
+  "name": "simple",
+  "description": "Simple flogo contribution bundle file",
+  "contributions": [
+    "github.com/TNTworks/flogo-contrib/trigger/rest",
+    "github.com/TNTworks/flogo-contrib/activity/log",
+    "github.com/TNTworks/flogo-contrib/activity/rest",
+    "github.com/project-flogo/flow/activity/subflow",
+    "github.com/TNTworks/flogo-contrib/function/string",
+    "github.com/TNTworks/flogo-contrib/function/coerce"
+  ]
+}

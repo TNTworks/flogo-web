@@ -1,0 +1,167 @@
+:host {
+  position: relative;
+  margin: 0;
+}
+
+.file {
+  width: 94px;
+  height: 108px;
+}
+.data-table {
+  position: absolute;
+  top: 30%;
+  right: 40%;
+  path {
+    fill: #e0e0e0;
+  }
+}
+.label {
+  display: inline;
+  &:after {
+    content: '.csv';
+    font-weight: 600;
+    text-align: center;
+    position: absolute;
+    top: 60%;
+    right: 40%;
+    font-size: 23px;
+    color: #b6b6b6;
+  }
+}
+.file-image {
+  display: none;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  top: 30%;
+  right: 40%;
+}
+
+.empty {
+  .page-outline,
+  .dog-ear {
+    fill: #e0e0e0;
+  }
+  .page-shadow,
+  .dog-ear-shadow {
+    fill: transparent;
+  }
+}
+
+.uploading {
+  .page-outline,
+  .dog-ear {
+    fill: #727272;
+  }
+  .data-table {
+    display: none;
+  }
+  .file-image {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    background-image: url('/assets/svg/ic-loading-spinner-medium.svg');
+    animation: rotation 1s infinite linear;
+  }
+  @keyframes rotation {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(359deg);
+    }
+  }
+  .label {
+    &:after {
+      color: #727272;
+    }
+  }
+}
+
+.uploaded {
+  .page-outline,
+  .dog-ear {
+    fill: #727272;
+  }
+  .data-table {
+    display: none;
+  }
+  .file-image {
+    display: inline-block;
+    background-image: url('/assets/svg/ic_success_circle.svg');
+  }
+  .label {
+    &:after {
+      color: #727272;
+    }
+  }
+  &:hover {
+    cursor: pointer;
+    .page-outline,
+    .dog-ear {
+      fill: #8493a8;
+    }
+    .page-fill,
+    .dog-ear-fill {
+      fill: #e2e4f4;
+    }
+    .file-image {
+      background-image: url('/assets/svg/ic-remove-x.svg');
+    }
+    .label {
+      &:after {
+        content: 'Remove File';
+        font-size: 14px;
+        font-weight: normal;
+        color: #3c434c;
+        right: 22%;
+        top: 61%;
+      }
+    }
+  }
+}
+
+.errored {
+  .page-outline,
+  .dog-ear {
+    fill: #727272;
+  }
+  .data-table {
+    display: none;
+  }
+  .file-image {
+    display: inline-block;
+    background-image: url('/assets/svg/ic-critical-error.svg');
+  }
+  .label {
+    &:after {
+      content: 'Error';
+      font-size: 14px;
+      font-weight: normal;
+      color: #d6031d;
+    }
+  }
+}
+
+.dragging {
+  .page-outline,
+  .dog-ear {
+    fill: #0081cb;
+  }
+  .page-shadow,
+  .dog-ear-shadow {
+    fill: transparent;
+  }
+  .data-table {
+    path {
+      fill: #0081cb;
+    }
+  }
+  .label {
+    &:after {
+      color: #0081cb;
+    }
+  }
+}

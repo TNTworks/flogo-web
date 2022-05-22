@@ -1,0 +1,46 @@
+<ng-container [ngSwitch]="status" class="action-buttons">
+  <ng-container *ngSwitchCase="statuses.Running">
+    <button
+      class="action-button uxpl-button-secondary"
+      type="button"
+      (click)="stop.emit()"
+    >
+      <span class="action-icon stop"></span>Stop
+    </button>
+    <button
+      class="action-button uxpl-button-secondary"
+      type="button"
+      (click)="pause.emit()"
+    >
+      <span class="action-icon pause"></span> Pause
+    </button>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="statuses.Paused">
+    <button
+      class="action-button uxpl-button-secondary"
+      type="button"
+      (click)="stop.emit()"
+    >
+      <span class="action-icon stop"></span>Stop
+    </button>
+    <button
+      class="action-button uxpl-button-primary"
+      type="button"
+      (click)="resume.emit()"
+    >
+      <span class="action-icon resume"></span>Resume
+    </button>
+  </ng-container>
+
+  <ng-container *ngSwitchDefault>
+    <button
+      class="action-button uxpl-button-primary"
+      type="button"
+      [disabled]="disableRunStream"
+      (click)="open.emit()"
+    >
+      Run stream
+    </button>
+  </ng-container>
+</ng-container>

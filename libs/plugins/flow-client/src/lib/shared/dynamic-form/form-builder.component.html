@@ -1,0 +1,10 @@
+<div class="form-container">
+  <form [formGroup]="fbForm">
+    <div formArrayName="formFields">
+      <flogo-flow-dynamic-field-group
+        [fieldGroup]="formFields"
+        [metadata]="fieldsWithControlType"
+      ></flogo-flow-dynamic-field-group>
+    </div>
+  </form>
+</div>

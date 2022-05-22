@@ -1,0 +1,42 @@
+<div class="resource-details">
+  <div class="resource-header">
+    <h4 class="resource-title qa-resource-title">{{ resource.name }}</h4>
+    <flogo-apps-resource-badge
+      class="resource-badge"
+      *ngIf="resource?.pluginInfo"
+      [type]="resource.pluginInfo.label"
+      [color]="resource.pluginInfo.color"
+    ></flogo-apps-resource-badge>
+  </div>
+
+  <p [title]="resource.description" class="resource-description qa-resource-description">
+    <span *ngIf="resource.description"> {{ resource.description }} </span>
+    <span *ngIf="!resource.description"> {{ 'FLOWS:NODESCRIPTION' | translate }} </span>
+  </p>
+</div>
+
+<div class="resource-metadata">
+  <p class="resource-date">
+    {{ 'FLOWS:CREATED' | translate: { value: '' } }}
+    {{ resource.createdAt | timeFromNow }}
+  </p>
+
+  <p class="resource-date">
+    <span *ngIf="resource.updatedAt"
+      >{{ 'FLOWS:UPDATED' | translate: { value: '' } }}
+      {{ resource.updatedAt | timeFromNow }}</span
+    >
+    <span *ngIf="!resource.updatedAt"></span>
+  </p>
+</div>
+
+<div class="resource-menu">
+  <flogo-delete-popover
+    #deleteBox
+    class="resource-menu__delete-btn"
+    i18nMessage="APP-DETAIL-POPUP:CONFIRM-MESSAGE-DELETE"
+    (confirmDel)="onDeleteResource($event)"
+    [deleteContent]="resource"
+  >
+  </flogo-delete-popover>
+</div>

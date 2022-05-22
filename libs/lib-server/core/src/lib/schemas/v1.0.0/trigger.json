@@ -1,0 +1,105 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://github.com/project-flogo/flogo-web/schemas/1.0.0/trigger.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "ref", "handlers"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ref": {
+      "type": "string",
+      "trigger-installed": true,
+      "minLength": 1
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "settings": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "handlers": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/handler"
+      }
+    }
+  },
+  "definitions": {
+    "handler": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["action"],
+      "properties": {
+        "action": {
+          "$ref": "#/definitions/action"
+        },
+        "settings": {
+          "$comment": "Key - value pairs for the settings",
+          "type": "object",
+          "additionalProperties": true
+        }
+      }
+    },
+    "action": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id" : {
+          "type": "string",
+          "minLength": 1
+        },
+        "ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "data": {
+          "type": "object"
+        },
+        "settings": {
+          "type": "object"
+        },
+        "mappings": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "input": {
+              "$ref": "common.json#/definitions/mappingsCollection"
+            },
+            "output": {
+              "$ref": "common.json#/definitions/mappingsCollection"
+            }
+          }
+        },
+        "input": {
+          "type": "object"
+        },
+        "output": {
+          "type": "object"
+        }
+      },
+      "anyOf": [
+        { "required": ["id"] },
+        { "required": ["data"] },
+        { "required": ["settings"] }
+      ]
+    },
+    "flowData": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["flowURI"],
+      "properties": {
+        "flowURI": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

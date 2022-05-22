@@ -1,0 +1,23 @@
+<div
+  class="trigger_block"
+  [class.trigger_block--menu-open]="isShowingMenu"
+  (mouseenter)="handleTriggerMenuShow()"
+  (mouseleave)="handleTriggerMenuHide()"
+>
+  <div class="trigger_menu">
+    <ul class="list-group trigger_menu-list">
+      <li
+        class="list-group-item trigger_menu-item"
+        (click)="selectedMenuItem(MENU_OPTIONS.DELETE)"
+      >
+        <i class="flogo-icon-delete trigger_menu-icon"></i>
+        {{ 'TRIGGER-MENU:DELETE' | translate }}
+      </li>
+    </ul>
+  </div>
+  <div class="trigger" title="{{ trigger.name }}" (click)="handleTriggerSelection()">
+    <div class="trigger-content">
+      <flogo-trigger-icon [iconUrl]="iconIndex[trigger.id]"></flogo-trigger-icon>
+    </div>
+  </div>
+</div>

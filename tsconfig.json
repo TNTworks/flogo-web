@@ -1,0 +1,68 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "allowJs": true,
+    "downlevelIteration": true,
+    "importHelpers": true,
+    "module": "esnext",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es2015",
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["es2017", "dom"],
+    "baseUrl": ".",
+    "paths": {
+      "@flogo-web/assets": ["libs/assets/src/index.ts"],
+      "@flogo-web/core": ["libs/core/src/index.ts"],
+      "@flogo-web/parser": ["libs/parser/src/index.ts"],
+      "@flogo-web/lib-server/core": ["libs/lib-server/core/src/index.ts"],
+      "@flogo-web/lib-client/core": ["libs/lib-client/core/src/index.ts"],
+      "@flogo-web/lib-client/core/testing": ["libs/lib-client/core/src/testing/index.ts"],
+      "@flogo-web/lib-client/common": ["libs/lib-client/common/src/index.ts"],
+      "@flogo-web/lib-client/confirmation": ["libs/lib-client/confirmation/src/index.ts"],
+      "@flogo-web/lib-client/context-panel": [
+        "libs/lib-client/context-panel/src/index.ts"
+      ],
+      "@flogo-web/lib-client/modal": ["libs/lib-client/modal/src/index.ts"],
+      "@flogo-web/lib-client/language": ["libs/lib-client/language/src/index.ts"],
+      "@flogo-web/lib-client/language/testing": [
+        "libs/lib-client/language/testing/index.ts"
+      ],
+      "@flogo-web/lib-client/notifications": [
+        "libs/lib-client/notifications/src/index.ts"
+      ],
+      "@flogo-web/lib-client/notifications/testing": [
+        "libs/lib-client/notifications/testing/index.ts"
+      ],
+      "@flogo-web/lib-client/activity-icon": ["libs/lib-client/activity-icon/src/index.ts"],
+      "@flogo-web/lib-client/activity-configuration": ["libs/lib-client/activity-configuration/src/index.ts"],
+      "@flogo-web/lib-client/diagram": ["libs/lib-client/diagram/src/index.ts"],
+      "@flogo-web/lib-client/contrib-installer": [
+        "libs/lib-client/contrib-installer/src/index.ts"
+      ],
+      "@flogo-web/lib-client/logs": ["libs/lib-client/logs/src/index.ts"],
+      "@flogo-web/lib-client/designer-header": ["libs/lib-client/header/src/index.ts"],
+      "@flogo-web/lib-client/resource-interface-builder": [
+        "libs/lib-client/resource-interface-builder/src/index.ts"
+      ],
+      "@flogo-web/lib-client/mapper": ["libs/lib-client/mapper/src/index.ts"],
+      "@flogo-web/lib-client/mapper-icons": ["libs/lib-client/mapper-icons/src/index.ts"],
+      "@flogo-web/lib-client/search": ["libs/lib-client/search/src/index.ts"],
+      "@flogo-web/lib-client/trigger-shared": ["libs/lib-client/trigger-shared/src/index.ts"],
+      "@flogo-web/lib-client/select": ["libs/lib-client/select/src/index.ts"],
+      "@flogo-web/plugins/flow-core": ["libs/plugins/flow-core/src/index.ts"],
+      "@flogo-web/plugins/flow-server": ["libs/plugins/flow-server/src/index.ts"],
+      "@flogo-web/plugins/flow-client": ["libs/plugins/flow-client/src/index.ts"],
+      "@flogo-web/plugins/stream-client": ["libs/plugins/stream-client/src/index.ts"],
+      "@flogo-web/plugins/stream-core": ["libs/plugins/stream-core/src/index.ts"],
+      "@flogo-web/plugins/stream-server": ["libs/plugins/stream-server/src/index.ts"],
+      "@flogo-web/editor": ["libs/editor/src/index.ts"]
+    },
+    "rootDir": "."
+  },
+  "exclude": ["node_modules", "tmp", "dist", "coverage"]
+}

@@ -1,0 +1,136 @@
+@import '~@flogo-web/assets/styles/_variables';
+@import '~@flogo-web/assets/styles/uxpl/modal';
+
+:host {
+  .uxpl-modal-confirmation;
+  width: 900px;
+  max-width: 900px;
+}
+.export-flow-container {
+  height: auto;
+  max-height: 347px;
+  border: 1px solid @primary-blue;
+  overflow-y: auto;
+}
+
+.flogo-export-flow-selected {
+  background-color: @alice-gray;
+}
+
+.flogo-export-flow-list-item {
+  max-height: 100px;
+  padding: 10px 15px;
+  border-bottom: 1px solid @gainsboro-four;
+}
+
+.flogo-export-flow-description {
+  font-size: 12px;
+  color: @warm-grey;
+  padding-left: 25px;
+  margin-top: -5px;
+}
+
+.flogo-export-flow-name {
+  display: inline-block;
+  position: relative;
+  top: -6px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: left;
+  color: @warm-grey;
+}
+
+.flogo-export-flow-created-at {
+  font-size: 10px;
+  letter-spacing: 0.6px;
+  text-align: right;
+  color: @color-plain;
+}
+
+.flogo-export-flow-header {
+  color: @pale-gray;
+  font-size: 18px;
+}
+
+.flogo-select-flow-link {
+  margin: 15px 0;
+  line-height: 1.43;
+  letter-spacing: 0.4px;
+}
+
+.flogo-select-separator {
+  color: @warm-grey;
+  padding: 3px;
+}
+
+.flogo-export-flow-footer {
+  margin-top: 30px;
+  text-align: right;
+}
+
+.flogo-export-flow-close {
+  color: @pale-gray;
+  position: absolute;
+  top: 0;
+  left: 96%;
+  height: 1.25rem;
+  width: 1.25rem;
+  margin-right: 1.25rem;
+  margin-top: 1.25rem;
+  cursor: pointer;
+}
+
+.flogo-checkbox {
+  padding-left: 20px;
+  display: inline-block;
+}
+.flogo-checkbox label {
+  display: inline-block;
+  position: relative;
+  padding-left: 5px;
+}
+.flogo-checkbox label::before {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  width: 17px;
+  height: 17px;
+  left: 0;
+  bottom: 3px;
+  margin-left: -21px;
+  border: 1px solid @gainsboro-three;
+  border-radius: 3px;
+  background-color: @color-bg;
+  -webkit-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+  -o-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+  transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+}
+.flogo-checkbox label::after {
+  display: inline-block;
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  left: 0;
+  top: 0;
+  margin-left: -20px;
+  padding-left: 2px;
+  padding-top: 1px;
+  font-size: 11px;
+  color: @color-disabled;
+}
+
+.flogo-checkbox input[type='checkbox'] {
+  display: none;
+}
+
+.flogo-checkbox input[type='checkbox']:checked + label::after {
+  font-family: 'FontAwesome';
+  content: '\f00c';
+}
+.flogo-checkbox-primary input[type='checkbox']:checked + label::before {
+  background-color: @alice-blue;
+  border-color: @alice-blue;
+}
+.flogo-checkbox-primary input[type='checkbox']:checked + label::after {
+  color: @color-bg;
+}

@@ -1,0 +1,8 @@
+<flogo-stream-simulation-controls
+  [status]="simulatorStatus$ | async"
+  [disableRunStream]="disableRunStream"
+  (open)="openConfiguration()"
+  (pause)="pauseSimulation()"
+  (stop)="stopSimulation()"
+  (resume)="resumeSimulation()"
+></flogo-stream-simulation-controls>

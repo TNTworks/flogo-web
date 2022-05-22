@@ -1,0 +1,621 @@
+swagger: '2.0'
+
+info:
+  version: "1.0.0"
+  title: App model api
+  description: |-
+    ## Error codes
+    Possible error codes
+      - RequiredProperty: Missing or empty value for required property
+      - UniqueValue: Value for property is already present
+schemes:
+  - http
+basePath: /api
+produces:
+  - application/json
+consumes:
+  - application/json
+
+################################################################################
+#                                   Tags                                       #
+################################################################################
+tags:
+ - name: Apps
+ - name: Import
+ - name: Export
+ - name: Flows
+
+################################################################################
+#                               Parameters                                     #
+################################################################################
+parameters:
+  appId:
+    name: appId
+    in: path
+    description: The app identifier number
+    type: number
+    required: true
+  flowId:
+    name: flowId
+    in: path
+    description: The flow identifier number
+    type: string
+    required: true
+
+################################################################################
+#                                 Paths                                        #
+################################################################################
+paths:
+  /apps:
+    get:
+      summary: Get all apps
+      tags: [Apps]
+      parameters:
+        - name: filter[name]
+          in: query
+          description: |-
+            Filter all apps with exactly this name.
+            Useful to avoid app name duplicates
+          required: false
+          type: string
+      responses:
+        200:
+          description: Successful response
+          schema:
+            type: object
+            required: ["data"]
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/App'
+          examples:
+            application/json: |-
+              {
+                "data": [
+                  {
+                    "id": "123"
+                    "name": "myapp",
+                    "version": "0.0.1",
+                    "description": "My App",
+                    "createdAt": "2016-12-16T00:24:26+00:00",
+                    "updatedAt": "2016-12-16T00:24:26+00:00"
+                  },
+                  {
+                    "id": "456",
+                    "name": "myapp2",
+                    "version": "0.0.1",
+                    "description": "My App",
+                    "createdAt": "2016-12-17T10:00:26+00:00",
+                    "updatedAt": "2016-12-18T09:24:26+00:00"
+                  }
+                ]
+              }
+    post:
+      summary: Creates a new app
+      description: |-
+        Creates a new app.
+
+        ## Constraints
+         - Name should be unique across the application
+
+      tags: [Apps]
+      parameters:
+        - name: app
+          in: body
+          description: App to create
+          required: true
+          schema:
+            $ref: '#/definitions/App'
+      responses:
+        201:
+          $ref: '#/responses/AppSingle'
+        400:
+          description: error
+          schema:
+            type: object
+            required: ["errors"]
+            # TODO: declare possible errors
+            # - App name already exists
+            # - Importing an app with flows with unrecognized activities/triggers?
+            properties:
+              errors:
+                type: array
+                items:
+                  $ref: '#/definitions/ValidationError'
+  /apps/{appId}:
+    parameters:
+      - $ref: '#/parameters/appId'
+    get:
+      summary: Get one app
+      tags: [Apps]
+      responses:
+        200:
+          $ref: '#/responses/AppSingle'
+        404:
+          $ref: '#/responses/NotFound'
+    patch:
+      summary: Update and app
+      tags: [Apps]
+      parameters:
+        - name: app
+          in: body
+          description: App to update
+          required: true
+          schema:
+            $ref: '#/definitions/App'
+      responses:
+        200:
+          $ref: '#/responses/AppSingle'
+        404:
+          $ref: '#/responses/NotFound'
+        400:
+          description: Conflict
+          # conflict
+          # TODO: detail errors
+          # - App name already exists
+          # - Updating flows with unrecognized activities/triggers?
+          schema:
+            type: object
+            required: ["errors"]
+            properties:
+              errors:
+                type: array
+                items:
+                  $ref: '#/definitions/Error'
+    delete:
+      summary: Delete an app
+      tags: [Apps]
+      responses:
+        204:
+          description: App deleted successfully
+        404:
+          $ref: '#/responses/NotFound'
+  /apps/{appId}/flows:
+    parameters:
+      - $ref: '#/parameters/appId'
+    get:
+      summary: Get all the flows in an app
+      tags: [Apps, Flows]
+      parameters:
+        - name: filter[name]
+          in: query
+          description: |-
+            Filter all apps with exactly this name.
+            Useful to avoid app name duplicates
+          required: false
+          type: string
+      responses:
+        200:
+          description: Successful response
+          schema:
+            type: object
+            required: ["data"]
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/Flow'
+    post:
+      summary: Create a new flow
+      tags: [Apps, Flows]
+      parameters:
+        - name: flow
+          in: body
+          description: Flow to create
+          required: true
+          schema:
+            $ref: '#/definitions/Flow'
+      responses:
+        201:
+          $ref: '#/responses/FlowSingle'
+        400:
+          # error number: 400, 409, 422?
+          # todo: define schema
+          description: Validation error
+          schema:
+            type: object
+            required: ["errors"]
+            properties:
+              errors:
+                type: array
+                items:
+                  - type: object
+        404:
+          description: Application not found
+          schema:
+            type: object
+            required: ["errors"]
+            properties:
+              errors:
+                type: array
+                items:
+                  $ref: '#/definitions/Error'
+  /apps/{appId}/flows/{flowId}:
+    parameters:
+      - $ref: '#/parameters/appId'
+      - $ref: '#/parameters/flowId'
+    get:
+      summary: Get one flow
+      tags: [Apps, Flows]
+      responses:
+        200:
+          $ref: '#/responses/FlowSingle'
+        404:
+          $ref: '#/responses/NotFound'
+    patch:
+      summary: Update a flow
+      tags: [Apps, Flows]
+      parameters:
+        - name: flow
+          in: body
+          description: Update a flow
+          required: true
+          schema:
+            $ref: '#/definitions/Flow'
+      responses:
+        201:
+          $ref: '#/responses/FlowSingle'
+        400:
+          # error number: 400, 409, 422?
+          # todo: define schema
+          description: Validation error
+          schema:
+            type: object
+            required: ["errors"]
+            properties:
+              errors:
+                type: array
+                items:
+                  - type: object
+        404:
+          description: Application not found
+          schema:
+            type: object
+            required: ["errors"]
+            properties:
+              errors:
+                type: array
+                items:
+                  $ref: '#/definitions/Error'
+    delete:
+      summary: Delete a flow
+      tags: [Apps, Flows]
+      responses:
+        204:
+          description: Flow deleted successfully
+        404:
+          $ref: '#/responses/NotFound'
+  /flows/recent:
+    get:
+      summary: Get the most recently updated flows
+      description: |-
+        Fetch the most recently updated flows
+      tags: [Flows]
+      responses:
+        200:
+          $ref: '#/responses/FlowCollection'
+  /apps/import:
+    post:
+      summary: Import from an app.json definition
+      tags: [Apps, Import]
+      consumes:
+        - multipart/form-data
+      description: |-
+        TODO
+        Import an app.json definition as defined by flogo-lib
+      parameters:
+        - name: app
+          in: formData
+          description: File to import
+          type: file
+        - name: name
+          in: query
+          type: string
+          description: |-
+            Overrides the name for the app. Useful when we want to register an app with a different name from the one in the uplaoded file.
+      responses:
+        201:
+          $ref: '#/responses/AppSingle'
+        400:
+          description: error
+          schema:
+            type: object
+            required: ["errors"]
+            # TODO: declare possible errors
+            # - App name already exists
+            # - Importing an app with flows with unrecognized activities/triggers?
+            properties:
+              errors:
+                type: array
+                items:
+                  $ref: '#/definitions/Error'
+  /apps/{appId}/flows/import:
+    parameters:
+      - $ref: '#/parameters/appId'
+    post:
+      summary: Import a flow.json into an existing app
+      tags: [Apps, Flows, Import]
+      consumes:
+        - multipart/form-data
+      description: |-
+        TODO
+        Import an flow.json definition as defined by flogo-lib into an existing app
+      parameters:
+        - name: flow
+          in: formData
+          description: File to import
+          type: file
+        - name: name
+          in: query
+          type: string
+          description: |-
+            Overrides the name for the flow. Useful when we want to register a flow with a different name from the one in the uplaoded file.
+      responses:
+        201:
+          $ref: '#/responses/AppSingle'
+        400:
+          description: error
+          schema:
+            type: object
+            required: ["errors"]
+            # TODO: declare possible errors
+            # - App name already exists
+            # - Importing an app with flows with unrecognized activities/triggers?
+            properties:
+              errors:
+                type: array
+                items:
+                  $ref: '#/definitions/Error'
+  /apps/{appId}/export:
+    get:
+      summary: Export an app.json
+      description: |-
+        TODO
+        Export an app.json definition as defined by flogo-lib to be used directly in a flogo engine
+      tags: [Apps, Export]
+      parameters:
+         - $ref: '#/parameters/appId'
+         - name: type
+           in: query
+           description: |-
+            By providing the type value we can export the whole application or only (selected / all) flows of an application.
+
+            Example: `GET /apps/123:export?type=application`, `GET /apps/123:export?type=flows`
+
+           required: false
+           type: string
+           enum: ['application', 'flows']
+         - name: flowids
+           in: query
+           description: |-
+            By providing the flowids value we can export the flows only which are selected. flowids only work when value for type is `flows`.
+
+            Example: `GET /apps/123:export?type=flows&flowids=abc,def,ghi`
+
+           required: false
+           type: string
+      responses:
+        200:
+          description: Okay
+          schema:
+            $ref: '#/definitions/AppJson'
+  /apps/{appId}/flows/{flowId}/export:
+    get:
+      summary: Export a flow.json
+      description: |-
+        TODO
+        Import a flow.json definition as defined by flogo-lib to be used directly in a flogo engine
+      tags: [Apps, Export]
+      parameters:
+         - $ref: '#/parameters/appId'
+         - $ref: '#/parameters/flowId'
+         - name: alt
+           in: query
+           description: |-
+            By passing the value "media" force the download of a file containing the export content instead of returning a regular json response.
+
+            Example: `GET /export/apps/123/flows/abc?alt=media`
+
+           required: false
+           type: string
+           enum: ['media']
+      responses:
+        200:
+          description: Okay
+          schema:
+            $ref: '#/definitions/FlowJson'
+
+################################################################################
+#                                 Responses                                    #
+################################################################################
+responses:
+  AppSingle:
+    description: Successful app response
+    schema:
+      type: object
+      required: ["data"]
+      properties:
+        data:
+          $ref: '#/definitions/App'
+    examples:
+      application/json: |-
+        {
+          "data": {
+            "id": "123"
+            "name": "myapp",
+            "version": "0.0.1",
+            "description": "My App",
+            "createdAt": "2016-12-16T00:24:26+00:00",
+            "updatedAt": "2016-12-16T00:24:26+00:00",
+            "flows": [
+              {
+                "id": "abc",
+                "name": "App test"
+              }
+            ]
+          }
+        }
+  FlowSingle:
+    description: Successful flow response
+    schema:
+      type: object
+      required: ["data"]
+      properties:
+        data:
+          $ref: '#/definitions/Flow'
+  FlowCollection:
+    description: Succesful flow compound
+    schema:
+      type: object
+      required: ["data"]
+      properties:
+        data:
+          $ref: '#/definitions/ArrayOfFlows'
+  NotFound:
+    description: Resource not found
+    schema:
+      type: object
+      required: ["errors"]
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/definitions/Error'
+
+################################################################################
+#                                 Definitions                                  #
+################################################################################
+definitions:
+  App:
+    type: object
+    required: ['id', 'name']
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      version:
+        type: string
+      description:
+        type: string
+      createdAt:
+        type: string
+        format: dateTime
+        readOnly: true
+      updatedAt:
+        type: string
+        format: dateTime
+        readOnly: true
+      flows:
+        type: array
+        items:
+          $ref: '#/definitions/MiniFlow'
+        readOnly: true
+  Error:
+    type: object
+    properties:
+      status:
+        type: string
+        description: The HTTP status code applicable to this problem, expressed as a string value
+      code:
+        type: string
+        description: An application-specific error code, expressed as a string value.
+      title:
+        type: string
+        description: A short, human-readable summary of the problem that SHOULD NOT change from occurrence to occurrence of the problem
+      detail:
+        type: string
+        description: A human-readable explanation specific to this occurrence of the problem.
+      meta:
+        type: object
+        description: A meta object containing non-standard meta-information about the error.
+  ValidationError:
+    allOf:
+      - $ref: '#/definitions/Error'
+      - type: object
+        properties:
+          meta:
+            type: object
+            description: A meta object containing the details of the validation problems
+            properties:
+              property:
+                type: string
+              value:
+                type: string
+  MiniFlow:
+    type: object
+    description: Short version of a flow to use in arrays, like in an app summary
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      description:
+        type: string
+      createdAt:
+        type: string
+        format: dateTime
+      updatedAt:
+        type: string
+        format: dateTime
+      # TODO: define required trigger properties
+      trigger:
+        type: object
+        properties:
+          name:
+            type: string
+  Flow:
+  # using the same as current implementation
+  # TODO: clean and standarize
+    type: object
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      description:
+        type: string
+      createdAt:
+        type: string
+        format: dateTime
+      updatedAt:
+        type: string
+        format: dateTime
+      paths:
+        type: object
+        properties:
+          root:
+            type: object
+            properties:
+              is:
+                type: string
+          nodes:
+            type: object
+      items:
+        type: object
+      errorHandler:
+        type: object
+        properties:
+          paths:
+            type: object
+            properties:
+              root:
+                type: object
+                properties:
+                  is:
+                    type: string
+          items:
+            type: object
+  ArrayOfFlows:
+    type: array
+    items:
+      $ref: '#/definitions/Flow'
+  AppJson:
+    description: |-
+      Still to be defined but ideally wiil be the same as defined by the shareable app.json definition used by the flogo-lib
+    type: object
+  FlowJson:
+    description: |-
+      Still to be defined but ideally wiil be the same as defined by the shareable flow.json definition used by the flogo-lib
+    type: object

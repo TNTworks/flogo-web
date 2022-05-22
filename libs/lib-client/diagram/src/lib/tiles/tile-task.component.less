@@ -1,0 +1,259 @@
+@import '~@flogo-web/assets/styles/_variables';
+@import '../_styles';
+
+@menu-tab-width: 36px;
+@menu-tab-radius: 8px;
+
+:host {
+  height: @tile-height;
+  width: @tile-width;
+  cursor: pointer;
+  position: relative;
+  font-size: 12px;
+  margin-left: @tile-left-margin;
+
+  &:hover {
+    .task-container {
+      transform: scale(1.04);
+    }
+  }
+}
+
+.task-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  height: 100%;
+  transition: all 0.2s ease-in-out;
+}
+
+.shape-container {
+  display: block;
+  pointer-events: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.content {
+  color: @color-plain;
+  align-items: center;
+  width: 76%;
+  height: 100%;
+  position: relative;
+  left: 5px;
+}
+
+.content__text--return {
+  margin-top: 5px;
+}
+
+.content__text--subflow {
+  margin-top: 5px;
+}
+
+.content__text {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  line-height: 1.2;
+  color: @color-ink;
+}
+
+.menu-content {
+  height: 16px;
+  position: absolute;
+  right: 4px;
+  bottom: 2px;
+  display: flex;
+}
+
+.menu-options {
+  display: flex;
+}
+
+.menu__icon {
+  padding: 2px 4px;
+  margin-left: 5px;
+  margin-right: 5px;
+  &:hover {
+    color: @primary-blue;
+    background-color: rgba(0, 129, 203, 0.1);
+    font-weight: 600;
+    border-radius: 3px;
+  }
+}
+
+.kebabmenu {
+  padding: 1px;
+  font-size: 14px;
+  color: @color-medium-gray;
+  &:hover {
+    color: @primary-blue;
+    background-color: rgba(0, 129, 203, 0.1);
+    border-radius: 3px;
+    font-weight: 600;
+  }
+}
+
+.kebabmenu-selected {
+  color: @primary-blue;
+}
+
+.content__items {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  align-items: center;
+  margin-top: 15px;
+  position: relative;
+}
+
+.content__activity-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.content__text-group {
+  position: absolute;
+  margin-left: 4px;
+  display: inline-block;
+}
+
+.content__text--id {
+  font-size: 10px;
+  color: @color-dark-gray;
+  line-height: 1.3;
+  display: inline-block;
+}
+
+.tile__bg {
+  transform: translate(0, 0);
+}
+
+.tile__shadow {
+  fill: #000;
+}
+
+.tile__stroke {
+  stroke: transparent;
+  transition: stroke 200ms ease-in-out;
+}
+
+.badges {
+  z-index: 3;
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  top: -9px;
+  right: 13px;
+  pointer-events: none;
+}
+
+.badge {
+  font-size: 14px;
+  text-align: center;
+  display: block;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+
+  &::before {
+    margin-left: -5px;
+    top: -1px;
+    position: relative;
+  }
+
+  & + .badge {
+    margin-left: 4px;
+  }
+}
+
+.badge--iterator {
+  background-color: #36bfbb;
+}
+
+.badge--configure {
+  background-color: @color-stroke;
+}
+
+.badge--error {
+  font-size: 18px;
+  background-color: #fff;
+  color: #fe566a;
+  pointer-events: all;
+  cursor: default;
+  transform: rotate(180deg);
+
+  &::before {
+    margin-left: -7px;
+    top: -3px;
+  }
+}
+
+.main-branch-link {
+  border-top: solid 4px @branch-color-primary;
+  width: 34px;
+  position: absolute;
+  right: -26px;
+  top: (@tile-height / 2)-2;
+}
+
+:host(.--with-branches) {
+  .task-container {
+    z-index: 2;
+  }
+  .content {
+    width: 70%;
+    left: 1px;
+  }
+  .menu__icon {
+    padding: 2px 3px;
+  }
+  .badges {
+    right: 21px;
+  }
+}
+
+:host(.is-selected) {
+  .task-container {
+    transform: scale(1.04);
+  }
+  .tile__bg {
+    fill: @tile-color-bg--selected;
+  }
+  .content__text,
+  .menu-content,
+  .kebabmenu {
+    color: @color-bg;
+  }
+  .menu__icon,
+  .kebabmenu {
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      color: @color-bg;
+    }
+  }
+}
+
+:host-context(.is-readonly) {
+  cursor: inherit;
+}
+:host(.has-run) {
+  .tile__stroke {
+    stroke: @color-secondary;
+    stroke-width: 2px;
+  }
+  .main-branch-link {
+    border-top: solid 4px @color-secondary;
+  }
+}
+
+:host(.is-invalid) {
+  .tile__stroke {
+    stroke: @color-stroke;
+    stroke-width: 2px;
+  }
+}

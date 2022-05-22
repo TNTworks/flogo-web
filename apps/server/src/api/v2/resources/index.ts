@@ -1,0 +1,1 @@
+export { mountResourceRoutes } from './routes';

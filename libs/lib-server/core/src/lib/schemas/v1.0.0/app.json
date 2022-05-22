@@ -1,0 +1,78 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://github.com/project-flogo/flogo-web/schemas/1.0.0/app.json",
+  "type": "object",
+  "required": ["name", "type", "appModel"],
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "type": "string",
+      "title": "The name of the app"
+    },
+    "type": {
+      "type": "string",
+      "title": "The type of the application",
+      "default": "flogo:app",
+      "const": "flogo:app"
+    },
+    "version": {
+      "type": "string",
+      "title": "Version of this app"
+    },
+    "appModel": {
+      "type": "string",
+      "title": "Flogo app model version"
+    },
+    "description": {
+      "type": "string",
+      "title": "The description of this app",
+      "default": ""
+    },
+    "properties": {
+      "type": "array",
+      "items": {
+        "ref": "common.json#/definitions/appProperty"
+      }
+    },
+    "imports": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "triggers": {
+      "type": "array",
+      "items": {
+        "$ref": "trigger.json"
+      }
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "$ref": "action.json"
+      }
+    },
+    "resources": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/resource"
+      }
+    }
+  },
+  "definitions": {
+    "resource": {
+      "type": "object",
+      "required": ["id", "data"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^\\w+:\\w+$"
+        },
+        "data": {
+          "type": "object"
+        }
+      }
+    }
+  }
+}

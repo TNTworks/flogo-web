@@ -1,0 +1,30 @@
+<h1>Form Demo</h1>
+
+<h2>Select</h2>
+
+<p>From module <code>@flogo-web/lib-client/dropdown</code></p>
+
+<flogo-select
+  placeholder="Select option"
+  label="Select option"
+  fieldId="select-demo"
+  (select)="select($event)"
+  [value]="currentValue"
+>
+  <flogo-select-option label="Option 1" value="1"></flogo-select-option>
+  <flogo-select-option label="Option 2" value="2"></flogo-select-option>
+  <flogo-select-option label="Option 3" value="3"></flogo-select-option>
+</flogo-select>
+
+<h3>Select with default value</h3>
+
+<flogo-select
+  label="Option with default"
+  fieldId="select-demo-default"
+  (select)="select($event)"
+  [value]="currentValueForDefault"
+>
+  <flogo-select-option label="Option A" value="A"></flogo-select-option>
+  <flogo-select-option label="Some Default" value="Some default"></flogo-select-option>
+  <flogo-select-option label="Option C" value="C"></flogo-select-option>
+</flogo-select>
