@@ -1,4 +1,4 @@
-ARG GOLANG_VERSION=1.16.15
+ARG GOLANG_VERSION=1.18.2
 FROM golang:$GOLANG_VERSION AS gobase
 
 FROM node:10.16-slim as base
@@ -22,18 +22,17 @@ RUN set -ex \
 FROM base AS builder
 ARG CLI_VERSION="latest"
 ARG CORE_VERSION="latest"
+ENV GOFLAGS -buildvcs=false
 ENV FLOGO_LIB_VERSION ${CORE_VERSION}
 ENV BUILD_DIR /tmp/build
 ENV FLOGO_WEB_LOCALDIR ${BUILD_DIR}/dist/local
 ENV GO111MODULE on
 RUN GO111MODULE=off go get -u -v github.com/TNTworks/flogo-cli/... \
-#    && mkdir -p $GOPATH/src/github.com/project-flogo \
-#    && cd $GOPATH/src/github.com/project-flogo \
-#    && git clone https://github.com/TNTworks/flogo-cli.git \
     && flogo --version \
     && GO111MODULE=off go get github.com/project-flogo/services/flow-store/...
 COPY / ${BUILD_DIR}/
 WORKDIR ${BUILD_DIR}
+
 RUN yarn --pure-lockfile && yarn release && \
   cd dist/apps/server && \
   yarn --pure-lockfile --production=true && \
